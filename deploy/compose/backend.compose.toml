@@ -1,0 +1,16 @@
+# Compose-only overrides on top of deploy/backend.prod.toml: the stack runs on http://localhost:8088.
+[http]
+allowed_origins = ["^http://localhost:8088$"]
+
+[email]
+from = "EmAI Academy LOCAL <academy@emai.dev>"
+
+[user]
+verification_redirect_url = "http://localhost:8088/auth/verify-account"
+password_reset_redirect_url = "http://localhost:8088/auth/reset-password"
+
+[feedback]
+public_base_url = "http://localhost:8088"
+
+[oauth2]
+redirect_uris = ["http://localhost:8088/oauth/callback"]

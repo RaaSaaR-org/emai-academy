@@ -1,0 +1,5 @@
+#!/bin/sh
+# Apply the skills-ms database migrations (alembic upgrade head) and exit.
+set -eu
+cd /app
+exec alembic upgrade head

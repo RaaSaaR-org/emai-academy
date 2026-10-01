@@ -1,0 +1,58 @@
+# EmAI Academy web gateway: serves the SPA and proxies the API (port of config/Caddyfile).
+# Rendered by the nginx image's envsubst step at container start.
+#   /api/skills/*                      -> ${SKILLS_UPSTREAM}   (prefix stripped)
+#   GET /api/challenges/courses/*/tasks -> []                  (no challenges-ms in this tenant)
+#   /api/*                             -> ${BACKEND_UPSTREAM}  (prefix stripped)
+# Upstream host names are resolved once at start (system resolver, so k8s search domains work).
+# In Kubernetes they are Service names with stable ClusterIPs.
+server {
+    listen 8080;
+    listen [::]:8080;
+    server_name _;
+    root /usr/share/nginx/html;
+
+    client_max_body_size 10m;
+    # Relative redirects: the public scheme/host/port are the gateway's, not this pod's.
+    absolute_redirect off;
+    server_tokens off;
+    gzip on;
+    gzip_types text/css application/javascript application/json image/svg+xml;
+
+    location = /healthz {
+        access_log off;
+        default_type text/plain;
+        return 200 "ok\n";
+    }
+
+    location ~ ^/api/challenges/courses/[^/]+/tasks$ {
+        default_type application/json;
+        return 200 "[]";
+    }
+
+    location /api/skills/ {
+        proxy_pass ${SKILLS_UPSTREAM}/;
+        include /etc/nginx/proxy_headers.conf;
+    }
+
+    location /api/ {
+        proxy_pass ${BACKEND_UPSTREAM}/;
+        include /etc/nginx/proxy_headers.conf;
+    }
+
+    # Hashed build assets and lesson modules (content-addressed paths) never change.
+    location /_nuxt/ {
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        try_files $uri =404;
+    }
+    location /learning-modules/ {
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        add_header Access-Control-Allow-Origin "*";
+        try_files $uri =404;
+    }
+
+    # SPA (ssr: false): unknown paths get the app shell.
+    location / {
+        add_header Cache-Control "no-cache";
+        try_files $uri $uri/index.html /index.html;
+    }
+}

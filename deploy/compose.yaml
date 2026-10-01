@@ -1,0 +1,168 @@
+# EmAI Academy: local production-like stack (same images, names and wiring as the Helm chart).
+#
+#   docker compose -f deploy/compose.yaml up -d --build      # build + start + seed
+#   open http://localhost:8088          (academy)    http://localhost:5088   (smtp4dev, mails)
+#   docker compose -f deploy/compose.yaml down -v            # stop and drop the data
+#
+# Compose-only differences to production: the public origin is http://localhost:8088 (web and
+# skills images are built with PUBLIC_ORIGIN accordingly, lesson modules may use local HTTP),
+# smtp4dev stands in for the real SMTP server, and the secrets below are fixed dev values.
+name: emai-academy-local
+
+# Same file layout as the chart, plus the compose-only URL overrides (localhost:8088).
+x-backend-env: &backend-env
+  ACADEMY_CONFIG: /etc/academy/secret/secret.toml:/etc/academy/compose/compose.toml:/etc/academy/config/backend.toml:/app/config.toml
+
+x-backend-volumes: &backend-volumes
+  - ./compose/secret.toml:/etc/academy/secret/secret.toml:ro
+  - ./backend.prod.toml:/etc/academy/config/backend.toml:ro
+  - ./compose/backend.compose.toml:/etc/academy/compose/compose.toml:ro
+
+x-skills-env: &skills-env
+  JWT_SECRET: compose-dev-jwt-secret
+  DATABASE_URL: postgresql+asyncpg://academy:compose-dev-password@emai-academy-postgres:5432/emai_skills
+  REDIS_URL: redis://emai-academy-valkey:6379/1
+  AUTH_REDIS_URL: redis://emai-academy-valkey:6379/0
+  AUTH_URL: http://emai-academy-backend:8081/auth
+  SHOP_URL: http://emai-academy-backend:8081/shop
+  PUBLIC_BASE_URL: http://localhost:8088/api/skills
+  POOL_SIZE: "5"
+  MAX_OVERFLOW: "10"
+  POOL_RECYCLE: "300"
+  # skills-ms mails go through its own relay sidecar (as in the chart)
+  SMTP_HOST: 127.0.0.1
+  SMTP_PORT: "2526"
+  SMTP_TLS: "False"
+  SMTP_STARTTLS: "False"
+  SMTP_FROM: EmAI Academy <academy@emai.dev>
+  # compose only: local HTTP origin
+  LESSON_MODULE_ORIGINS: '["http://localhost:8088"]'
+  LESSON_MODULE_LOCAL_DEVELOPMENT: "True"
+
+services:
+  emai-academy-postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: academy
+      POSTGRES_PASSWORD: compose-dev-password
+      POSTGRES_DB: emai_academy
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres/10-emai-skills-db.sh:/docker-entrypoint-initdb.d/10-emai-skills-db.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U academy -d emai_skills"]
+      interval: 2s
+      retries: 30
+
+  emai-academy-valkey:
+    image: valkey/valkey:8-alpine
+    command: ["valkey-server", "--save", "", "--appendonly", "no"]
+
+  smtp4dev:
+    image: rnwood/smtp4dev:v3
+    ports: ["127.0.0.1:5088:80"]
+
+  emai-academy-backend:
+    image: emai-academy-backend:compose
+    build: { context: .., dockerfile: docker/backend/Dockerfile }
+    environment: *backend-env
+    volumes: *backend-volumes
+    depends_on:
+      emai-academy-postgres: { condition: service_healthy }
+      emai-academy-valkey: { condition: service_started }
+
+  # Sidecar: shares the backend's network namespace, like a container in the backend pod.
+  mail-relay:
+    image: emai-academy-services:compose
+    build: { context: .., dockerfile: docker/services/Dockerfile }
+    network_mode: service:emai-academy-backend
+    environment:
+      EMAI_MAIL_UPSTREAM: smtp://smtp4dev:25
+      EMAI_WEB_URL: http://localhost:8088
+    depends_on: [emai-academy-backend, smtp4dev]
+
+  # The chart's migrate initContainer (command: ["migrate"]).
+  skills-migrate:
+    image: emai-academy-skills:compose
+    build:
+      context: ..
+      dockerfile: docker/skills/Dockerfile
+      args: { PUBLIC_ORIGIN: "http://localhost:8088" }
+    entrypoint: ["migrate"]
+    environment: *skills-env
+    depends_on:
+      emai-academy-postgres: { condition: service_healthy }
+    restart: "no"
+
+  emai-academy-skills:
+    image: emai-academy-skills:compose
+    environment:
+      <<: *skills-env
+      RUN_MIGRATIONS: "false"
+    depends_on:
+      skills-migrate: { condition: service_completed_successfully }
+      emai-academy-valkey: { condition: service_started }
+
+  skills-mail-relay:
+    image: emai-academy-services:compose
+    network_mode: service:emai-academy-skills
+    environment:
+      EMAI_MAIL_UPSTREAM: smtp://smtp4dev:25
+      EMAI_WEB_URL: http://localhost:8088
+    depends_on: [emai-academy-skills, smtp4dev]
+
+  # Sidecar in the skills pod.
+  xp-bridge:
+    image: emai-academy-services:compose
+    network_mode: service:emai-academy-skills
+    command: ["python", "/opt/emai/services/xp-bridge/bridge.py"]
+    environment:
+      JWT_SECRET: compose-dev-jwt-secret
+      PGHOST: emai-academy-postgres
+      PGPASSWORD: compose-dev-password
+    depends_on: [emai-academy-skills]
+
+  emai-academy-web:
+    image: emai-academy-web:compose
+    build:
+      context: ..
+      dockerfile: docker/web/Dockerfile
+      args: { PUBLIC_ORIGIN: "http://localhost:8088" }
+    ports: ["127.0.0.1:8088:8080"]
+    # nginx resolves the upstream names once at start; in compose they only exist while the
+    # containers do, so retry until the backend is up (in Kubernetes Service names always resolve).
+    restart: on-failure
+    depends_on: [emai-academy-backend, emai-academy-skills]
+
+  # Seed (the chart's Job): step 1 in the backend image, step 2 in the skills image.
+  seed-backend:
+    image: emai-academy-backend:compose
+    command: ["/opt/emai/seed-backend.sh"]
+    environment:
+      <<: *backend-env
+      ADMIN_PASSWORD: emai-admin-dev
+      TOKEN_FILE: /seed/token
+    volumes:
+      - ./compose/secret.toml:/etc/academy/secret/secret.toml:ro
+      - ./backend.prod.toml:/etc/academy/config/backend.toml:ro
+      - ./compose/backend.compose.toml:/etc/academy/compose/compose.toml:ro
+      - seed:/seed
+    depends_on: [emai-academy-backend]
+    restart: "no"
+
+  seed-skills:
+    image: emai-academy-skills:compose
+    entrypoint: ["/opt/emai/seed.sh"]
+    environment:
+      <<: *skills-env
+      SKILLS_URL: http://emai-academy-skills:8011
+      TOKEN_FILE: /seed/token
+    volumes: [seed:/seed]
+    depends_on:
+      seed-backend: { condition: service_completed_successfully }
+      emai-academy-skills: { condition: service_started }
+    restart: "no"
+
+volumes:
+  pgdata:
+  seed:

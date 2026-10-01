@@ -117,6 +117,15 @@ Content workflow: edit `content/rooms/*.yml`, then
 These are local development values only. `.logs/`, `.run/`, `.state/`, `frontend/.env`,
 `node_modules`, `.nuxt`, `.output` and build output are gitignored.
 
+## Deployment
+
+Target: https://academy.emai.dev (Helm chart in RaaSaaR-org/deployments, Argo CD). Four images
+(`web`, `backend`, `skills`, `services`) are built by `.github/workflows/images.yml`; the
+Dockerfiles in `docker/` fetch the upstream sources at pinned commits, so no upstream code is
+vendored here. `deploy/compose.yaml` runs the same images locally as a production-like stack
+(the e2e tests pass against it). Details, config and secret reference, release steps:
+[deploy/README.md](deploy/README.md).
+
 ## Override points used
 
 Everything the tenant changes is in one of these places. Nothing is edited in upstream repos.

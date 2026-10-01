@@ -17,7 +17,7 @@ If re-branding fails, the original is forwarded unchanged (a lost verification m
 than a Bootstrap-branded one) and the failure is logged.
 
 Python stdlib only (3.9+). Minimal SMTP server: EHLO/HELO, AUTH PLAIN/LOGIN (accepted, local
-only), MAIL, RCPT, DATA, RSET, NOOP, QUIT. Listens on 127.0.0.1 only.
+only), MAIL, RCPT, DATA, RSET, NOOP, QUIT. Listens on 127.0.0.1 (EMAI_MAIL_RELAY_HOST) only.
 """
 from __future__ import annotations
 
@@ -27,16 +27,17 @@ import logging
 import os
 import re
 import smtplib
+import ssl
 import sys
 from email import policy
 from email.message import EmailMessage
 from email.parser import BytesParser
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, unquote, urlparse
 
 HERE = Path(__file__).resolve().parent
 TEMPLATES = Path(os.environ.get("EMAI_MAIL_TEMPLATES", HERE.parent.parent / "config" / "mail"))
-LISTEN_HOST = "127.0.0.1"
+LISTEN_HOST = os.environ.get("EMAI_MAIL_RELAY_HOST", "127.0.0.1")
 LISTEN_PORT = int(os.environ.get("EMAI_MAIL_RELAY_PORT", "2526"))
 UPSTREAM = urlparse(os.environ.get("EMAI_MAIL_UPSTREAM", "smtp://academy:academy@127.0.0.1:2525"))
 WEB_URL = os.environ.get("EMAI_WEB_URL", "http://localhost:3001").rstrip("/")
@@ -127,11 +128,29 @@ def rebrand(raw: bytes) -> bytes:
 
 
 def forward(mail_from: str, rcpt_to: list[str], data: bytes) -> None:
-    with smtplib.SMTP(UPSTREAM.hostname or "127.0.0.1", UPSTREAM.port or 25, timeout=30) as smtp:
+    # EMAI_MAIL_UPSTREAM URL forms (user and password may be percent-encoded):
+    #   smtps://user:pass@host:465                implicit TLS
+    #   smtp://user:pass@host:587                 STARTTLS required (submission port)
+    #   smtp://...?tls=required  or  ?starttls    STARTTLS required
+    #   smtp://host:25                            STARTTLS if the server offers it (smtp4dev doesn't)
+    #   smtp://...?tls=none                       never TLS
+    query = parse_qs(UPSTREAM.query, keep_blank_values=True)
+    tls = query.get("tls", [""])[0]
+    host = UPSTREAM.hostname or "127.0.0.1"
+    if UPSTREAM.scheme == "smtps":
+        smtp = smtplib.SMTP_SSL(host, UPSTREAM.port or 465, timeout=30, context=ssl.create_default_context())
+    else:
+        smtp = smtplib.SMTP(host, UPSTREAM.port or 25, timeout=30)
+    with smtp:
         smtp.ehlo()
+        if UPSTREAM.scheme != "smtps" and tls != "none":
+            required = tls == "required" or "starttls" in query or UPSTREAM.port == 587
+            if required or smtp.has_extn("starttls"):
+                smtp.starttls(context=ssl.create_default_context())
+                smtp.ehlo()
         if UPSTREAM.username:
             try:
-                smtp.login(UPSTREAM.username, UPSTREAM.password or "")
+                smtp.login(unquote(UPSTREAM.username), unquote(UPSTREAM.password or ""))
             except smtplib.SMTPNotSupportedError:
                 pass
         smtp.sendmail(mail_from, rcpt_to, data)

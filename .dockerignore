@@ -1,0 +1,14 @@
+**/node_modules
+**/.nuxt
+**/.output
+**/.data
+**/.env
+.git
+.logs
+.run
+.state
+docs
+content/modules/dist
+frontend/public/learning-modules
+**/__pycache__
+**/.DS_Store

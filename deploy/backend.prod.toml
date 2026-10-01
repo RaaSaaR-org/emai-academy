@@ -1,0 +1,91 @@
+# EmAI Academy backend: production overlay (non-secret), mounted at /etc/academy/config/backend.toml.
+#
+# ACADEMY_CONFIG=/etc/academy/secret/secret.toml:/etc/academy/config/backend.toml:/app/config.toml
+# (first file wins, merged per key; /app/config.toml holds the upstream defaults).
+# Secrets never go in this file. They come from /etc/academy/secret/secret.toml (rendered by the
+# deployer from the emai-academy-secrets Secret):
+#   [database] url = "postgres://academy:<POSTGRES_PASSWORD>@emai-academy-postgres:5432/emai_academy"
+#   [jwt] secret   = "<JWT_SECRET>"   (must equal skills-ms JWT_SECRET)
+# Alternative: the image entrypoint renders the same overlay from ACADEMY_DATABASE_URL /
+# ACADEMY_JWT_SECRET env vars (docker/backend/entrypoint.sh); missing files are skipped.
+
+[http]
+address = "0.0.0.0:8081"
+# Browsers call the API same-origin through the web gateway (/api), so CORS only matters
+# for other origins. Regex set, matched against the Origin header.
+allowed_origins = ["^https://academy\\.emai\\.dev$"]
+# No [http] real_ip: set_from takes a single fixed proxy address, and the web gateway pod has
+# none. Rate limits per client IP therefore see the gateway's address (see deploy/README.md).
+
+[database]
+# Password-less fallback; the real URL (with password) comes from ACADEMY_DATABASE_URL.
+url = "postgres://academy@emai-academy-postgres:5432/emai_academy"
+run_migrations = true
+
+[cache]
+url = "redis://emai-academy-valkey:6379/0"
+
+[email]
+# The mail relay sidecar (services/mail-relay) re-brands the compiled-in Bootstrap templates
+# and forwards to the real SMTP server (SMTP_URL secret -> EMAI_MAIL_UPSTREAM).
+smtp_url = "smtp://127.0.0.1:2526"
+from = "EmAI Academy <academy@emai.dev>"
+
+[contact]
+email = "EmAI Robotics <info@emai.dev>"
+
+[user]
+verification_redirect_url = "https://academy.emai.dev/auth/verify-account"
+password_reset_redirect_url = "https://academy.emai.dev/auth/reset-password"
+
+[feedback]
+enabled = false
+public_base_url = "https://academy.emai.dev"
+
+# Off until reCAPTCHA keys exist (then: enable = true, sitekey, secret; the frontend needs the
+# matching site key). Without it, signup is protected only by e-mail verification.
+[recaptcha]
+enable = false
+# Required by the schema even when disabled.
+sitekey = ""
+secret = ""
+
+# Not used: every EmAI course is free and purchases are unavailable ([purchase] is unset).
+# The fields are required by the config schema.
+[paypal]
+client_id = "unused"
+client_secret = "unused"
+
+# Required by the config schema; the render daemon only renders invoices and documents,
+# which EmAI never issues. Nothing listens there.
+[render]
+daemon_url = "http://127.0.0.1:8001/"
+
+[microservices]
+# The trailing slash is required. No challenges-ms / events-ms in this tenant.
+skills_url = "http://emai-academy-skills:8011/"
+
+[finance]
+# Only written when invoices, credit notes or final statements are issued (never, here).
+invoices_archive = "/data/finance/invoices"
+credit_notes_archive = "/data/finance/credit_notes"
+final_statements_archive = "/data/finance/final_statements"
+
+[oauth2]
+enable = false
+redirect_uris = ["https://academy.emai.dev/oauth/callback"]
+
+[oauth2.providers.github]
+enable = false
+client_id = ""
+client_secret = ""
+
+[oauth2.providers.discord]
+enable = false
+client_id = ""
+client_secret = ""
+
+[oauth2.providers.google]
+enable = false
+client_id = ""
+client_secret = ""
