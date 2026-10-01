@@ -1,5 +1,5 @@
 # Builder path start, skill 3 "Robotik-Software-Grundlagen": SO-101 + LeRobot setup.
-# Sources: LeRobot docs so101.mdx / il_robots.mdx (/Users/sebastian/develop/emai/repos/lerobot, 2026-09),
+# Sources: LeRobot docs so101.mdx / il_robots.mdx (huggingface/lerobot, 2026-09),
 # SO-101 URDF (robot-management-system/app/public/assets/robots/so101/so101.urdf).
 order: 110
 path:

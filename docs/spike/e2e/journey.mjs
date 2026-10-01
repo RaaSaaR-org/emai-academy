@@ -438,7 +438,7 @@ await step("room-xp-on-dashboard", async () => {
   await sleep(1500);
   const t = await text();
   await shot("20c-dashboard-xp");
-  assert(new RegExp(`\\b${xp.total_xp}\\s*XP`).test(t), `dashboard does not show ${xp.total_xp} XP`);
+  assert(new RegExp(`\\b${xp.total_xp.toLocaleString("de-DE").replace(".", "\\.?")}\\s*XP`).test(t), `dashboard does not show ${xp.total_xp} XP`);
   assert(!/Dein erster Schritt zählt|Ihr erster Schritt zählt/.test(t), "dashboard still shows the empty state");
   return { total_xp: xp.total_xp, level: xp.total_level };
 });

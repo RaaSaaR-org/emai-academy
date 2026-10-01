@@ -148,7 +148,7 @@ Needs upstream changes (not made):
 ## Commands
 
 ```sh
-cd /Users/sebastian/develop/Bootstrap-Academy/emai-academy
+cd <workspace>/emai-academy
 scripts/dev-up.sh            # backend, skills, gateway, frontend (idempotent)
 scripts/seed.sh              # admin, skills sync + layout, copy + register lesson modules
 scripts/reload-content.sh    # after content changes: restart skills-ms + seed

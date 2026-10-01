@@ -6,7 +6,7 @@ Status: researched and tested on 2026-10-01 against upstream `frontend` @ `devel
 headless Chromium over CDP, and then deleted it. Upstream `git status` stayed clean, and the
 :3000 dev server was not touched.
 
-All `file:line` references are relative to `/Users/sebastian/develop/Bootstrap-Academy/frontend`
+All `file:line` references are relative to `<workspace>/frontend`
 unless another path is given.
 
 ---

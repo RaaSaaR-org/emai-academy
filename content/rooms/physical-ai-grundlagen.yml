@@ -1,6 +1,6 @@
 # Decider path for skill 1 "Physical AI Grundlagen".
 # Source: emai landing page, Wissen > Grundlagen "Physical AI in acht Kapiteln"
-# (/Users/sebastian/develop/emai/landing-page/src/i18n/locales/{de,en}/knowledge.json).
+# (emai.dev landing page repo: src/i18n/locales/{de,en}/knowledge.json).
 order: 10
 path:
   id: physical-ai-grundlagen

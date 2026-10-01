@@ -2,7 +2,7 @@
 
 Research notes for the EmAI tenant (read-only analysis of
 `skills-ms-rooms` @ `37251f8` (release/2026-09) and `backend` @ `fbe5e60` (develop)).
-All paths below are relative to `/Users/sebastian/develop/Bootstrap-Academy/`.
+All paths below are relative to `<workspace>/`.
 Every schema example in this file was validated against the real pydantic models
 (`api.schemas.rooms.Catalogue`, `api.schemas.course.Course`,
 `CharacterAreaCatalogue`, `LessonModuleDescriptor`) using the skills-ms venv.
@@ -127,10 +127,10 @@ AUTH_URL=http://127.0.0.1:8081/auth
 SHOP_URL=http://127.0.0.1:8081/shop
 CHALLENGES_URL=http://127.0.0.1:8005
 ROOMS_ENABLED=True
-LEARNING_ROOMS_CONTENT=/Users/sebastian/develop/Bootstrap-Academy/emai-academy/content/learning_rooms.json
-CHARACTER_AREAS=/Users/sebastian/develop/Bootstrap-Academy/emai-academy/content/character_areas.json
-COURSES=/Users/sebastian/develop/Bootstrap-Academy/emai-academy/content/courses
-MP4_LECTURES=/Users/sebastian/develop/Bootstrap-Academy/emai-academy/content/lectures
+LEARNING_ROOMS_CONTENT=<workspace>/emai-academy/content/learning_rooms.json
+CHARACTER_AREAS=<workspace>/emai-academy/content/character_areas.json
+COURSES=<workspace>/emai-academy/content/courses
+MP4_LECTURES=<workspace>/emai-academy/content/lectures
 LESSON_MODULE_ORIGINS=["http://localhost:3001"]
 LESSON_MODULE_LOCAL_DEVELOPMENT=True
 LECTURE_XP=10
@@ -175,9 +175,9 @@ AUTH_REDIS_URL=redis://127.0.0.1:6379/2
 Recommended EmAI start (no `.env` juggling):
 
 ```bash
-cd /Users/sebastian/develop/Bootstrap-Academy/skills-ms-rooms
+cd <workspace>/skills-ms-rooms
 nix develop --command sh -c '
-  set -a; . /Users/sebastian/develop/Bootstrap-Academy/emai-academy/config/skills-ms.env; set +a
+  set -a; . <workspace>/emai-academy/config/skills-ms.env; set +a
   alembic upgrade head && python -m api'
 ```
 
@@ -711,9 +711,9 @@ Yes. Config is external (`ACADEMY_CONFIG`, `academy_config/src/lib.rs:23-60`: a
 the Bootstrap instance runs from the same `target/`:
 
 ```bash
-cd /Users/sebastian/develop/Bootstrap-Academy/backend
+cd <workspace>/backend
 .devenv/profile/bin/createdb -h 127.0.0.1 -U academy emai_academy   # once
-direnv exec "$PWD" sh -c 'ACADEMY_CONFIG=/Users/sebastian/develop/Bootstrap-Academy/emai-academy/config/backend.toml:$PWD/config.dev.toml target/debug/academy serve'
+direnv exec "$PWD" sh -c 'ACADEMY_CONFIG=<workspace>/emai-academy/config/backend.toml:$PWD/config.dev.toml target/debug/academy serve'
 # (cargo run -- serve also works; it is a no-op build when nothing changed)
 ```
 
@@ -767,9 +767,9 @@ events_url = ""
 enabled = false                           # default; if enabled also github_token_file, storage_path, public_base_url
 
 [finance]                                 # relative defaults would share Bootstrap's dirs
-invoices_archive = "/Users/sebastian/develop/Bootstrap-Academy/emai-academy/.state/invoices"
-credit_notes_archive = "/Users/sebastian/develop/Bootstrap-Academy/emai-academy/.state/credit_notes"
-final_statements_archive = "/Users/sebastian/develop/Bootstrap-Academy/emai-academy/.state/final_statements"
+invoices_archive = "<workspace>/emai-academy/.state/invoices"
+credit_notes_archive = "<workspace>/emai-academy/.state/credit_notes"
+final_statements_archive = "<workspace>/emai-academy/.state/final_statements"
 ```
 
 Inherited from `config.dev.toml` and fine to share: `recaptcha.enable=false`

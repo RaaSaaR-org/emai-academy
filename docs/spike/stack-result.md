@@ -34,7 +34,7 @@ The JWT secret is `emai-dev-secret` in both `config/backend.toml` `[jwt]` and
 ## Commands
 
 ```bash
-cd /Users/sebastian/develop/Bootstrap-Academy/emai-academy
+cd <workspace>/emai-academy
 
 # prerequisite: shared services (normally already running for Bootstrap)
 #   cd ../backend && devenv up

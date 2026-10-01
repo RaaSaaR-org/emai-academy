@@ -1,0 +1,410 @@
+{
+  "when": "2026-10-01T09:10:37.304Z",
+  "user": {
+    "name": "runmupb9y6r",
+    "display": "Kurs Testerin",
+    "email": "run-mupb9y6r@emai.local",
+    "password": "EmaiRun!7mupb9y6r"
+  },
+  "passed": 28,
+  "failed": 0,
+  "courses": [
+    {
+      "course": "physical-ai-grundlagen",
+      "units": 10,
+      "gainedXp": 200,
+      "totalXp": 200
+    },
+    {
+      "course": "physical-ai-begriffe",
+      "units": 2,
+      "gainedXp": 40,
+      "totalXp": 240
+    },
+    {
+      "course": "funktionale-sicherheit",
+      "units": 2,
+      "gainedXp": 40,
+      "totalXp": 280
+    },
+    {
+      "course": "ot-security-robotik",
+      "units": 2,
+      "gainedXp": 40,
+      "totalXp": 320
+    },
+    {
+      "course": "souveraenitaet-und-regulierung",
+      "units": 2,
+      "gainedXp": 40,
+      "totalXp": 360
+    },
+    {
+      "course": "use-cases-bewerten",
+      "units": 2,
+      "gainedXp": 40,
+      "totalXp": 400
+    },
+    {
+      "course": "pilot-planen",
+      "units": 2,
+      "gainedXp": 40,
+      "totalXp": 440
+    },
+    {
+      "course": "change-und-akzeptanz",
+      "units": 2,
+      "gainedXp": 40,
+      "totalXp": 480
+    },
+    {
+      "course": "bauformen-und-sensorik",
+      "units": 2,
+      "gainedXp": 40,
+      "totalXp": 520
+    },
+    {
+      "course": "unitree-g1-dex3",
+      "units": 2,
+      "gainedXp": 40,
+      "totalXp": 560
+    },
+    {
+      "course": "so101-lerobot-setup",
+      "units": 4,
+      "gainedXp": 80,
+      "totalXp": 640
+    },
+    {
+      "course": "ros2-und-echtzeit",
+      "units": 2,
+      "gainedXp": 40,
+      "totalXp": 680
+    },
+    {
+      "course": "lerobot-datensaetze",
+      "units": 5,
+      "gainedXp": 100,
+      "totalXp": 780
+    },
+    {
+      "course": "teleoperation-g1-xr",
+      "units": 2,
+      "gainedXp": 40,
+      "totalXp": 820
+    },
+    {
+      "course": "imitation-learning-act",
+      "units": 2,
+      "gainedXp": 40,
+      "totalXp": 860
+    },
+    {
+      "course": "vla-modelle-im-vergleich",
+      "units": 2,
+      "gainedXp": 40,
+      "totalXp": 900
+    },
+    {
+      "course": "smolvla-feintuning",
+      "units": 2,
+      "gainedXp": 40,
+      "totalXp": 940
+    },
+    {
+      "course": "simulation-und-sim-to-real",
+      "units": 2,
+      "gainedXp": 40,
+      "totalXp": 980
+    },
+    {
+      "course": "reinforcement-learning-isaac-lab",
+      "units": 2,
+      "gainedXp": 40,
+      "totalXp": 1020
+    },
+    {
+      "course": "policies-evaluieren",
+      "units": 2,
+      "gainedXp": 40,
+      "totalXp": 1060
+    },
+    {
+      "course": "inferenz-und-deployment",
+      "units": 2,
+      "gainedXp": 40,
+      "totalXp": 1100
+    }
+  ],
+  "results": [
+    {
+      "step": "signup",
+      "ok": true,
+      "ms": 1242,
+      "detail": "runmupb9y6r"
+    },
+    {
+      "step": "verify-email",
+      "ok": true,
+      "ms": 1408,
+      "detail": "EQEK-CGNY-DPDR-GX54"
+    },
+    {
+      "step": "login-fresh-session",
+      "ok": true,
+      "ms": 1303,
+      "detail": {
+        "landedOn": "/dashboard",
+        "startXp": 0
+      }
+    },
+    {
+      "step": "course:physical-ai-grundlagen",
+      "ok": true,
+      "ms": 18645,
+      "detail": {
+        "units": 10,
+        "counter": "10 / 10 erledigt",
+        "xp": "+200 = 200"
+      }
+    },
+    {
+      "step": "course:physical-ai-begriffe",
+      "ok": true,
+      "ms": 6030,
+      "detail": {
+        "units": 2,
+        "counter": "2 / 2 erledigt",
+        "xp": "+40 = 240"
+      }
+    },
+    {
+      "step": "course:funktionale-sicherheit",
+      "ok": true,
+      "ms": 6015,
+      "detail": {
+        "units": 2,
+        "counter": "2 / 2 erledigt",
+        "xp": "+40 = 280"
+      }
+    },
+    {
+      "step": "course:ot-security-robotik",
+      "ok": true,
+      "ms": 5627,
+      "detail": {
+        "units": 2,
+        "counter": "2 / 2 erledigt",
+        "xp": "+40 = 320"
+      }
+    },
+    {
+      "step": "course:souveraenitaet-und-regulierung",
+      "ok": true,
+      "ms": 5977,
+      "detail": {
+        "units": 2,
+        "counter": "2 / 2 erledigt",
+        "xp": "+40 = 360"
+      }
+    },
+    {
+      "step": "course:use-cases-bewerten",
+      "ok": true,
+      "ms": 5639,
+      "detail": {
+        "units": 2,
+        "counter": "2 / 2 erledigt",
+        "xp": "+40 = 400"
+      }
+    },
+    {
+      "step": "course:pilot-planen",
+      "ok": true,
+      "ms": 5296,
+      "detail": {
+        "units": 2,
+        "counter": "2 / 2 erledigt",
+        "xp": "+40 = 440"
+      }
+    },
+    {
+      "step": "course:change-und-akzeptanz",
+      "ok": true,
+      "ms": 5617,
+      "detail": {
+        "units": 2,
+        "counter": "2 / 2 erledigt",
+        "xp": "+40 = 480"
+      }
+    },
+    {
+      "step": "course:bauformen-und-sensorik",
+      "ok": true,
+      "ms": 6024,
+      "detail": {
+        "units": 2,
+        "counter": "2 / 2 erledigt",
+        "xp": "+40 = 520"
+      }
+    },
+    {
+      "step": "course:unitree-g1-dex3",
+      "ok": true,
+      "ms": 6397,
+      "detail": {
+        "units": 2,
+        "counter": "2 / 2 erledigt",
+        "xp": "+40 = 560"
+      }
+    },
+    {
+      "step": "course:so101-lerobot-setup",
+      "ok": true,
+      "ms": 9269,
+      "detail": {
+        "units": 4,
+        "counter": "4 / 4 erledigt",
+        "xp": "+80 = 640"
+      }
+    },
+    {
+      "step": "course:ros2-und-echtzeit",
+      "ok": true,
+      "ms": 5962,
+      "detail": {
+        "units": 2,
+        "counter": "2 / 2 erledigt",
+        "xp": "+40 = 680"
+      }
+    },
+    {
+      "step": "course:lerobot-datensaetze",
+      "ok": true,
+      "ms": 10722,
+      "detail": {
+        "units": 5,
+        "counter": "5 / 5 erledigt",
+        "xp": "+100 = 780"
+      }
+    },
+    {
+      "step": "course:teleoperation-g1-xr",
+      "ok": true,
+      "ms": 6066,
+      "detail": {
+        "units": 2,
+        "counter": "2 / 2 erledigt",
+        "xp": "+40 = 820"
+      }
+    },
+    {
+      "step": "course:imitation-learning-act",
+      "ok": true,
+      "ms": 6107,
+      "detail": {
+        "units": 2,
+        "counter": "2 / 2 erledigt",
+        "xp": "+40 = 860"
+      }
+    },
+    {
+      "step": "course:vla-modelle-im-vergleich",
+      "ok": true,
+      "ms": 6041,
+      "detail": {
+        "units": 2,
+        "counter": "2 / 2 erledigt",
+        "xp": "+40 = 900"
+      }
+    },
+    {
+      "step": "course:smolvla-feintuning",
+      "ok": true,
+      "ms": 6008,
+      "detail": {
+        "units": 2,
+        "counter": "2 / 2 erledigt",
+        "xp": "+40 = 940"
+      }
+    },
+    {
+      "step": "course:simulation-und-sim-to-real",
+      "ok": true,
+      "ms": 5704,
+      "detail": {
+        "units": 2,
+        "counter": "2 / 2 erledigt",
+        "xp": "+40 = 980"
+      }
+    },
+    {
+      "step": "course:reinforcement-learning-isaac-lab",
+      "ok": true,
+      "ms": 6038,
+      "detail": {
+        "units": 2,
+        "counter": "2 / 2 erledigt",
+        "xp": "+40 = 1020"
+      }
+    },
+    {
+      "step": "course:policies-evaluieren",
+      "ok": true,
+      "ms": 6015,
+      "detail": {
+        "units": 2,
+        "counter": "2 / 2 erledigt",
+        "xp": "+40 = 1060"
+      }
+    },
+    {
+      "step": "course:inferenz-und-deployment",
+      "ok": true,
+      "ms": 6012,
+      "detail": {
+        "units": 2,
+        "counter": "2 / 2 erledigt",
+        "xp": "+40 = 1100"
+      }
+    },
+    {
+      "step": "dashboard-shows-xp",
+      "ok": true,
+      "ms": 2260,
+      "detail": {
+        "total_xp": 1100,
+        "level": 7,
+        "rootSkills": 9
+      }
+    },
+    {
+      "step": "continue-after-everything-done",
+      "ok": true,
+      "ms": 3189,
+      "detail": {
+        "landedOn": "/learn?path=physical-ai-grundlagen",
+        "says": "© 2026 EmAI Robotics GmbH. Alle Rechte vorbehalten."
+      }
+    },
+    {
+      "step": "skill-tree-progress",
+      "ok": true,
+      "ms": 4561,
+      "detail": {
+        "rootSkillsWithXp": "9/9"
+      }
+    },
+    {
+      "step": "relogin-keeps-progress",
+      "ok": true,
+      "ms": 2917,
+      "detail": {
+        "xp": 1100,
+        "physical-ai-grundlagen": "10 / 10 erledigt"
+      }
+    }
+  ],
+  "consoleErrors": [],
+  "failedRequests": []
+}

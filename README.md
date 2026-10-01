@@ -10,6 +10,14 @@ Technically it is a **white-label tenant of [Bootstrap Academy](https://github.c
 This repo holds only what is EmAI-specific. The upstream checkouts next to it are used as they are
 and are never modified.
 
+> **License note.** This repo contains only EmAI-specific code, content and configuration. It runs on
+> top of [Bootstrap Academy](https://github.com/Bootstrap-Academy) (frontend, backend, skills-ms),
+> which is © Cedric Mössner and licensed under the *Business Source License 1.1 Modified*: it permits
+> copying, modification and non-production use, and prohibits redistribution of the licensed work and
+> derivative works. Upstream code is not included here (the Dockerfiles fetch it at build time), and
+> running the platform in production needs a commercial license from the licensor. EmAI Academy is a
+> use case / prototype, not an official Bootstrap Academy product.
+
 > Status: spike / working prototype (2026-10). Findings per workstream are in `docs/spike/`.
 > Before any public pilot: the terms page is a placeholder, the imprint lacks the register court,
 > and the privacy page's hosting section is a draft.

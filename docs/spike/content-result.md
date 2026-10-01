@@ -12,10 +12,10 @@ These variables point the EmAI skills-ms (`skills-ms-rooms`, :8011) at the conte
 
 | Env var | Value | Notes |
 |---|---|---|
-| `COURSES` | `/Users/sebastian/develop/Bootstrap-Academy/emai-academy/content/courses` | **Must be set.** The default is the relative `config/courses`, which holds 87 Bootstrap courses. |
-| `LEARNING_ROOMS_CONTENT` | `/Users/sebastian/develop/Bootstrap-Academy/emai-academy/content/learning_rooms.json` | Must be an absolute regular file, not a symlink. If it isn't, startup fails closed. |
-| `CHARACTER_AREAS` | `/Users/sebastian/develop/Bootstrap-Academy/emai-academy/content/character_areas.json` | |
-| `MP4_LECTURES` | `/Users/sebastian/develop/Bootstrap-Academy/emai-academy/content/lectures` | Empty. No mp4 lectures are used yet. |
+| `COURSES` | `<workspace>/emai-academy/content/courses` | **Must be set.** The default is the relative `config/courses`, which holds 87 Bootstrap courses. |
+| `LEARNING_ROOMS_CONTENT` | `<workspace>/emai-academy/content/learning_rooms.json` | Must be an absolute regular file, not a symlink. If it isn't, startup fails closed. |
+| `CHARACTER_AREAS` | `<workspace>/emai-academy/content/character_areas.json` | |
+| `MP4_LECTURES` | `<workspace>/emai-academy/content/lectures` | Empty. No mp4 lectures are used yet. |
 | `ROOMS_ENABLED` | `True` | |
 | `LESSON_MODULE_ORIGINS` | `["http://localhost:3001"]` | For the two custom units |
 | `LESSON_MODULE_LOCAL_DEVELOPMENT` | `True` | Allows `http://localhost` module URLs |
@@ -190,7 +190,7 @@ modules were already built when I aligned to them):
 ## 4. Validation
 
 ```sh
-cd /Users/sebastian/develop/Bootstrap-Academy/emai-academy
+cd <workspace>/emai-academy
 ../skills-ms-rooms/.venv/bin/python content/tools/build_learning_rooms.py          # regenerate JSON
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=../skills-ms-rooms \
   ../skills-ms-rooms/.venv/bin/python content/tools/validate.py                     # -> "content is valid"
