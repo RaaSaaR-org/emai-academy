@@ -6,6 +6,11 @@
 //   cd docs/spike/e2e && node course-run.mjs            # all courses
 //   COURSES=physical-ai-grundlagen,so101-lerobot-setup node course-run.mjs
 //
+// Production: nobody can read the verification mail there, so sign up a FRESH test account
+// by hand (verify it via the real mailbox), then skip signup with
+//   EMAI_WEB=https://academy.emai.dev EMAI_USER=<name> EMAI_PASSWORD=<pw> node course-run.mjs
+// The account must have no progress yet (the run checks that XP starts at 0 and grows).
+//
 // Writes ./course-run.json and screenshots to ../screens/run-*.png. Exit 0 only if all passed.
 import fs from "node:fs";
 import path from "node:path";
@@ -15,7 +20,7 @@ import puppeteer from "puppeteer-core";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SCREENS = path.resolve(HERE, "../screens");
 const WEB = process.env.EMAI_WEB || "http://localhost:3001";
-const API = process.env.EMAI_API || "http://127.0.0.1:8191";
+const API = process.env.EMAI_API || (process.env.EMAI_WEB ? `${process.env.EMAI_WEB.replace(/\/$/, "")}/api` : "http://127.0.0.1:8191");
 const SMTP = process.env.EMAI_SMTP_UI || "http://localhost:5050";
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const ROOMS = JSON.parse(fs.readFileSync(path.resolve(HERE, "../../../content/learning_rooms.json"), "utf8"));
@@ -23,7 +28,10 @@ const unitsOf = (p) => ROOMS.units.filter((u) => u.path_id === p && !u.retired);
 const COURSES = (process.env.COURSES || ROOMS.paths.map((p) => p.id).join(",")).split(",").filter(Boolean);
 
 const stamp = Date.now().toString(36);
-const USER = { name: `run${stamp}`, display: "Kurs Testerin", email: `run-${stamp}@emai.local`, password: `EmaiRun!7${stamp}` };
+const EXISTING = Boolean(process.env.EMAI_USER && process.env.EMAI_PASSWORD);
+const USER = EXISTING
+  ? { name: process.env.EMAI_USER, password: process.env.EMAI_PASSWORD, display: "(existing account)", email: "(existing account)" }
+  : { name: `run${stamp}`, display: "Kurs Testerin", email: `run-${stamp}@emai.local`, password: `EmaiRun!7${stamp}` };
 
 const results = [];
 const consoleErrors = [];
@@ -87,6 +95,7 @@ async function login() {
 }
 
 // ------------------------------------------------------------------ account
+if (!EXISTING) {
 await step("signup", async () => {
   await go("/auth/signup");
   const inputs = await page.$$("form input[type=text], form input[type=email], form input[type=password]");
@@ -121,6 +130,7 @@ await step("verify-email", async () => {
   assert(me.email_verified === true, "not verified");
   return code;
 });
+}
 await step("login-fresh-session", async () => {
   await page.close();
   page = await (await browser.createBrowserContext()).newPage();
@@ -289,6 +299,7 @@ await step("skill-tree-progress", async () => {
   await go("/skill-tree");
   await sleep(2500);
   await shot("skill-tree-end");
+  if (COURSES.length < ROOMS.paths.length) return { rootSkillsWithXp: `${withXp.length}/${tree.skills.length}`, note: "subset run, not all skills expected" };
   assert(withXp.length === tree.skills.length, `skills without XP: ${tree.skills.filter((s) => !withXp.includes(s.id)).map((s) => s.id).join(", ")}`);
   return { rootSkillsWithXp: `${withXp.length}/${tree.skills.length}` };
 });
