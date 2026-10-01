@@ -1,0 +1,61 @@
+# Skill 2: form factors and sensing.
+order: 100
+path:
+  id: bauformen-und-sensorik
+  title: {de: "Bauformen und Sensorik", en: "Form factors and sensing"}
+  direction_id: builder
+units:
+  - id: bs-bauform-waehlen
+    title: {de: "Die Bauform folgt der Aufgabe", en: "Form follows task"}
+    room: guided-lesson
+    teaches: [bs-bauform]
+    steps:
+      - id: kriterien
+        title: {de: "Fünf Fragen an jede Plattform", en: "Five questions for any platform"}
+        body:
+          de: "Bevor Sie eine Plattform auswählen, klären Sie:\n1. Muss sich der Roboter fortbewegen? Wenn ja: ebener Boden, Treppen, Gelände?\n2. Welche Traglast und Reichweite braucht die Aufgabe?\n3. Wie fein muss gegriffen werden: Parallelgreifer oder mehrfingrige Hand?\n4. Welche Sensorik braucht die Aufgabe: Kamera, Tiefe, Kraft, Tastsinn?\n5. Wie lange muss das System am Stück laufen, und wie wird es geladen?"
+          en: "Before choosing a platform, clarify:\n1. Does the robot need to move around? If so: flat floor, stairs, terrain?\n2. What payload and reach does the task require?\n3. How fine does the grasp need to be: parallel gripper or multi-finger hand?\n4. What sensing does the task need: camera, depth, force, touch?\n5. How long must the system run continuously, and how is it charged?"
+        check:
+          id: mobil
+          question:
+            de: "Ein Roboter soll Proben aus fünf Laboren auf einer Etage holen und in Racks stellen. Welche Bauform passt am besten?"
+            en: "A robot is to collect samples from five labs on one floor and place them in racks. Which form factor fits best?"
+          options:
+            - {value: arm, text: {de: "Stationärer Arm", en: "Stationary arm"}}
+            - {value: mobil, text: {de: "Mobiler Manipulator", en: "Mobile manipulator"}}
+            - {value: vierbeiner, text: {de: "Vierbeiner ohne Arm", en: "Quadruped without an arm"}}
+          answer: mobil
+          correct: {de: "Richtig. Ebener Boden, wechselnde Orte, greifen: Rad plus Arm.", en: "Right. Flat floor, changing locations, grasping: wheels plus arm."}
+          tryAgain: {de: "Er muss fahren UND greifen, aber keine Treppen steigen.", en: "It must drive AND grasp, but not climb stairs."}
+      - id: zweibeiner
+        title: {de: "Wann Beine sinnvoll sind", en: "When legs make sense"}
+        body:
+          de: "Zweibeinige kognitive Roboter sind für Umgebungen gebaut, die für Menschen gestaltet sind: Treppen, Türen, enge Gänge, Werkzeuge in Menschengröße. Sie sind technisch am anspruchsvollsten, und die Akkulaufzeit ist im Dauerbetrieb oft der limitierende Faktor. Wo ein Rad oder ein fester Arm genügt, ist es meist robuster und günstiger."
+          en: "Bipedal cognitive robots are built for environments designed for people: stairs, doors, narrow corridors, human-sized tools. They are technically the most demanding, and battery life is often the limiting factor in continuous operation. Where wheels or a fixed arm suffice, they are usually more robust and cheaper."
+  - id: bs-sensorik
+    title: {de: "Sensorik für Wahrnehmung und Kontakt", en: "Sensing for perception and contact"}
+    room: guided-lesson
+    teaches: [bs-sensorik]
+    requires: [bs-bauform]
+    steps:
+      - id: sehen
+        title: {de: "Sehen: RGB, Tiefe, LiDAR", en: "Seeing: RGB, depth, LiDAR"}
+        body:
+          de: "RGB-Kameras liefern das Bild, aus dem VLA-Modelle ihre Entscheidungen ableiten. Tiefenkameras ergänzen pro Pixel die Entfernung, per Stereo-Verfahren oder Infrarot-Muster. LiDAR erzeugt 3D-Punktwolken und ist robust gegenüber Licht, wird aber vor allem für Navigation und Kartierung genutzt.\n\nWichtig für Robot Learning: Kameraposition und -einstellungen gehören zum Datensatz. Wer die Kamera nach der Aufnahme verschiebt, verschiebt die Welt der Policy."
+          en: "RGB cameras provide the image from which VLA models derive their decisions. Depth cameras add a distance per pixel, via stereo or infrared patterns. LiDAR produces 3D point clouds and is robust to lighting, but is mainly used for navigation and mapping.\n\nImportant for robot learning: camera position and settings are part of the dataset. Moving the camera after recording moves the policy's world."
+        check:
+          id: kamera-verschoben
+          question:
+            de: "Nach dem Training wird die Frontkamera um 10 cm versetzt. Was ist zu erwarten?"
+            en: "After training, the front camera is moved by 10 cm. What should you expect?"
+          options:
+            - {value: a, text: {de: "Keine Auswirkung, die Policy ist bildunabhängig.", en: "No effect, the policy is image-independent."}}
+            - {value: b, text: {de: "Die Erfolgsquote kann deutlich sinken. Neu testen oder nachtrainieren.", en: "The success rate may drop significantly. Re-test or retrain."}}
+          answer: b
+          correct: {de: "Richtig. Die Kamerapose ist eine der Achsen, auf der Policies am leichtesten brechen.", en: "Right. The camera pose is one of the axes on which policies break most easily."}
+          tryAgain: {de: "Die Policy hat nur Bilder aus der alten Perspektive gesehen.", en: "The policy has only seen images from the old viewpoint."}
+      - id: fuehlen
+        title: {de: "Fühlen: Kraft und Tastsinn", en: "Feeling: force and touch"}
+        body:
+          de: "Viele Aufgaben entscheiden sich im Kontakt: Fügen, Stecken, weiche oder zerbrechliche Teile. Kraft-Momenten-Sensoren am Handgelenk und taktile Sensoren in den Fingern machen diesen Kontakt messbar. Auch für die Sicherheit sind sie wichtig, weil sie Kollisionen erkennen."
+          en: "Many tasks are decided in contact: inserting, plugging, soft or fragile parts. Force-torque sensors at the wrist and tactile sensors in the fingers make this contact measurable. They also matter for safety because they detect collisions."

@@ -1,0 +1,31 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: Bauformen und Sensorik
+description: 'Arm, mobiler Manipulator, Vierbeiner oder Zweibeiner: welche Bauform zu welcher Aufgabe passt und
+  welche Sensorik Wahrnehmung und Kontakt möglich macht.'
+category: Hardware
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: bauformen-und-sensorik
+learning_goals:
+- Eine Bauform anhand der Aufgabe begründet auswählen
+- Kameras, Tiefensensoren, LiDAR, Kraft- und Tastsensorik unterscheiden
+- Verstehen, warum die Kamerapose Teil des Datensatzes ist
+requirements:
+- Physical AI in acht Kapiteln
+last_update: 1790812800
+translations:
+  en:
+    title: Form factors and sensing
+    description: 'Arm, mobile manipulator, quadruped or biped: which form factor fits which task, and which sensors
+      enable perception and contact.'
+    learning_goals:
+    - Choose a form factor based on the task
+    - Distinguish cameras, depth sensors, LiDAR, force and tactile sensing
+    - Understand why the camera pose is part of the dataset
+    requirements:
+    - Physical AI in eight chapters
+sections: []

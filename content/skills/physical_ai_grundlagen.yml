@@ -1,0 +1,12 @@
+# Skill 1 (root of both tracks). Root id = file name (^[a-z0-9_]+$).
+name: Physical AI Grundlagen
+dependencies: []
+skills:
+  physical_ai_ueberblick:
+    name: Physical AI in acht Kapiteln
+    dependencies: []
+    courses: [physical-ai-grundlagen]
+  physical_ai_begriffe:
+    name: Begriffe der Physical AI
+    dependencies: [physical_ai_ueberblick]
+    courses: [physical-ai-begriffe]

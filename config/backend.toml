@@ -1,0 +1,62 @@
+# EmAI Academy: overlay for a second instance of the Bootstrap Academy backend.
+#
+# scripts/lib.sh runs the backend with (first file wins, merged per key):
+#   ACADEMY_CONFIG=.run/backend.paths.toml:config/backend.toml:../backend/config.dev.toml
+# .run/backend.paths.toml is generated per checkout and holds the absolute [finance] archive
+# paths, so this file contains no machine-specific paths.
+# Anything not set here comes from backend/config.dev.toml and then from backend/config.toml.
+# The shared devenv services stay as they are: Postgres :5432, Valkey :6379,
+# smtp4dev :2525, render daemon :8001 and the API mocks :8100-8104.
+
+[http]
+address = "127.0.0.1:8081"
+allowed_origins = [".*"]
+
+[database]
+# Own database on the shared Postgres (created by scripts/dev-up.sh)
+url = "postgres://academy@127.0.0.1:5432/emai_academy"
+# serve applies pending migrations on start
+run_migrations = true
+
+[cache]
+# The backend has no key prefix option, so the tenant gets its own Valkey DB index.
+# Bootstrap uses db 0 (backend) and db 1 (skills-ms). EmAI: db 2 (backend) and db 3 (skills-ms).
+# skills-ms AUTH_REDIS_URL must point at this same DB (logout revocation keys).
+url = "redis://127.0.0.1:6379/2"
+
+[email]
+# The backend's mail templates are compiled in and Bootstrap-branded. The tenant mail relay
+# (services/mail-relay, :2526) re-brands every mail and forwards it to smtp4dev :2525.
+smtp_url = "smtp://127.0.0.1:2526"
+from = "EmAI Academy DEV <academy@emai.dev>"
+
+[jwt]
+# Must equal JWT_SECRET in config/skills-ms.env. It differs from Bootstrap's "changeme",
+# so Bootstrap tokens are not valid here.
+secret = "emai-dev-secret"
+
+[contact]
+email = "EmAI Robotics <info@emai.dev>"
+
+[user]
+verification_redirect_url = "http://localhost:3001/auth/verify-account"
+password_reset_redirect_url = "http://localhost:3001/auth/reset-password"
+
+[oauth2]
+redirect_uris = ["http://localhost:3001/oauth/callback", "http://127.0.0.1:3001/oauth/callback"]
+
+[microservices]
+# Real EmAI skills-ms (skills-ms-rooms worktree). The trailing slash is required.
+# challenges_url and events_url are inherited from config.dev.toml (mocks on :8104).
+skills_url = "http://127.0.0.1:8011/"
+
+[feedback]
+# Off, as in the defaults. If turned on, it also needs github_token_file and storage_path.
+enabled = false
+public_base_url = "http://localhost:3001"
+
+# Coins, premium and PayPal: academy_config has no enable/disable switch for these.
+# New purchases are already unavailable because [purchase] provision_window_seconds
+# is not set (PurchaseError::Unavailable for every product kind), and every EmAI
+# course is price: 0, so skills-ms never calls the shop. The frontend layer hides the
+# coin, premium and hearts UI.

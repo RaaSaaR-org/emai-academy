@@ -1,0 +1,72 @@
+# Skill 7: inference and deployment (source: LeRobot async.mdx; emai vla-training lessons).
+order: 165
+path:
+  id: inferenz-und-deployment
+  title: {de: "Inferenz und Deployment", en: "Inference and deployment"}
+  direction_id: builder
+units:
+  - id: dep-async
+    title: {de: "Rechnen, während der Arm sich bewegt", en: "Compute while the arm moves"}
+    room: guided-lesson
+    teaches: [dep-async]
+    steps:
+      - id: problem
+        title: {de: "Das Ruckel-Problem", en: "The stutter problem"}
+        body:
+          de: "Im einfachsten Fall rechnet die Policy einen Chunk, der Roboter führt ihn aus, und erst dann wird der nächste berechnet. Während das Modell rechnet, steht der Arm still. Bei großen VLAs entstehen so sichtbare Pausen."
+          en: "In the simplest case the policy computes a chunk, the robot executes it, and only then is the next one computed. While the model computes, the arm stands still. With large VLAs this produces visible pauses."
+      - id: async
+        title: {de: "Asynchrone Inferenz", en: "Asynchronous inference"}
+        body:
+          de: "LeRobot trennt deshalb Policy-Server und Roboter-Client. Der Client führt Aktionen aus seiner Warteschlange aus und schickt eine neue Beobachtung, sobald die Warteschlange unter eine Schwelle fällt. Der Server rechnet währenddessen den nächsten Chunk. Der Server kann auf einer GPU im eigenen Netz laufen, der Client am Roboter."
+          en: "LeRobot therefore separates policy server and robot client. The client executes actions from its queue and sends a new observation as soon as the queue drops below a threshold. Meanwhile the server computes the next chunk. The server can run on a GPU in your own network, the client on the robot."
+        code: "python -m lerobot.async_inference.policy_server \\\n    --host=0.0.0.0 --port=8080\n\npython -m lerobot.async_inference.robot_client \\\n    --server_address=<gpu-host>:8080 \\\n    --robot.type=so101_follower \\\n    --robot.port=/dev/ttyACM0 \\\n    --robot.id=emai_follower \\\n    --robot.cameras=\"{front: {type: opencv, index_or_path: 0, width: 640, height: 480, fps: 30}}\" \\\n    --task=\"Grab the black cube and put it in the box\" \\\n    --policy_type=smolvla \\\n    --pretrained_name_or_path=<user>/smolvla_so101 \\\n    --policy_device=cuda \\\n    --actions_per_chunk=50 \\\n    --chunk_size_threshold=0.5"
+        check:
+          id: schwelle
+          question:
+            de: "Was bewirkt chunk_size_threshold=0.5?"
+            en: "What does chunk_size_threshold=0.5 do?"
+          options:
+            - {value: a, text: {de: "Eine neue Beobachtung wird geschickt, wenn nur noch die Hälfte des Chunks übrig ist.", en: "A new observation is sent when only half of the chunk is left."}}
+            - {value: b, text: {de: "Der Roboter fährt mit halber Geschwindigkeit.", en: "The robot moves at half speed."}}
+          answer: a
+          correct: {de: "Richtig. So ist der nächste Chunk fertig, bevor der aktuelle aufgebraucht ist.", en: "Right. That way the next chunk is ready before the current one runs out."}
+          tryAgain: {de: "Es geht um die Warteschlange, nicht um Geschwindigkeit.", en: "It is about the queue, not speed."}
+  - id: dep-betrieb
+    title: {de: "Souverän im Betrieb", en: "Sovereign in operation"}
+    room: guided-lesson
+    teaches: [dep-betrieb]
+    requires: [dep-async]
+    steps:
+      - id: wo
+        title: {de: "Wo läuft das Modell?", en: "Where does the model run?"}
+        body:
+          de: "Drei Optionen: direkt am Roboter (geringste Latenz, begrenzte Rechenleistung), auf einem Edge-Server im Werk (genug GPU, Daten bleiben im Haus) oder in der Cloud (flexibel, aber Latenz, Abhängigkeit und Datenabfluss). Für die meisten industriellen Anwendungen empfehlen wir Roboter plus Edge-Server im eigenen Netz."
+          en: "Three options: directly on the robot (lowest latency, limited compute), on an edge server in the plant (enough GPU, data stays in-house) or in the cloud (flexible, but latency, dependency and data leaving the site). For most industrial applications we recommend robot plus edge server in your own network."
+        check:
+          id: edge
+          question:
+            de: "Welche Option hält Kamerabilder im Werk und bietet trotzdem genug GPU-Leistung für ein VLA?"
+            en: "Which option keeps camera images in the plant and still offers enough GPU power for a VLA?"
+          options:
+            - {value: edge, text: {de: "Edge-Server im eigenen Netz", en: "Edge server in your own network"}}
+            - {value: cloud, text: {de: "Cloud", en: "Cloud"}}
+          answer: edge
+          correct: {de: "Genau.", en: "Exactly."}
+          tryAgain: {de: "Die Cloud liegt außerhalb des Werks.", en: "The cloud is outside the plant."}
+      - id: versionierung
+        title: {de: "Modelle wie Software behandeln", en: "Treat models like software"}
+        body:
+          de: "Ein Modell im Betrieb braucht dasselbe wie jede Software: eine eindeutige Version, eine dokumentierte Konfiguration einschließlich Ansteuerfrequenz und Normierung, einen geprüften Freigabeprozess und einen Weg zurück zur vorherigen Version. Updates werden signiert und erst nach Test in der Simulation und am gesicherten Roboter ausgerollt."
+          en: "A model in operation needs what any software needs: a unique version, a documented configuration including control frequency and normalisation, a reviewed release process and a way back to the previous version. Updates are signed and only rolled out after testing in simulation and on the secured robot."
+        check:
+          id: rollback
+          question:
+            de: "Nach einem Modell-Update steigen die Eingriffe pro Stunde deutlich. Was muss jetzt schnell möglich sein?"
+            en: "After a model update, interventions per hour rise significantly. What must be possible quickly now?"
+          options:
+            - {value: rollback, text: {de: "Zurück zur vorherigen Modellversion", en: "Roll back to the previous model version"}}
+            - {value: neu, text: {de: "Sofort neu trainieren", en: "Retrain immediately"}}
+          answer: rollback
+          correct: {de: "Richtig. Erst stabilisieren, dann analysieren.", en: "Right. Stabilise first, then analyse."}
+          tryAgain: {de: "Was stellt den bekannten guten Zustand wieder her?", en: "What restores the known good state?"}

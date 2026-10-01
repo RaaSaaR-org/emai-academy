@@ -1,0 +1,72 @@
+# Skill 7: evaluating policies (source: emai vla-training docs/vla-benchmark.md, README §5).
+order: 160
+path:
+  id: policies-evaluieren
+  title: {de: "Policies ehrlich evaluieren", en: "Evaluate policies honestly"}
+  direction_id: builder
+units:
+  - id: ev-stufen
+    title: {de: "Drei Stufen der Evaluation", en: "Three levels of evaluation"}
+    room: guided-lesson
+    teaches: [ev-stufen]
+    steps:
+      - id: stufen
+        title: {de: "Offline, Simulation, real", en: "Offline, simulation, real"}
+        body:
+          de: "1. Offline: Die Policy sagt auf aufgezeichneten Episoden Aktionen vorher, man vergleicht mit dem, was der Mensch tat. Billig, aber ohne Rückkopplung.\n2. Geschlossener Regelkreis in der Simulation: Die Policy steuert selbst, Erfolg wird automatisch gemessen. Reproduzierbar, aber mit Sim-to-Real-Lücke.\n3. Realer Roboter: der eigentliche Maßstab, aber teuer und schwer reproduzierbar."
+          en: "1. Offline: the policy predicts actions on recorded episodes and is compared with what the human did. Cheap, but without feedback.\n2. Closed loop in simulation: the policy controls by itself and success is measured automatically. Reproducible, but with a sim-to-real gap.\n3. Real robot: the actual yardstick, but expensive and hard to reproduce."
+        check:
+          id: stufe
+          question:
+            de: "Welche Stufe zeigt NICHT, ob die Policy sich von eigenen Fehlern erholt?"
+            en: "Which level does NOT show whether the policy recovers from its own errors?"
+          options:
+            - {value: offline, text: {de: "Offline", en: "Offline"}}
+            - {value: sim, text: {de: "Simulation", en: "Simulation"}}
+            - {value: real, text: {de: "Realer Roboter", en: "Real robot"}}
+          answer: offline
+          correct: {de: "Richtig. Offline sieht die Policy nie die Folgen ihrer Aktionen.", en: "Right. Offline the policy never sees the consequences of its actions."}
+          tryAgain: {de: "Wo fehlt die Rückkopplung?", en: "Where is the feedback missing?"}
+      - id: vergleichbar
+        title: {de: "Nur Gleiches vergleichen", en: "Compare like with like"}
+        body:
+          de: "Erfolgsquoten aus verschiedenen Simulatoren sind nicht vergleichbar, etwa MuJoCo und Isaac: andere Physik, anderes Rendering, oft andere Erfolgskriterien. Unsere Vergleichsskripte brechen deshalb ab, wenn man es versucht."
+          en: "Success rates from different simulators, such as MuJoCo and Isaac, are not comparable: different physics, different rendering, often different success criteria. Our comparison scripts therefore abort if you try."
+  - id: ev-statistik
+    title: {de: "Wie viele Versuche braucht eine Aussage?", en: "How many trials does a claim need?"}
+    room: guided-lesson
+    teaches: [ev-statistik]
+    requires: [ev-stufen]
+    steps:
+      - id: zufall
+        title: {de: "7 von 10 ist keine Zahl, sondern ein Bereich", en: "7 out of 10 is not a number but a range"}
+        body:
+          de: "Gelingen 7 von 10 Versuchen, liegt die wahre Erfolgsquote mit 95 % Sicherheit irgendwo zwischen etwa 40 % und 90 % (Wilson-Intervall). Ein Vergleich „Modell A 7/10, Modell B 5/10“ sagt deshalb fast nichts. Mehr Versuche, feste Startwerte (Seeds) für beide Modelle und ein gepaarter Test machen aus Eindrücken belastbare Aussagen."
+          en: "If 7 out of 10 trials succeed, the true success rate lies, with 95 % confidence, somewhere between about 40 % and 90 % (Wilson interval). A comparison „model A 7/10, model B 5/10“ therefore says almost nothing. More trials, fixed seeds for both models and a paired test turn impressions into sound claims."
+        check:
+          id: vergleich
+          question:
+            de: "Modell A schafft 7/10, Modell B 5/10. Was folgt daraus?"
+            en: "Model A achieves 7/10, model B 5/10. What follows?"
+          options:
+            - {value: a, text: {de: "A ist klar besser.", en: "A is clearly better."}}
+            - {value: b, text: {de: "Noch nichts Belastbares, die Intervalle überlappen stark.", en: "Nothing reliable yet, the intervals overlap heavily."}}
+          answer: b
+          correct: {de: "Richtig. Erst mehr gepaarte Versuche entscheiden.", en: "Right. Only more paired trials decide."}
+          tryAgain: {de: "Denken Sie an die Breite des Bereichs bei 10 Versuchen.", en: "Think of how wide the range is with 10 trials."}
+      - id: vorregistrieren
+        title: {de: "Vorher festlegen, dann messen", en: "Decide first, then measure"}
+        body:
+          de: "Legen Sie vor dem Lauf fest: Erfolgskriterium, Anzahl Versuche, Startwerte, Modellversion, Ansteuerfrequenz. Wer erst nach dem Messen entscheidet, was als Erfolg zählt, misst seine Hoffnung. In unserem Labor gilt außerdem: Jede Stellschraube, die eine Messzahl verschieben kann, muss ihre Wirkung im Protokoll nachweisen, sonst wird der Lauf verweigert."
+          en: "Before the run, fix: success criterion, number of trials, seeds, model version, control frequency. Deciding what counts as success only after measuring measures your hopes. In our lab there is another rule: every setting that can shift a metric must prove its effect in the log, or the run is refused."
+        check:
+          id: zeitpunkt
+          question:
+            de: "Wann legen Sie das Erfolgskriterium fest?"
+            en: "When do you set the success criterion?"
+          options:
+            - {value: vorher, text: {de: "Vor dem Lauf", en: "Before the run"}}
+            - {value: nachher, text: {de: "Nach dem Lauf, wenn man die Ergebnisse kennt", en: "After the run, once the results are known"}}
+          answer: vorher
+          correct: {de: "Genau.", en: "Exactly."}
+          tryAgain: {de: "Sonst misst man seine Hoffnung.", en: "Otherwise you measure your hopes."}

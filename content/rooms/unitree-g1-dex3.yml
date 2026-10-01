@@ -1,0 +1,77 @@
+# Skill 2: our hands-on embodiment Unitree G1 EDU + Dex3 (source: emai vla-training README, docs/vla-modelle.md).
+order: 105
+path:
+  id: unitree-g1-dex3
+  title: {de: "Unitree G1 EDU mit Dex3-Händen", en: "Unitree G1 EDU with Dex3 hands"}
+  direction_id: builder
+units:
+  - id: g1-aufbau
+    title: {de: "Aufbau und Gelenkstruktur", en: "Structure and joints"}
+    room: guided-lesson
+    teaches: [g1-aufbau]
+    steps:
+      - id: plattform
+        title: {de: "Die Plattform in unserem Labor", en: "The platform in our lab"}
+        body:
+          de: "Der Unitree G1 ist ein zweibeiniger kognitiver Roboter. Wir setzen die EDU-Variante ein: Sie hat einen zusätzlichen Entwicklungsrechner an Bord und erlaubt Zugriff auf die Low-Level-Schnittstellen. Dazu kommen zwei Dex3-Hände mit je drei Fingern.\n\nDie Kommunikation mit dem Roboter läuft über DDS: Gelenkzustände und Befehle werden als Topics veröffentlicht und abonniert, im realen Roboter wie in der Isaac-Simulation."
+          en: "The Unitree G1 is a bipedal cognitive robot. We use the EDU variant: it has an additional development computer on board and gives access to the low-level interfaces. It is fitted with two Dex3 hands with three fingers each.\n\nCommunication with the robot runs over DDS: joint states and commands are published and subscribed as topics, on the real robot as in the Isaac simulation."
+      - id: gelenke
+        title: {de: "43 Werte, 28 für Imitation Learning", en: "43 values, 28 for imitation learning"}
+        body:
+          de: "Unser vollständiger Zustandsvektor hat 43 Werte:\nlinkes Bein 6 | rechtes Bein 6 | Taille 3 | linker Arm 7 | rechter Arm 7 | linke Hand 7 | rechte Hand 7\n\nFür Manipulationsaufgaben per Imitation Learning nutzen wir nur Arme und Hände: 14 + 14 = 28 Werte. Die Beine hält ein separater Balance- und Lauf-Controller."
+          en: "Our full state vector has 43 values:\nleft leg 6 | right leg 6 | waist 3 | left arm 7 | right arm 7 | left hand 7 | right hand 7\n\nFor manipulation tasks via imitation learning we only use arms and hands: 14 + 14 = 28 values. A separate balance and locomotion controller handles the legs."
+        check:
+          id: dex3-dim
+          question:
+            de: "Wie viele Werte beschreiben beide Dex3-Hände zusammen?"
+            en: "How many values describe both Dex3 hands together?"
+          options:
+            - {value: "6", text: {de: "6", en: "6"}}
+            - {value: "14", text: {de: "14", en: "14"}}
+            - {value: "28", text: {de: "28", en: "28"}}
+          answer: "14"
+          correct: {de: "Richtig: 7 pro Hand.", en: "Right: 7 per hand."}
+          tryAgain: {de: "Sieben pro Hand, zwei Hände.", en: "Seven per hand, two hands."}
+      - id: reihenfolge
+        title: {de: "Die Tücke im Detail", en: "The devil in the detail"}
+        body:
+          de: "Die Reihenfolge der Gelenke im Vektor ist eine Konvention, keine Naturkonstante. Bei der rechten Dex3-Hand liegt z. B. der Zeigefinger vor dem Mittelfinger, anders als man vermuten würde. Wer Datensätze aus verschiedenen Quellen mischt, muss die Gelenkreihenfolge prüfen, sonst lernt die Policy vertauschte Finger."
+          en: "The order of joints in the vector is a convention, not a law of nature. In the right Dex3 hand, for example, the index finger comes before the middle finger, not where you might expect. Anyone mixing datasets from different sources must check the joint order, or the policy learns swapped fingers."
+        check:
+          id: mischen
+          question:
+            de: "Sie kombinieren einen öffentlichen Dex3-Datensatz mit eigenen Aufnahmen. Was prüfen Sie zuerst?"
+            en: "You combine a public Dex3 dataset with your own recordings. What do you check first?"
+          options:
+            - {value: a, text: {de: "Die Gelenkreihenfolge und Einheiten beider Quellen", en: "The joint order and units of both sources"}}
+            - {value: b, text: {de: "Nur die Anzahl der Episoden", en: "Only the number of episodes"}}
+          answer: a
+          correct: {de: "Genau. Gleiche Dimension heißt nicht gleiche Bedeutung.", en: "Exactly. Same dimension does not mean same meaning."}
+          tryAgain: {de: "28 Werte sind nicht automatisch dieselben 28 Werte.", en: "28 values are not automatically the same 28 values."}
+  - id: g1-betrieb
+    title: {de: "Sicher mit dem G1 arbeiten", en: "Working safely with the G1"}
+    room: guided-lesson
+    teaches: [g1-betrieb]
+    requires: [g1-aufbau]
+    steps:
+      - id: regeln
+        title: {de: "Grundregeln im Labor", en: "Basic lab rules"}
+        body:
+          de: "Ein zweibeiniger Roboter kann stürzen. Deshalb arbeiten wir mit Sicherungsgestell oder Seil, freiem Sturzbereich, einer zweiten Person mit Zugriff auf den Not-Halt und klaren Absprachen, wer den Roboter gerade steuert. Neue Policies laufen zuerst in der Simulation, dann mit reduzierter Geschwindigkeit am gesicherten Roboter."
+          en: "A bipedal robot can fall. That is why we work with a support frame or tether, a clear fall zone, a second person with access to the emergency stop and clear agreement on who is controlling the robot. New policies run first in simulation, then at reduced speed on the secured robot."
+        check:
+          id: neue-policy
+          question:
+            de: "Eine frisch trainierte Policy soll auf den G1. Was ist der richtige erste Schritt?"
+            en: "A freshly trained policy is to run on the G1. What is the right first step?"
+          options:
+            - {value: a, text: {de: "Direkt am freistehenden Roboter mit voller Geschwindigkeit testen", en: "Test directly on the free-standing robot at full speed"}}
+            - {value: b, text: {de: "In der Simulation über dieselben DDS-Schnittstellen testen", en: "Test in simulation over the same DDS interfaces"}}
+          answer: b
+          correct: {de: "Richtig. So prüfen Sie den echten Software-Stack, ohne Hardware zu riskieren.", en: "Right. That tests the real software stack without risking hardware."}
+          tryAgain: {de: "Wo kostet ein Fehler nichts?", en: "Where does a mistake cost nothing?"}
+      - id: datenquellen
+        title: {de: "Woher die Daten kommen", en: "Where the data come from"}
+        body:
+          de: "Für den G1 mit Dex3 gibt es drei Datenquellen: Teleoperation am realen Roboter, Teleoperation in der Isaac-Simulation und öffentliche Datensätze mit exakt diesem Aufbau, etwa die Dex3-Sammlungen von Unitree auf Hugging Face. Mehr dazu im Kurs zur XR-Teleoperation."
+          en: "For the G1 with Dex3 there are three data sources: teleoperation on the real robot, teleoperation in the Isaac simulation and public datasets with exactly this setup, such as Unitree's Dex3 collections on Hugging Face. More on this in the XR teleoperation course."

@@ -1,0 +1,86 @@
+# Skill 1: glossary course, based on the emai landing-page glossary ("Physical AI von A bis Z").
+order: 20
+path:
+  id: physical-ai-begriffe
+  title: {de: "Physical AI von A bis Z", en: "Physical AI from A to Z"}
+  direction_id: entscheider
+units:
+  - id: begriffe-koerper
+    title: {de: "Begriffe rund um den Körper", en: "Terms about the body"}
+    room: guided-lesson
+    teaches: [begriffe-hardware]
+    steps:
+      - id: aktor
+        title: {de: "Aktor, Endeffektor, Freiheitsgrade", en: "Actuator, end effector, degrees of freedom"}
+        body:
+          de: "Aktor: Bauteil, das Energie in Bewegung umsetzt, etwa ein Elektromotor im Gelenk.\nEndeffektor: das Werkzeug am Ende des Arms, z. B. Greifer, Sauger oder Roboterhand.\nFreiheitsgrade (DoF): Anzahl der unabhängigen Bewegungsmöglichkeiten. Ein typischer Industriearm hat sechs, ein Zweibeiner oft mehr als zwanzig."
+          en: "Actuator: a component that turns energy into motion, such as an electric motor in a joint.\nEnd effector: the tool at the end of the arm, e.g. gripper, suction cup or robot hand.\nDegrees of freedom (DoF): the number of independent ways to move. A typical industrial arm has six, a biped often more than twenty."
+        check:
+          id: dof
+          question:
+            de: "Wie viele Freiheitsgrade hat ein typischer Industriearm?"
+            en: "How many degrees of freedom does a typical industrial arm have?"
+          options:
+            - {value: "3", text: {de: "3", en: "3"}}
+            - {value: "6", text: {de: "6", en: "6"}}
+            - {value: "20", text: {de: "über 20", en: "more than 20"}}
+          answer: "6"
+          correct: {de: "Richtig. Sechs reichen, um Position und Orientierung im Raum frei zu wählen.", en: "Right. Six are enough to choose position and orientation in space freely."}
+          tryAgain: {de: "Position (3) plus Orientierung (3).", en: "Position (3) plus orientation (3)."}
+      - id: sensorik
+        title: {de: "Sensorik", en: "Sensing"}
+        body:
+          de: "Tiefenkamera: misst zu jedem Bildpunkt die Entfernung.\nLiDAR: tastet die Umgebung per Laser ab und erzeugt eine 3D-Punktwolke.\nKraft-Momenten-Sensor: misst Kräfte und Drehmomente, meist am Handgelenk.\nTaktile Sensorik: erfasst Berührung und Druck an Fingern oder Greifern.\nSLAM: Der Roboter erstellt eine Karte und bestimmt gleichzeitig seine Position darin."
+          en: "Depth camera: measures the distance for every pixel.\nLiDAR: scans the surroundings with a laser and produces a 3D point cloud.\nForce-torque sensor: measures forces and torques, usually at the wrist.\nTactile sensing: detects touch and pressure on fingers or grippers.\nSLAM: the robot builds a map and simultaneously locates itself in it."
+        check:
+          id: sensor-wahl
+          question:
+            de: "Ein Roboter soll beim Fügen spüren, ob ein Stift klemmt. Welcher Sensor hilft am direktesten?"
+            en: "A robot should feel whether a pin jams during insertion. Which sensor helps most directly?"
+          options:
+            - {value: lidar, text: {de: "LiDAR", en: "LiDAR"}}
+            - {value: kraft, text: {de: "Kraft-Momenten-Sensor", en: "Force-torque sensor"}}
+            - {value: slam, text: {de: "SLAM", en: "SLAM"}}
+          answer: kraft
+          correct: {de: "Genau. Klemmen zeigt sich als Kraft, nicht im Bild.", en: "Exactly. Jamming shows up as force, not in the image."}
+          tryAgain: {de: "Was ändert sich physikalisch, wenn etwas klemmt?", en: "What changes physically when something jams?"}
+  - id: begriffe-lernen
+    title: {de: "Begriffe rund ums Lernen und den Betrieb", en: "Terms about learning and operation"}
+    room: guided-lesson
+    teaches: [begriffe-lernen]
+    requires: [begriffe-hardware]
+    steps:
+      - id: lernen
+        title: {de: "Vom Datensatz zur Policy", en: "From dataset to policy"}
+        body:
+          de: "Demonstration: aufgezeichneter Durchlauf einer Aufgabe mit Sensordaten und Bewegungen.\nTeleoperation: Fernsteuerung durch einen Menschen, wichtigste Quelle für Trainingsdaten.\nPolicy: das gelernte Steuerungsmodell, das Wahrnehmung auf die nächste Aktion abbildet.\nInferenz: die Anwendung des trainierten Modells im Betrieb, beim Roboter oft viele Male pro Sekunde.\nDigitaler Zwilling: virtuelles Abbild einer Anlage, um Abläufe zu testen und Trainingsdaten zu erzeugen."
+          en: "Demonstration: a recorded run of a task with sensor data and motions.\nTeleoperation: remote control by a person, the most important source of training data.\nPolicy: the learned control model that maps perception to the next action.\nInference: applying the trained model in operation, for robots often many times per second.\nDigital twin: a virtual replica of a plant used to test processes and generate training data."
+        check:
+          id: inferenz
+          question:
+            de: "Wie heißt es, wenn die trainierte Policy im Betrieb den Roboter steuert?"
+            en: "What is it called when the trained policy controls the robot in operation?"
+          options:
+            - {value: training, text: {de: "Training", en: "Training"}}
+            - {value: inferenz, text: {de: "Inferenz", en: "Inference"}}
+            - {value: teleop, text: {de: "Teleoperation", en: "Teleoperation"}}
+          answer: inferenz
+          correct: {de: "Richtig.", en: "Right."}
+          tryAgain: {de: "Das Modell wird angewendet, nicht trainiert.", en: "The model is applied, not trained."}
+      - id: betrieb
+        title: {de: "Betrieb und Kontrolle", en: "Operation and control"}
+        body:
+          de: "Human-in-the-Loop: Ein Mensch überwacht, gibt frei oder übernimmt bei Bedarf.\nIntervention: Eingriff eines Menschen zur Korrektur, eine wichtige Reifekennzahl.\nEdge Computing: Verarbeitung direkt am Roboter oder im eigenen Werk statt in einer entfernten Cloud.\nVendor Lock-in: Abhängigkeit von einem Anbieter, dessen Technik sich nur mit hohem Aufwand ersetzen lässt.\nDatensouveränität: selbst bestimmen, wo eigene Daten liegen, wer sie nutzt und wofür."
+          en: "Human-in-the-loop: a person monitors, approves or takes over when needed.\nIntervention: a human correction, an important maturity metric.\nEdge computing: processing directly on the robot or in your own plant instead of a remote cloud.\nVendor lock-in: dependence on a supplier whose technology can only be replaced at great cost.\nData sovereignty: deciding yourself where your data lives, who uses it and for what."
+        check:
+          id: edge
+          question:
+            de: "Kamerabilder aus der Halle sollen das Werk nicht verlassen. Welches Prinzip setzen Sie um?"
+            en: "Camera images from the shop floor must not leave the plant. Which principle are you applying?"
+          options:
+            - {value: edge, text: {de: "Edge Computing und Datensouveränität", en: "Edge computing and data sovereignty"}}
+            - {value: lockin, text: {de: "Vendor Lock-in", en: "Vendor lock-in"}}
+            - {value: sim, text: {de: "Sim-to-Real", en: "Sim-to-real"}}
+          answer: edge
+          correct: {de: "Genau. Verarbeitung vor Ort sichert die Kontrolle über die Daten.", en: "Exactly. Local processing keeps control over the data."}
+          tryAgain: {de: "Wo findet die Verarbeitung statt?", en: "Where does the processing happen?"}

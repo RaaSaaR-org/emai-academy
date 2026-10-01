@@ -1,0 +1,31 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: Einen Pilot planen und auswerten
+description: Der Pilot-Steckbrief auf einer Seite, ehrliche Auswertung gegen vorab festgelegte Kriterien und die
+  Entscheidung zwischen Rollout, Nachbessern und Stopp.
+category: Einführung
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: pilot-planen
+learning_goals:
+- Einen Pilot-Steckbrief erstellen
+- Pilotergebnisse gegen Kriterien auswerten
+- Eine begründete Entscheidung treffen
+requirements:
+- Use Cases finden und bewerten
+last_update: 1790812800
+translations:
+  en:
+    title: Plan and evaluate a pilot
+    description: The one-page pilot brief, honest evaluation against criteria set in advance and the decision between
+      rollout, improvement and stop.
+    learning_goals:
+    - Write a pilot brief
+    - Evaluate pilot results against criteria
+    - Make a well-founded decision
+    requirements:
+    - Find and assess use cases
+sections: []

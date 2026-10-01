@@ -1,0 +1,33 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: SmolVLA auf eigene Daten feintunen
+description: 'Ein vortrainiertes VLA mit dem eigenen SO-101-Datensatz anpassen: Trainingsbefehl, Hardwarebedarf,
+  LoRA und warum niedriger Loss noch kein Erfolg ist.'
+category: Lernen & Modelle
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: smolvla-feintuning
+learning_goals:
+- SmolVLA mit lerobot-train feintunen
+- Hardwarebedarf und LoRA einordnen
+- Offline-Metriken von echtem Erfolg unterscheiden
+requirements:
+- Datensätze aufnehmen und verstehen
+- Offene VLA-Modelle im Vergleich
+last_update: 1790812800
+translations:
+  en:
+    title: Fine-tune SmolVLA on your own data
+    description: 'Adapt a pre-trained VLA with your own SO-101 dataset: training command, hardware needs, LoRA and
+      why low loss is not yet success.'
+    learning_goals:
+    - Fine-tune SmolVLA with lerobot-train
+    - Assess hardware needs and LoRA
+    - Distinguish offline metrics from real success
+    requirements:
+    - Record and understand datasets
+    - Open VLA models compared
+sections: []

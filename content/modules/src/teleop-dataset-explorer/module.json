@@ -1,0 +1,5 @@
+{
+  "id": "teleop-dataset-explorer",
+  "api_version": 1,
+  "entry": "index.js"
+}

@@ -1,0 +1,4 @@
+/* Path is mandated by upstream nuxt.config (css: ["~/assets/css/tailwind.css"]), which resolves
+   against the final app (this tenant). Pull in upstream's stylesheet, then the EmAI theme. */
+@import "../../../../frontend/assets/css/tailwind.css";
+@import "./emai.css";

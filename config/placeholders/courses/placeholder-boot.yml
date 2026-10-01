@@ -1,0 +1,15 @@
+# PLACEHOLDER: used only while emai-academy/content/courses does not exist.
+title: "PLATZHALTER (Boot)"
+description: "Boot-Platzhalter. Echter Inhalt liegt in emai-academy/content/courses."
+category: Physical AI
+language: de
+image: null
+authors:
+  - name: EmAI Robotics
+    url: https://emai.dev
+price: 0
+learning_path_id: placeholder-boot
+learning_goals: []
+requirements: []
+last_update: 1790812800
+sections: []

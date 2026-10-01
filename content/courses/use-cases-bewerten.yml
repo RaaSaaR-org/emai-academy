@@ -1,0 +1,31 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: Use Cases finden und bewerten
+description: Woran man gute Kandidaten für kognitive Roboter erkennt und wie man sie mit Gesamtkosten und Eingriffsaufwand
+  ehrlich bewertet.
+category: Einführung
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: use-cases-bewerten
+learning_goals:
+- Signale für geeignete Use Cases erkennen
+- Total Cost of Ownership vollständig aufstellen
+- Eingriffsaufwand in Personalzeit umrechnen
+requirements:
+- Physical AI in acht Kapiteln
+last_update: 1790812800
+translations:
+  en:
+    title: Find and assess use cases
+    description: How to spot good candidates for cognitive robots and assess them honestly with total cost and intervention
+      effort.
+    learning_goals:
+    - Recognise signals of suitable use cases
+    - Set up a complete total cost of ownership
+    - Convert intervention effort into staff time
+    requirements:
+    - Physical AI in eight chapters
+sections: []

@@ -1,0 +1,12 @@
+# Skill 3 (Builder track).
+name: Robotik-Software-Grundlagen
+dependencies: [physical_ai_grundlagen]
+skills:
+  so101_lerobot_setup:
+    name: SO-101 & LeRobot einrichten
+    dependencies: []
+    courses: [so101-lerobot-setup]
+  middleware_und_takt:
+    name: Middleware, Regelkreise & Takt
+    dependencies: []
+    courses: [ros2-und-echtzeit]

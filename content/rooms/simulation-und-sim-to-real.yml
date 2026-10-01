@@ -1,0 +1,67 @@
+# Skill 6: simulation, digital twins, sim-to-real (source: emai vla-training docs/datensatz-erweitern.md, isaac/README).
+order: 150
+path:
+  id: simulation-und-sim-to-real
+  title: {de: "Simulation und Sim-to-Real", en: "Simulation and sim-to-real"}
+  direction_id: builder
+units:
+  - id: sim-wozu
+    title: {de: "Wozu Simulation?", en: "What is simulation for?"}
+    room: guided-lesson
+    teaches: [sim-zweck]
+    steps:
+      - id: drei
+        title: {de: "Drei Aufgaben der Simulation", en: "Three jobs of simulation"}
+        body:
+          de: "In der Physical AI erfüllt Simulation drei Aufgaben:\n1. Training: Reinforcement Learning braucht Millionen Versuche, die real zu langsam und zu riskant wären.\n2. Daten: Teleoperation in der Simulation und das erneute Abspielen mit variiertem Licht und Kamerawinkel erzeugen zusätzliche Demonstrationen.\n3. Evaluation: Policies lassen sich reproduzierbar, mit festen Startwerten und ohne Hardware-Risiko vergleichen.\n\nVerbreitete Werkzeuge sind MuJoCo (leichtgewichtig, schnell) und NVIDIA Isaac Sim mit Isaac Lab (fotorealistisches Rendering, massiv parallel auf der GPU)."
+          en: "In Physical AI, simulation does three jobs:\n1. Training: reinforcement learning needs millions of trials that would be too slow and risky in reality.\n2. Data: teleoperation in simulation and replaying with varied lighting and camera angle produce additional demonstrations.\n3. Evaluation: policies can be compared reproducibly, with fixed seeds and no hardware risk.\n\nCommon tools are MuJoCo (lightweight, fast) and NVIDIA Isaac Sim with Isaac Lab (photorealistic rendering, massively parallel on the GPU)."
+        check:
+          id: zweck
+          question:
+            de: "Welche Aufgabe übernimmt die Simulation NICHT von selbst?"
+            en: "Which job does simulation NOT do by itself?"
+          options:
+            - {value: a, text: {de: "Reproduzierbare Vergleiche mit festen Startwerten", en: "Reproducible comparisons with fixed seeds"}}
+            - {value: b, text: {de: "Die Garantie, dass eine Policy real funktioniert", en: "Guaranteeing that a policy works in reality"}}
+            - {value: c, text: {de: "Viele parallele Trainingsversuche", en: "Many parallel training trials"}}
+          answer: b
+          correct: {de: "Richtig. Genau das ist die Sim-to-Real-Lücke.", en: "Right. That is exactly the sim-to-real gap."}
+          tryAgain: {de: "Was muss am Ende immer noch real geprüft werden?", en: "What must still be checked in reality at the end?"}
+  - id: sim-luecke
+    title: {de: "Die Sim-to-Real-Lücke", en: "The sim-to-real gap"}
+    room: guided-lesson
+    teaches: [sim-luecke]
+    requires: [sim-zweck]
+    steps:
+      - id: luecke
+        title: {de: "Physik und Pixel", en: "Physics and pixels"}
+        body:
+          de: "Die Lücke hat zwei Seiten. Physikalisch: Reibung, Spiel in Getrieben, Kabel, Latenzen. Visuell: Gerenderte Bilder unterscheiden sich in Helligkeit, Schatten, Glanzlichtern und Rauschen von Kameraaufnahmen.\n\nIn einem unserer Projekte war das Simulationsbild im Mittel deutlich heller als alle 402 realen Trainingsaufnahmen. Allein das Austauschen der Pixel bei gleichem Gelenkzustand kostete die Modelle einen Großteil ihrer Anfahrtsrichtung."
+          en: "The gap has two sides. Physical: friction, backlash in gears, cables, latencies. Visual: rendered images differ from camera recordings in brightness, shadows, highlights and noise.\n\nIn one of our projects the simulation image was on average much brighter than all 402 real training recordings. Just swapping the pixels at the same joint state cost the models much of their approach direction."
+        check:
+          id: seite
+          question:
+            de: "Die Policy greift in der Simulation daneben, obwohl Gelenkzustände identisch sind. Welche Seite der Lücke ist wahrscheinlich?"
+            en: "The policy misses in simulation although joint states are identical. Which side of the gap is likely?"
+          options:
+            - {value: visuell, text: {de: "Die visuelle", en: "The visual side"}}
+            - {value: physik, text: {de: "Die physikalische", en: "The physical side"}}
+          answer: visuell
+          correct: {de: "Richtig. Gleicher Zustand, anderes Bild, andere Entscheidung.", en: "Right. Same state, different image, different decision."}
+          tryAgain: {de: "Was unterscheidet sich, wenn die Gelenke gleich sind?", en: "What differs if the joints are the same?"}
+      - id: randomisierung
+        title: {de: "Domain Randomization", en: "Domain randomisation"}
+        body:
+          de: "Das wirksamste Gegenmittel ist strukturierte Variation: Licht, Texturen, Farben und Kameraposition werden in der Simulation zufällig verändert, damit die Policy lernt, was wirklich zählt. Reine 2D-Bildaugmentierung im Dataloader, etwa Helligkeits-Jitter, ersetzt das nicht: Sie verschiebt globale Farbwerte, aber keine Schatten und Glanzlichter."
+          en: "The most effective remedy is structured variation: lighting, textures, colours and camera pose are randomised in simulation so the policy learns what really matters. Pure 2D image augmentation in the data loader, such as brightness jitter, does not replace this: it shifts global colour values but not shadows and highlights."
+        check:
+          id: jitter
+          question:
+            de: "Reicht ein Helligkeits-Jitter im Dataloader, um die visuelle Lücke zu schließen?"
+            en: "Is brightness jitter in the data loader enough to close the visual gap?"
+          options:
+            - {value: ja, text: {de: "Ja", en: "Yes"}}
+            - {value: nein, text: {de: "Nein, es braucht strukturierte Variation von Licht, Textur und Kamera.", en: "No, it needs structured variation of lighting, texture and camera."}}
+          answer: nein
+          correct: {de: "Richtig. Das hat sich auch in unseren Messungen bestätigt.", en: "Right. Our own measurements confirmed this too."}
+          tryAgain: {de: "Jitter ändert keine Schatten.", en: "Jitter does not change shadows."}

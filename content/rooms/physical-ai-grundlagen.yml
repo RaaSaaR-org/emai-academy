@@ -1,0 +1,536 @@
+# Decider path for skill 1 "Physical AI Grundlagen".
+# Source: emai landing page, Wissen > Grundlagen "Physical AI in acht Kapiteln"
+# (/Users/sebastian/develop/emai/landing-page/src/i18n/locales/{de,en}/knowledge.json).
+order: 10
+path:
+  id: physical-ai-grundlagen
+  title: {de: "Physical AI in acht Kapiteln", en: "Physical AI in eight chapters"}
+  direction_id: entscheider
+  chapters:
+    - {id: pai-k1, title: {de: "1 · Was ist Physical AI?", en: "1 · What is Physical AI?"}}
+    - {id: pai-k2, title: {de: "2 · Klassisch oder kognitiv?", en: "2 · Classic or cognitive?"}}
+    - {id: pai-k3, title: {de: "3 · Wie Roboter lernen", en: "3 · How robots learn"}}
+    - {id: pai-k4, title: {de: "4 · Foundation-Modelle", en: "4 · Foundation models"}}
+    - {id: pai-k5, title: {de: "5 · Daten", en: "5 · Data"}}
+    - {id: pai-k6, title: {de: "6 · Hardware und Bauformen", en: "6 · Hardware and form factors"}}
+    - {id: pai-k7, title: {de: "7 · Sicherheit und Souveränität", en: "7 · Safety and sovereignty"}}
+    - {id: pai-k8, title: {de: "8 · Bewerten und einführen", en: "8 · Evaluate and adopt"}}
+    - {id: pai-abschluss, title: {de: "Abschluss", en: "Wrap-up"}}
+units:
+  # ------------------------------------------------------------------ Kapitel 1
+  - id: pai-was-ist-physical-ai
+    chapter_id: pai-k1
+    title: {de: "KI mit Körper", en: "AI with a body"}
+    room: guided-lesson
+    teaches: [pai-embodiment, pai-regelkreis]
+    steps:
+      - id: definition
+        title: {de: "Was Physical AI meint", en: "What Physical AI means"}
+        body:
+          de: "Physical AI, oft auch Embodied AI genannt, bezeichnet KI-Systeme mit einem Körper. Sie verarbeiten nicht nur Texte oder Bilder, sondern handeln in der physischen Welt: Sie nehmen ihre Umgebung über Kameras und Sensoren wahr, leiten daraus Entscheidungen ab und setzen sie über Motoren und Greifer um.\n\nWir nennen solche Systeme kognitive Roboter."
+          en: "Physical AI, often called embodied AI, describes AI systems with a body. They do not only process text or images, they act in the physical world: they perceive their surroundings through cameras and sensors, derive decisions from that and carry them out with motors and grippers.\n\nWe call such systems cognitive robots."
+        note:
+          de: "Der Name EmAI kommt von Embodied AI."
+          en: "The name EmAI comes from embodied AI."
+      - id: gelernt
+        title: {de: "Gelernt statt programmiert", en: "Learned, not programmed"}
+        body:
+          de: "Der entscheidende Unterschied zur klassischen Robotik: Das Verhalten wird nicht mehr Zeile für Zeile programmiert, sondern zu großen Teilen aus Daten gelernt. Dadurch können Roboter mit Varianz umgehen, also mit Teilen, die jedes Mal etwas anders liegen, mit wechselnden Aufgaben und mit Umgebungen, die nicht für Roboter gebaut wurden."
+          en: "The decisive difference to classic robotics: behaviour is no longer programmed line by line but largely learned from data. That lets robots cope with variance: parts that lie slightly differently every time, changing tasks and environments that were not built for robots."
+        check:
+          id: embodiment
+          question:
+            de: "Was unterscheidet einen kognitiven Roboter von einem Chatbot?"
+            en: "What distinguishes a cognitive robot from a chatbot?"
+          options:
+            - {value: a, text: {de: "Er hat deutlich mehr Parameter.", en: "It has far more parameters."}}
+            - {value: b, text: {de: "Er hat einen Körper mit Sensoren und Aktoren und handelt in der physischen Welt.", en: "It has a body with sensors and actuators and acts in the physical world."}}
+            - {value: c, text: {de: "Er läuft ausschließlich in der Cloud.", en: "It runs exclusively in the cloud."}}
+          answer: b
+          correct: {de: "Genau. Erst der Körper macht aus einem Modell einen handelnden Agenten.", en: "Exactly. The body turns a model into an agent that acts."}
+          tryAgain: {de: "Denken Sie an Kameras, Motoren und Greifer.", en: "Think of cameras, motors and grippers."}
+      - id: kreislauf
+        title: {de: "Wahrnehmen, entscheiden, handeln", en: "Perceive, decide, act"}
+        body:
+          de: "Technisch läuft ständig derselbe Kreislauf ab:\n• Wahrnehmen: Kameras, Tiefensensoren, LiDAR und Kraftsensoren liefern ein Bild der Umgebung.\n• Entscheiden: Ein KI-Modell leitet aus Wahrnehmung und Auftrag die nächste Bewegung ab.\n• Handeln: Motoren, Gelenke und Greifer setzen die Entscheidung um, oft viele Male pro Sekunde.\n\nAm Ergebnis prüft der Roboter, ob die Handlung funktioniert hat, und der Kreislauf beginnt von vorn. Je schneller und robuster dieser Kreislauf, desto nützlicher der Roboter."
+          en: "Technically the same loop runs all the time:\n• Perceive: cameras, depth sensors, LiDAR and force sensors provide a picture of the surroundings.\n• Decide: an AI model derives the next movement from perception and task.\n• Act: motors, joints and grippers carry out the decision, often many times per second.\n\nThe robot checks the result to see whether the action worked, and the loop starts again. The faster and more robust this loop, the more useful the robot."
+        check:
+          id: kreislauf
+          question:
+            de: "Ein Greifer rutscht ab, der Roboter bemerkt es über den Kraftsensor und greift neu. Welcher Teil des Kreislaufs hat den Fehler erkannt?"
+            en: "A gripper slips, the robot notices through the force sensor and grasps again. Which part of the loop detected the error?"
+          options:
+            - {value: wahrnehmen, text: {de: "Wahrnehmen", en: "Perceive"}}
+            - {value: entscheiden, text: {de: "Entscheiden", en: "Decide"}}
+            - {value: handeln, text: {de: "Handeln", en: "Act"}}
+          answer: wahrnehmen
+          correct: {de: "Richtig. Der Sensor liefert die Rückmeldung, die Entscheidung folgt danach.", en: "Right. The sensor provides the feedback; the decision follows."}
+          tryAgain: {de: "Welcher Schritt liefert Informationen über die Umgebung?", en: "Which step provides information about the surroundings?"}
+      - id: kurz
+        title: {de: "Kurz gesagt", en: "In short"}
+        body:
+          de: "Physical AI ist KI mit Körper. Sie lernt Verhalten aus Daten, statt es fest programmiert zu bekommen, und kann deshalb mit Varianz umgehen."
+          en: "Physical AI is AI with a body. It learns behaviour from data instead of having it hard-coded, and can therefore cope with variance."
+  # ------------------------------------------------------------------ Kapitel 2
+  - id: pai-klassisch-oder-kognitiv
+    chapter_id: pai-k2
+    title: {de: "Klassische Automatisierung oder kognitiver Roboter?", en: "Classic automation or cognitive robot?"}
+    room: guided-lesson
+    teaches: [pai-varianz]
+    requires: [pai-embodiment]
+    steps:
+      - id: klassisch
+        title: {de: "Die Stärke klassischer Anlagen", en: "The strength of classic systems"}
+        body:
+          de: "Klassische Industrieroboter sind unschlagbar, wenn Abläufe hochvolumig, immer gleich und gut strukturiert sind: Schweißen, Lackieren, Palettieren in festen Mustern. Sie sind präzise, schnell und über Jahrzehnte erprobt. Aber jede Änderung kostet Programmier- und Umrüstaufwand."
+          en: "Classic industrial robots are unbeatable when processes are high-volume, always identical and well structured: welding, painting, palletising in fixed patterns. They are precise, fast and proven over decades. But every change costs programming and changeover effort."
+      - id: umruesten
+        title: {de: "Was Varianz heute kostet", en: "What variance costs today"}
+        body:
+          de: "Verschieben Sie den Regler: Wie oft wird die Zelle im Monat auf ein neues Teil umgestellt? Wir rechnen beispielhaft mit 4 Stunden Programmier- und Einrichtaufwand je Umstellung."
+          en: "Move the slider: how often per month is the cell switched to a new part? As an example we assume 4 hours of programming and set-up per changeover."
+        experiment:
+          id: umstellungen
+          label: {de: "Umstellungen pro Monat", en: "Changeovers per month"}
+          min: 0
+          max: 40
+          initial: 4
+          resultLabel: {de: "Stunden Umprogrammierung pro Monat", en: "Hours of reprogramming per month"}
+          operation: {kind: multiply, factor: 4}
+        note:
+          de: "Die 4 Stunden sind ein Rechenbeispiel. Setzen Sie für Ihre Anlage eigene Werte ein. Bei 20 Umstellungen sind es schon 80 Stunden, also rund zwei Arbeitswochen im Monat."
+          en: "The 4 hours are an example. Use your own values for your line. With 20 changeovers it is already 80 hours, roughly two working weeks per month."
+      - id: kognitiv
+        title: {de: "Wo kognitive Roboter interessant werden", en: "Where cognitive robots become interesting"}
+        body:
+          de: "Kognitive Roboter spielen ihre Stärken dort aus, wo Varianz den Alltag bestimmt: wechselnde Teile, kleine Losgrößen, unstrukturierte Umgebungen und Aufgaben, die bisher nur Menschen erledigen konnten. Dafür sind sie heute meist langsamer und weniger vorhersagbar als klassische Anlagen.\n\nDie richtige Frage lautet deshalb nicht „Welcher Roboter ist besser?“, sondern „Wie viel Varianz steckt in dieser Aufgabe, und was kostet sie uns heute?“"
+          en: "Cognitive robots play to their strengths where variance dominates everyday work: changing parts, small batch sizes, unstructured environments and tasks that only people could do so far. In exchange they are usually slower and less predictable than classic systems today.\n\nSo the right question is not „Which robot is better?“ but „How much variance is in this task, and what does it cost us today?“"
+        check:
+          id: aufgabe
+          question:
+            de: "Welche Aufgabe spricht am ehesten für einen kognitiven Roboter?"
+            en: "Which task most suggests a cognitive robot?"
+          options:
+            - {value: a, text: {de: "Punktschweißen derselben Karosserie, 800 Stück pro Schicht", en: "Spot welding the same car body, 800 units per shift"}}
+            - {value: b, text: {de: "Kommissionieren wechselnder Ersatzteile aus gemischten Kisten, Losgröße 1–5", en: "Picking changing spare parts from mixed bins, batch size 1–5"}}
+            - {value: c, text: {de: "Palettieren identischer Kartons im festen Muster", en: "Palletising identical boxes in a fixed pattern"}}
+          answer: b
+          correct: {de: "Genau. Viel Varianz und kleine Losgrößen sind das Terrain kognitiver Roboter.", en: "Exactly. High variance and small batches are where cognitive robots fit."}
+          tryAgain: {de: "Suchen Sie die Aufgabe mit der meisten Varianz.", en: "Look for the task with the most variance."}
+      - id: kurz
+        title: {de: "Kurz gesagt", en: "In short"}
+        body:
+          de: "Hohe Stückzahl und wenig Varianz: klassische Automatisierung. Viel Varianz, kleine Losgrößen und Lücken durch Fachkräftemangel: Hier werden kognitive Roboter interessant. In der Praxis ergänzen sich beide."
+          en: "High volume and little variance: classic automation. Lots of variance, small batches and gaps caused by skills shortages: this is where cognitive robots become interesting. In practice the two complement each other."
+        check:
+          id: ergaenzen
+          question:
+            de: "Wie verhalten sich klassische Automatisierung und kognitive Roboter in der Praxis zueinander?"
+            en: "How do classic automation and cognitive robots relate in practice?"
+          options:
+            - {value: a, text: {de: "Kognitive Roboter ersetzen klassische Anlagen vollständig.", en: "Cognitive robots fully replace classic systems."}}
+            - {value: b, text: {de: "Sie ergänzen sich, entscheidend ist die Aufgabe.", en: "They complement each other; the task decides."}}
+            - {value: c, text: {de: "Klassische Anlagen sind überholt.", en: "Classic systems are obsolete."}}
+          answer: b
+          correct: {de: "Richtig. Kein Entweder-oder.", en: "Right. It is not either-or."}
+          tryAgain: {de: "Beide haben Stärken. Was entscheidet?", en: "Both have strengths. What decides?"}
+  # ------------------------------------------------------------------ Kapitel 3
+  - id: pai-wie-roboter-lernen
+    chapter_id: pai-k3
+    title: {de: "Vormachen, üben, übertragen", en: "Demonstrate, practise, transfer"}
+    room: guided-lesson
+    teaches: [pai-lernwege]
+    requires: [pai-varianz]
+    steps:
+      - id: imitation
+        title: {de: "Imitation Learning", en: "Imitation learning"}
+        body:
+          de: "Viele praktische Fortschritte der letzten Jahre kommen aus dem Imitation Learning: Ein Mensch steuert den Roboter per Teleoperation durch eine Aufgabe. Der Roboter zeichnet dabei auf, was er sieht und wie er sich bewegt. Aus vielen solcher Demonstrationen lernt ein Modell, die sogenannte Policy, die Aufgabe selbst auszuführen."
+          en: "Much of the practical progress of recent years comes from imitation learning: a person steers the robot through a task by teleoperation. The robot records what it sees and how it moves. From many such demonstrations a model, the so-called policy, learns to perform the task itself."
+        check:
+          id: policy
+          question:
+            de: "Was ist eine Policy?"
+            en: "What is a policy?"
+          options:
+            - {value: a, text: {de: "Eine Sicherheitsrichtlinie für den Roboterbetrieb", en: "A safety guideline for operating robots"}}
+            - {value: b, text: {de: "Das gelernte Steuerungsmodell, das Wahrnehmung auf die nächste Aktion abbildet", en: "The learned control model that maps perception to the next action"}}
+            - {value: c, text: {de: "Eine Liste aufgezeichneter Demonstrationen", en: "A list of recorded demonstrations"}}
+          answer: b
+          correct: {de: "Richtig. Die Policy ist das, was am Ende den Roboter steuert.", en: "Right. The policy is what finally controls the robot."}
+          tryAgain: {de: "Die Demonstrationen sind die Daten. Was entsteht daraus?", en: "The demonstrations are the data. What is learned from them?"}
+      - id: rl
+        title: {de: "Reinforcement Learning und Sim-to-Real", en: "Reinforcement learning and sim-to-real"}
+        body:
+          de: "Beim Reinforcement Learning probiert der Roboter selbst aus und wird für Erfolg belohnt. Weil das in der realen Welt langsam und riskant wäre, geschieht es meist in der Simulation. Die Kunst liegt dann im Sim-to-Real-Transfer: Das Gelernte muss auch mit echter Reibung, echtem Licht und echtem Sensorrauschen funktionieren. Besonders erfolgreich ist dieser Weg bisher bei Fortbewegung und Balance."
+          en: "In reinforcement learning the robot tries things itself and is rewarded for success. Because that would be slow and risky in the real world, it mostly happens in simulation. The art is then the sim-to-real transfer: what was learned must also work with real friction, real light and real sensor noise. So far this route has been particularly successful for locomotion and balance."
+        check:
+          id: rl-wo
+          question:
+            de: "Warum findet Reinforcement Learning meist in der Simulation statt?"
+            en: "Why does reinforcement learning mostly happen in simulation?"
+          options:
+            - {value: a, text: {de: "Weil Ausprobieren in der realen Welt langsam und riskant wäre", en: "Because trial and error in the real world would be slow and risky"}}
+            - {value: b, text: {de: "Weil reale Roboter keine Belohnung verarbeiten können", en: "Because real robots cannot process rewards"}}
+            - {value: c, text: {de: "Weil Simulationen immer exakt der Realität entsprechen", en: "Because simulations always match reality exactly"}}
+          answer: a
+          correct: {de: "Genau. Und deshalb ist der Sim-to-Real-Transfer die eigentliche Hürde.", en: "Exactly. That is why the sim-to-real transfer is the real hurdle."}
+          tryAgain: {de: "Denken Sie an Zeit, Verschleiß und Sicherheit.", en: "Think of time, wear and safety."}
+      - id: finetuning
+        title: {de: "Fine-Tuning", en: "Fine-tuning"}
+        body:
+          de: "Wie viele Demonstrationen eine Aufgabe braucht, hängt stark von ihr ab, und davon, ob ein vortrainiertes Modell als Ausgangspunkt dient. Mit einem Foundation-Modell genügen für eine eng umrissene Aufgabe oft deutlich weniger Beispiele als beim Training von Grund auf.\n\nKurz gesagt: Roboter lernen heute vor allem durch Vormachen und durch Üben in der Simulation. Die Qualität der Demonstrationen entscheidet maßgeblich über den Erfolg."
+          en: "How many demonstrations a task needs depends strongly on the task, and on whether a pre-trained model serves as a starting point. With a foundation model, a narrowly defined task often needs far fewer examples than training from scratch.\n\nIn short: today robots learn mostly by demonstration and by practising in simulation. The quality of the demonstrations largely determines success."
+  - id: pai-video-lerobot
+    chapter_id: pai-k3
+    title: {de: "Video: LeRobot senkt die Einstiegshürde", en: "Video: LeRobot lowers the entry barrier"}
+    room: video
+    teaches: [pai-lerobot]
+    requires: [pai-lernwege]
+    video: {type: youtube, id: L0uxfZMlkag}
+    body:
+      de: "Rémi Cadène (Hugging Face) stellt LeRobot vor: offene Datensätze, Modelle und günstige Hardware wie den SO-101-Arm, mit dem wir im Builder-Pfad selbst arbeiten. Vortrag auf Englisch, ca. 15 Minuten."
+      en: "Rémi Cadène (Hugging Face) introduces LeRobot: open datasets, models and low-cost hardware such as the SO-101 arm that we use ourselves in the Builder path. Talk in English, about 15 minutes."
+  # ------------------------------------------------------------------ Kapitel 4
+  - id: pai-foundation-modelle
+    chapter_id: pai-k4
+    title: {de: "Vision-Language-Action-Modelle", en: "Vision-language-action models"}
+    room: guided-lesson
+    teaches: [pai-vla]
+    requires: [pai-lernwege]
+    steps:
+      - id: vla
+        title: {de: "Sehen, verstehen, handeln", en: "See, understand, act"}
+        body:
+          de: "Was große Sprachmodelle für Text sind, werden Vision-Language-Action-Modelle (VLA) für Roboter. Sie verbinden drei Dinge: Sie sehen (Kamerabilder), verstehen Sprache (den Auftrag, etwa „Leg das blaue Teil in die Kiste“) und geben Aktionen aus (Gelenkbewegungen oder Greiferbefehle).\n\nVortrainiert werden sie auf großen Datensätzen aus vielen Robotern und Aufgaben, danach werden sie für den konkreten Einsatz feinjustiert."
+          en: "What large language models are for text, vision-language-action models (VLAs) are becoming for robots. They combine three things: they see (camera images), understand language (the task, for example „Put the blue part into the box“) and output actions (joint movements or gripper commands).\n\nThey are pre-trained on large datasets from many robots and tasks and then fine-tuned for the concrete use case."
+        check:
+          id: vla-ausgabe
+          question:
+            de: "Was gibt ein VLA-Modell aus?"
+            en: "What does a VLA model output?"
+          options:
+            - {value: a, text: {de: "Einen Text, der die Szene beschreibt", en: "A text describing the scene"}}
+            - {value: b, text: {de: "Roboteraktionen wie Gelenkbewegungen oder Greiferbefehle", en: "Robot actions such as joint movements or gripper commands"}}
+            - {value: c, text: {de: "Ein neues Kamerabild", en: "A new camera image"}}
+          answer: b
+          correct: {de: "Richtig. Das A in VLA steht für Action.", en: "Right. The A in VLA stands for action."}
+          tryAgain: {de: "Wofür steht das A in VLA?", en: "What does the A in VLA stand for?"}
+      - id: offen
+        title: {de: "Offene Modelle", en: "Open models"}
+        body:
+          de: "Neben geschlossenen Modellen gibt es eine wachsende Zahl offener Modelle, deren Gewichte frei verfügbar sind, etwa OpenVLA, π0 oder SmolVLA. Für Unternehmen heißt das: Modelle lassen sich prüfen, anpassen und auf eigener Hardware betreiben. Genau darauf setzen wir."
+          en: "Besides closed models there is a growing number of open models whose weights are freely available, such as OpenVLA, π0 or SmolVLA. For companies this means models can be inspected, adapted and run on their own hardware. That is exactly what we build on."
+        check:
+          id: open-weight
+          question:
+            de: "Welchen Vorteil bieten Open-Weight-Modelle einem Unternehmen vor allem?"
+            en: "What is the main advantage of open-weight models for a company?"
+          options:
+            - {value: a, text: {de: "Sie sind immer genauer als geschlossene Modelle.", en: "They are always more accurate than closed models."}}
+            - {value: b, text: {de: "Sie lassen sich prüfen, anpassen und auf eigener Hardware betreiben.", en: "They can be inspected, adapted and run on your own hardware."}}
+            - {value: c, text: {de: "Sie brauchen keine Trainingsdaten.", en: "They need no training data."}}
+          answer: b
+          correct: {de: "Genau. Das sichert Kontrolle und Austauschbarkeit.", en: "Exactly. That secures control and replaceability."}
+          tryAgain: {de: "Es geht um Kontrolle, nicht um Garantien für Genauigkeit.", en: "It is about control, not guaranteed accuracy."}
+      - id: weltmodelle
+        title: {de: "Weltmodelle", en: "World models"}
+        body:
+          de: "Ein zweiter Forschungsstrang sind Weltmodelle: Modelle, die vorhersagen, wie sich die Umgebung durch eine Handlung verändert. Sie sollen Robotern helfen, vorauszuplanen und mit unbekannten Situationen umzugehen.\n\nKurz gesagt: VLA-Modelle machen Roboter vielseitiger, ein Modell für viele Aufgaben, Aufträge in natürlicher Sprache. Offene Modelle sichern dabei Kontrolle und Austauschbarkeit."
+          en: "A second line of research is world models: models that predict how the environment changes as a result of an action. They are meant to help robots plan ahead and deal with unfamiliar situations.\n\nIn short: VLA models make robots more versatile, one model for many tasks, instructions in natural language. Open models secure control and replaceability."
+  # ------------------------------------------------------------------ Kapitel 5
+  - id: pai-daten-engpass
+    chapter_id: pai-k5
+    title: {de: "Daten: der eigentliche Engpass", en: "Data: the real bottleneck"}
+    room: guided-lesson
+    teaches: [pai-daten]
+    requires: [pai-vla]
+    steps:
+      - id: quelle
+        title: {de: "Kein Internet für Roboter", en: "No internet for robots"}
+        body:
+          de: "Für Sprachmodelle gibt es das Internet. Für Roboter gibt es keine vergleichbare Datenquelle. Roboterdaten müssen erzeugt werden: durch Teleoperation, in der Simulation oder im laufenden Betrieb. Offene Sammlungen wie Open X-Embodiment oder die Datensätze der LeRobot-Community helfen beim Vortraining. Für die eigene Aufgabe braucht es aber fast immer eigene Daten aus der eigenen Umgebung."
+          en: "Language models have the internet. Robots have no comparable data source. Robot data must be generated: by teleoperation, in simulation or during operation. Open collections such as Open X-Embodiment or the LeRobot community datasets help with pre-training. For your own task you almost always need your own data from your own environment."
+        check:
+          id: datenquelle
+          question:
+            de: "Welche Quelle liefert KEINE Roboterdaten für die eigene Aufgabe?"
+            en: "Which source does NOT provide robot data for your own task?"
+          options:
+            - {value: a, text: {de: "Teleoperation in der eigenen Zelle", en: "Teleoperation in your own cell"}}
+            - {value: b, text: {de: "Protokolle aus dem laufenden Betrieb", en: "Logs from ongoing operation"}}
+            - {value: c, text: {de: "Texte aus dem Internet", en: "Text from the internet"}}
+          answer: c
+          correct: {de: "Richtig. Texte zeigen keine Gelenkwinkel und keine Greifkräfte.", en: "Right. Text contains no joint angles and no grip forces."}
+          tryAgain: {de: "Welche Quelle enthält weder Sensor- noch Bewegungsdaten?", en: "Which source contains neither sensor nor motion data?"}
+      - id: qualitaet
+        title: {de: "Qualität vor Menge", en: "Quality over quantity"}
+        body:
+          de: "Qualität zählt mehr als Menge: saubere, konsistente Demonstrationen, gut abgedeckte Varianten und dokumentierte Fehlerfälle. Ebenso wichtig sind Daten aus dem Betrieb, also Erfolgsquoten, Eingriffe und Abbrüche. Erst sie zeigen, wo ein Modell nachtrainiert werden muss."
+          en: "Quality matters more than quantity: clean, consistent demonstrations, well-covered variants and documented failure cases. Data from operation matter just as much: success rates, interventions and aborts. Only they show where a model needs retraining."
+        note:
+          de: "Aus unseren eigenen Trainingskampagnen: 400 Demonstrationen in immer derselben Szene helfen weniger als deutlich weniger Demonstrationen in vielen Szenen, mit vielen Objekten und unter wechselndem Licht."
+          en: "From our own training campaigns: 400 demonstrations in the same scene help less than far fewer demonstrations across many scenes, many objects and changing light."
+        check:
+          id: qualitaet
+          question:
+            de: "Sie haben 400 Demonstrationen, alle in derselben Szene mit demselben Objekt. Was bringt am meisten?"
+            en: "You have 400 demonstrations, all in the same scene with the same object. What helps most?"
+          options:
+            - {value: a, text: {de: "Weitere 400 Demonstrationen in derselben Szene", en: "Another 400 demonstrations in the same scene"}}
+            - {value: b, text: {de: "Neue Szenen, Objekte und Lichtverhältnisse", en: "New scenes, objects and lighting"}}
+            - {value: c, text: {de: "Das Modell länger trainieren", en: "Training the model for longer"}}
+          answer: b
+          correct: {de: "Genau. Generalisierung wächst mit der Vielfalt der Welt, nicht mit der Zahl der Wiederholungen.", en: "Exactly. Generalisation grows with the variety of the world, not with the number of repetitions."}
+          tryAgain: {de: "Mehr vom Gleichen hilft kaum. Was fehlt dem Datensatz?", en: "More of the same hardly helps. What is the dataset missing?"}
+      - id: hoheit
+        title: {de: "Datenhoheit", en: "Data sovereignty"}
+        body:
+          de: "Weil diese Daten Ihre Prozesse, Ihre Produkte und oft auch Ihre Mitarbeitenden zeigen, sind sie ein Wettbewerbsfaktor. Wo sie gespeichert und verarbeitet werden und wer sie nutzen darf, sollte vor dem ersten Pilot geklärt sein.\n\nKurz gesagt: Wer Roboter produktiv nutzen will, braucht eigene, gute Daten und die Hoheit darüber. Die Datenstrategie ist Teil der Robotik-Strategie."
+          en: "Because these data show your processes, your products and often your employees, they are a competitive factor. Where they are stored and processed and who may use them should be settled before the first pilot.\n\nIn short: anyone who wants to use robots productively needs their own good data and sovereignty over it. The data strategy is part of the robotics strategy."
+  # ------------------------------------------------------------------ Kapitel 6
+  - id: pai-hardware-bauformen
+    chapter_id: pai-k6
+    title: {de: "Der passende Körper für die Aufgabe", en: "The right body for the task"}
+    room: guided-lesson
+    teaches: [pai-bauformen]
+    requires: [pai-daten]
+    steps:
+      - id: bauformen
+        title: {de: "Vier Bauformen", en: "Four form factors"}
+        body:
+          de: "Kognitive Roboter gibt es in vielen Bauformen, und nicht jede Aufgabe braucht Beine:\n• Arme und Cobots: stationär, präzise, bewährt, ideal für feste Arbeitsplätze.\n• Mobile Manipulatoren: ein Arm auf einer fahrbaren Basis, für Aufgaben an wechselnden Orten.\n• Vierbeiner: robust und geländegängig, für Inspektion und Transport auf unebenem Boden.\n• Zweibeiner: menschenähnliche Gestalt für Umgebungen, die für Menschen gebaut sind. Technisch am anspruchsvollsten."
+          en: "Cognitive robots come in many form factors, and not every task needs legs:\n• Arms and cobots: stationary, precise, proven, ideal for fixed workstations.\n• Mobile manipulators: an arm on a mobile base, for tasks at changing locations.\n• Quadrupeds: robust and all-terrain, for inspection and transport on uneven ground.\n• Bipeds: a human-like shape for environments built for people. Technically the most demanding."
+        check:
+          id: bauform
+          question:
+            de: "Ein Roboter soll an einem festen Prüfplatz Bauteile in eine Vorrichtung legen. Welche Bauform liegt nahe?"
+            en: "A robot is to place parts into a fixture at a fixed inspection station. Which form factor is the obvious choice?"
+          options:
+            - {value: arm, text: {de: "Arm bzw. Cobot", en: "Arm or cobot"}}
+            - {value: vierbeiner, text: {de: "Vierbeiner", en: "Quadruped"}}
+            - {value: zweibeiner, text: {de: "Zweibeiner", en: "Biped"}}
+          answer: arm
+          correct: {de: "Richtig. Fester Arbeitsplatz, keine Fortbewegung nötig.", en: "Right. Fixed workstation, no locomotion needed."}
+          tryAgain: {de: "Muss sich der Roboter überhaupt fortbewegen?", en: "Does the robot need to move around at all?"}
+      - id: kennwerte
+        title: {de: "Worauf es im Alltag ankommt", en: "What matters day to day"}
+        body:
+          de: "Entscheidend sind neben der Bauform die Freiheitsgrade, die Traglast, die Sensorik, von Tiefenkameras über LiDAR bis zu Kraft- und Tastsensoren, sowie die Rechenleistung an Bord. Bei mobilen Systemen kommt die Akkulaufzeit hinzu, die im Dauerbetrieb oft der limitierende Faktor ist.\n\nDatenblätter zeigen Bestwerte unter Idealbedingungen. Was ein System in Ihrer Umgebung leistet, zeigt erst ein Test."
+          en: "Besides the form factor, what counts are the degrees of freedom, the payload, the sensors, from depth cameras through LiDAR to force and tactile sensors, and the on-board compute. For mobile systems add the battery life, which is often the limiting factor in continuous operation.\n\nData sheets show best-case values under ideal conditions. Only a test shows what a system achieves in your environment."
+        check:
+          id: datenblatt
+          question:
+            de: "Wie gehen Sie mit Datenblattwerten um?"
+            en: "How should you treat data sheet values?"
+          options:
+            - {value: a, text: {de: "Als garantierte Werte für den eigenen Einsatz", en: "As guaranteed values for your own use case"}}
+            - {value: b, text: {de: "Als Bestwerte, die ein eigener Test bestätigen muss", en: "As best-case values that your own test must confirm"}}
+          answer: b
+          correct: {de: "Genau: selbst getestet, herstellerunabhängig.", en: "Exactly: tested ourselves, vendor-neutral."}
+          tryAgain: {de: "Unter welchen Bedingungen entstehen Datenblattwerte?", en: "Under which conditions are data sheet values measured?"}
+      - id: kurz
+        title: {de: "Kurz gesagt", en: "In short"}
+        body:
+          de: "Wählen Sie die Bauform nach der Aufgabe, nicht nach der Demo. Laufzeit, Traglast und Sensorik entscheiden im Alltag."
+          en: "Choose the form factor by the task, not by the demo. Runtime, payload and sensors decide in daily use."
+  # ------------------------------------------------------------------ Kapitel 7
+  - id: pai-sicherheit-souveraenitaet
+    chapter_id: pai-k7
+    title: {de: "Safety, Security, Souveränität", en: "Safety, security, sovereignty"}
+    room: guided-lesson
+    teaches: [pai-sicherheit]
+    requires: [pai-bauformen]
+    steps:
+      - id: safety
+        title: {de: "Safety schützt Menschen", en: "Safety protects people"}
+        body:
+          de: "Funktionale Sicherheit schützt Menschen im Arbeitsbereich. Grundlage ist eine Risikobeurteilung. Für Industrie- und kollaborierende Roboter geben Normen wie ISO 10218 und ISO/TS 15066 den Rahmen vor, etwa für Kraft- und Geschwindigkeitsbegrenzung.\n\nBei lernenden Systemen kommt eine neue Frage hinzu: Was passiert, wenn das Modell falsch liegt? Die Antwort sind Schutzfunktionen, die unabhängig von der KI greifen."
+          en: "Functional safety protects people in the work area. It is based on a risk assessment. For industrial and collaborative robots, standards such as ISO 10218 and ISO/TS 15066 set the framework, for example for force and speed limiting.\n\nLearning systems add a new question: what happens when the model is wrong? The answer is protective functions that act independently of the AI."
+        check:
+          id: unabhaengig
+          question:
+            de: "Wie sichert man ab, dass ein falsch liegendes Modell niemanden gefährdet?"
+            en: "How do you make sure a model that is wrong endangers no one?"
+          options:
+            - {value: a, text: {de: "Durch ein größeres Modell", en: "With a bigger model"}}
+            - {value: b, text: {de: "Durch Schutzfunktionen, die unabhängig von der KI greifen", en: "With protective functions that act independently of the AI"}}
+            - {value: c, text: {de: "Durch mehr Trainingsdaten", en: "With more training data"}}
+          answer: b
+          correct: {de: "Richtig. Not-Halt, Kraft- und Geschwindigkeitsbegrenzung dürfen nicht vom Modell abhängen.", en: "Right. Emergency stop, force and speed limiting must not depend on the model."}
+          tryAgain: {de: "Die Absicherung darf nicht vom Modell selbst abhängen.", en: "The safeguard must not depend on the model itself."}
+      - id: security
+        title: {de: "Security schützt Systeme", en: "Security protects systems"}
+        body:
+          de: "Ein kognitiver Roboter ist ein vernetzter Computer mit Kameras und Mikrofonen. Er gehört wie jedes andere Gerät in ein OT-Sicherheitskonzept: Netzsegmentierung, Zugriffsrechte, geprüfte Updates, Protokollierung."
+          en: "A cognitive robot is a networked computer with cameras and microphones. Like any other device it belongs in an OT security concept: network segmentation, access rights, verified updates, logging."
+      - id: souveraenitaet
+        title: {de: "Souveränität sichert Kontrolle", en: "Sovereignty secures control"}
+        body:
+          de: "Souveränität bedeutet, dass Sie die Kontrolle über Daten, Modelle und Updates behalten. Auch der regulatorische Rahmen wächst: Die neue EU-Maschinenverordnung gilt ab Januar 2027, dazu kommen der EU AI Act und der Cyber Resilience Act.\n\nKurz gesagt: Safety schützt Menschen, Security schützt Systeme, Souveränität sichert Kontrolle. Alle drei gehören vor dem Pilot auf die Checkliste."
+          en: "Sovereignty means you keep control over data, models and updates. The regulatory framework is growing too: the new EU Machinery Regulation applies from January 2027, alongside the EU AI Act and the Cyber Resilience Act.\n\nIn short: safety protects people, security protects systems, sovereignty secures control. All three belong on the checklist before the pilot."
+        check:
+          id: zuordnung
+          question:
+            de: "Signierte Updates und Netzsegmentierung gehören zu …"
+            en: "Signed updates and network segmentation belong to …"
+          options:
+            - {value: safety, text: {de: "Safety", en: "Safety"}}
+            - {value: security, text: {de: "Security", en: "Security"}}
+            - {value: souveraenitaet, text: {de: "Souveränität", en: "Sovereignty"}}
+          answer: security
+          correct: {de: "Genau. Sie schützen das System vor Angriffen.", en: "Exactly. They protect the system against attacks."}
+          tryAgain: {de: "Was schützen diese Maßnahmen: Menschen, Systeme oder die Kontrolle?", en: "What do these measures protect: people, systems or control?"}
+  # ------------------------------------------------------------------ Kapitel 8
+  - id: pai-bewerten-einfuehren
+    chapter_id: pai-k8
+    title: {de: "Erst messen, dann entscheiden", en: "Measure first, then decide"}
+    room: guided-lesson
+    teaches: [pai-bewertung]
+    requires: [pai-sicherheit]
+    steps:
+      - id: kennzahlen
+        title: {de: "Vier Kennzahlen", en: "Four metrics"}
+        body:
+          de: "Eine überzeugende Demo ist kein Business Case. Bewerten Sie kognitive Roboter mit denselben Maßstäben wie jeden anderen Prozess:\n• Erfolgsquote: Anteil der Durchläufe, die ohne menschliche Hilfe gelingen.\n• Zykluszeit: Dauer pro Durchlauf im Vergleich zum heutigen Prozess.\n• Eingriffe pro Stunde: wie oft ein Mensch helfen oder korrigieren muss.\n• Gesamtkosten: Anschaffung, Integration, Energie, Wartung und Daten über die Laufzeit."
+          en: "A convincing demo is not a business case. Evaluate cognitive robots with the same yardsticks as any other process:\n• Success rate: share of runs that succeed without human help.\n• Cycle time: duration per run compared with today's process.\n• Interventions per hour: how often a person has to help or correct.\n• Total cost: purchase, integration, energy, maintenance and data over the lifetime."
+        check:
+          id: kennzahl
+          question:
+            de: "In einer Stunde laufen 60 Durchläufe, 6 davon muss ein Mensch korrigieren. Welche Kennzahl beschreibt das direkt?"
+            en: "In one hour there are 60 runs, a person has to correct 6 of them. Which metric describes this directly?"
+          options:
+            - {value: a, text: {de: "Zykluszeit", en: "Cycle time"}}
+            - {value: b, text: {de: "Eingriffe pro Stunde", en: "Interventions per hour"}}
+            - {value: c, text: {de: "Gesamtkosten", en: "Total cost"}}
+          answer: b
+          correct: {de: "Richtig: 6 Eingriffe pro Stunde, bei einer Erfolgsquote von 90 %.", en: "Right: 6 interventions per hour, at a 90 % success rate."}
+          tryAgain: {de: "Gezählt wird, wie oft ein Mensch helfen muss.", en: "What is counted is how often a person has to help."}
+      - id: pilotkriterium
+        title: {de: "Ein Erfolgskriterium vorab festlegen", en: "Set a success criterion up front"}
+        body:
+          de: "Legen Sie vor dem Pilot fest, ab welcher Erfolgsquote der Pilot als bestanden gilt. Im Beispiel liegt die Schwelle bei 90 %. Verschieben Sie den Regler und sehen Sie, wann das Kriterium erfüllt ist."
+          en: "Before the pilot, decide from which success rate the pilot counts as passed. In this example the threshold is 90 %. Move the slider and see when the criterion is met."
+        experiment:
+          id: erfolgsquote
+          label: {de: "Gemessene Erfolgsquote in %", en: "Measured success rate in %"}
+          min: 50
+          max: 100
+          initial: 80
+          resultLabel: {de: "Kriterium erfüllt (1 = ja, 0 = nein)", en: "Criterion met (1 = yes, 0 = no)"}
+          operation: {kind: threshold, threshold: 90, below: 0, atLeast: 1}
+      - id: vorgehen
+        title: {de: "Schrittweise einführen", en: "Adopt step by step"}
+        body:
+          de: "Bewährt hat sich ein schrittweises Vorgehen: Aufgabe auswählen, Ausgangswerte messen, einen klar begrenzten Pilot mit vorher festgelegten Erfolgskriterien fahren und erst dann über den Rollout entscheiden. So wird aus Neugier eine belastbare Entscheidung."
+          en: "A step-by-step approach has proven itself: choose a task, measure the baseline, run a clearly limited pilot with success criteria defined in advance, and only then decide on the rollout. That turns curiosity into a sound decision."
+        check:
+          id: reihenfolge
+          question:
+            de: "Was kommt direkt nach der Auswahl der Aufgabe?"
+            en: "What comes directly after choosing the task?"
+          options:
+            - {value: a, text: {de: "Rollout in allen Werken", en: "Rollout across all plants"}}
+            - {value: b, text: {de: "Ausgangswerte des heutigen Prozesses messen", en: "Measure the baseline of today's process"}}
+            - {value: c, text: {de: "Den Roboter mit dem besten Datenblatt kaufen", en: "Buy the robot with the best data sheet"}}
+          answer: b
+          correct: {de: "Genau. Ohne Ausgangswerte lässt sich kein Pilot bewerten.", en: "Exactly. Without a baseline no pilot can be evaluated."}
+          tryAgain: {de: "Womit wollen Sie den Pilot später vergleichen?", en: "What will you compare the pilot with later?"}
+  # ------------------------------------------------------------------ Abschluss
+  - id: pai-wissenscheck
+    chapter_id: pai-abschluss
+    title: {de: "Wissenscheck: Physical AI", en: "Knowledge check: Physical AI"}
+    room: guided-lesson
+    practices: [pai-embodiment, pai-varianz, pai-lernwege, pai-vla, pai-daten, pai-sicherheit, pai-bewertung]
+    requires: [pai-bewertung]
+    allow_skip: false
+    steps:
+      - id: start
+        title: {de: "Fünf Fragen zum Abschluss", en: "Five closing questions"}
+        body:
+          de: "Zum Abschluss verbinden wir die acht Kapitel. Jede Frage greift ein Kapitel auf. Sie können so oft antworten, wie Sie möchten."
+          en: "To finish, we connect the eight chapters. Each question picks up one chapter. You can answer as often as you like."
+      - id: q1
+        title: {de: "Frage 1", en: "Question 1"}
+        body:
+          de: "Ein Mittelständler montiert 40 Varianten eines Schaltschranks in Losgröße 1. Die Geschäftsführung fragt nach Automatisierung."
+          en: "A mid-sized company assembles 40 variants of a control cabinet in batch size 1. Management asks about automation."
+        check:
+          id: wc-varianz
+          question:
+            de: "Welche Frage stellen Sie zuerst?"
+            en: "Which question do you ask first?"
+          options:
+            - {value: a, text: {de: "Welcher Roboter hat die beste Demo?", en: "Which robot has the best demo?"}}
+            - {value: b, text: {de: "Wie viel Varianz steckt in der Aufgabe, und was kostet sie heute?", en: "How much variance is in the task, and what does it cost today?"}}
+            - {value: c, text: {de: "Wie viele Beine braucht der Roboter?", en: "How many legs does the robot need?"}}
+          answer: b
+          correct: {de: "Richtig. Die Aufgabe entscheidet, nicht die Demo.", en: "Right. The task decides, not the demo."}
+          tryAgain: {de: "Denken Sie an Kapitel 2.", en: "Think of chapter 2."}
+      - id: q2
+        title: {de: "Frage 2", en: "Question 2"}
+        body:
+          de: "Ein Team will einem Roboterarm das Einlegen von Teilen beibringen und zeichnet dazu Demonstrationen per Teleoperation auf."
+          en: "A team wants to teach a robot arm to load parts and records demonstrations by teleoperation."
+        check:
+          id: wc-lernweg
+          question:
+            de: "Welcher Lernweg ist das?"
+            en: "Which learning approach is this?"
+          options:
+            - {value: il, text: {de: "Imitation Learning", en: "Imitation learning"}}
+            - {value: rl, text: {de: "Reinforcement Learning", en: "Reinforcement learning"}}
+            - {value: prog, text: {de: "Klassische Programmierung", en: "Classic programming"}}
+          answer: il
+          correct: {de: "Genau. Lernen aus menschlichen Demonstrationen.", en: "Exactly. Learning from human demonstrations."}
+          tryAgain: {de: "Denken Sie an Kapitel 3.", en: "Think of chapter 3."}
+      - id: q3
+        title: {de: "Frage 3", en: "Question 3"}
+        body:
+          de: "Ein Anbieter bietet ein leistungsfähiges VLA-Modell an, das nur in seiner Cloud läuft. Ihre Kameradaten würden dorthin übertragen."
+          en: "A vendor offers a powerful VLA model that only runs in its cloud. Your camera data would be sent there."
+        check:
+          id: wc-souveraen
+          question:
+            de: "Welches Risiko sprechen Sie an?"
+            en: "Which risk do you raise?"
+          options:
+            - {value: a, text: {de: "Vendor Lock-in und fehlende Datenhoheit", en: "Vendor lock-in and lack of data sovereignty"}}
+            - {value: b, text: {de: "Zu geringe Traglast", en: "Insufficient payload"}}
+            - {value: c, text: {de: "Zu viele Freiheitsgrade", en: "Too many degrees of freedom"}}
+          answer: a
+          correct: {de: "Richtig. Offene Modelle auf eigener Hardware sichern Kontrolle.", en: "Right. Open models on your own hardware secure control."}
+          tryAgain: {de: "Denken Sie an Kapitel 4, 5 und 7.", en: "Think of chapters 4, 5 and 7."}
+      - id: q4
+        title: {de: "Frage 4", en: "Question 4"}
+        body:
+          de: "Im Pilot gelingen 45 von 50 Durchläufen ohne Hilfe. Als Kriterium waren vorab 95 % festgelegt."
+          en: "In the pilot, 45 of 50 runs succeed without help. The criterion set in advance was 95 %."
+        check:
+          id: wc-pilot
+          question:
+            de: "Ist das Kriterium erfüllt?"
+            en: "Is the criterion met?"
+          options:
+            - {value: ja, text: {de: "Ja, 45 von 50 ist genug.", en: "Yes, 45 of 50 is enough."}}
+            - {value: nein, text: {de: "Nein, 90 % liegt unter den festgelegten 95 %.", en: "No, 90 % is below the agreed 95 %."}}
+          answer: nein
+          correct: {de: "Richtig. Ehrliche Zahlen gegen vorher festgelegte Kriterien.", en: "Right. Honest numbers against criteria set in advance."}
+          tryAgain: {de: "Rechnen Sie 45 geteilt durch 50.", en: "Compute 45 divided by 50."}
+      - id: q5
+        title: {de: "Frage 5", en: "Question 5"}
+        body:
+          de: "Ein kognitiver Roboter soll neben Mitarbeitenden arbeiten."
+          en: "A cognitive robot is to work next to employees."
+        check:
+          id: wc-safety
+          question:
+            de: "Was ist die Grundlage der funktionalen Sicherheit?"
+            en: "What is the basis of functional safety?"
+          options:
+            - {value: a, text: {de: "Eine Risikobeurteilung", en: "A risk assessment"}}
+            - {value: b, text: {de: "Ein Penetrationstest", en: "A penetration test"}}
+            - {value: c, text: {de: "Eine hohe Erfolgsquote", en: "A high success rate"}}
+          answer: a
+          correct: {de: "Genau. Sie ist Pflicht vor jeder Inbetriebnahme.", en: "Exactly. It is mandatory before every commissioning."}
+          tryAgain: {de: "Denken Sie an Kapitel 7.", en: "Think of chapter 7."}

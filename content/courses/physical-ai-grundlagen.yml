@@ -1,0 +1,45 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: Physical AI in acht Kapiteln
+description: 'Der kompakte Einstieg für Geschäftsführung, Produktion und IT: wie kognitive Roboter wahrnehmen, lernen
+  und handeln, was Vision-Language-Action-Modelle leisten, warum Daten der Engpass sind und wie man Sicherheit und
+  Nutzen bewertet. Herstellerneutral und ohne Hype.'
+category: Grundlagen
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: physical-ai-grundlagen
+learning_goals:
+- Physical AI von klassischer Automatisierung abgrenzen
+- Die Lernwege Imitation Learning, Reinforcement Learning und Fine-Tuning unterscheiden
+- Einordnen, was VLA- und Foundation-Modelle heute leisten
+- Daten, Bauformen, Sicherheit und Souveränität als Entscheidungskriterien nutzen
+- Einen Pilot mit messbaren Erfolgskriterien skizzieren
+requirements: []
+last_update: 1790812800
+translations:
+  en:
+    title: Physical AI in eight chapters
+    description: 'The compact introduction for management, production and IT: how cognitive robots perceive, learn
+      and act, what vision-language-action models can do, why data is the bottleneck and how to assess safety and
+      value. Vendor-neutral and without hype.'
+    learning_goals:
+    - Distinguish Physical AI from classic automation
+    - Tell imitation learning, reinforcement learning and fine-tuning apart
+    - Assess what VLA and foundation models can do today
+    - Use data, form factors, safety and sovereignty as decision criteria
+    - Outline a pilot with measurable success criteria
+    requirements: []
+sections:
+- id: vortrag
+  title: Vortrag
+  description: null
+  lectures:
+  - id: lerobot-talk
+    title: 'LeRobot: Einstiegshürden für KI in der Robotik senken (Vortrag, englisch)'
+    description: Rémi Cadène (Hugging Face) über offene Datensätze, Modelle und günstige Hardware.
+    type: youtube
+    video_id: L0uxfZMlkag
+    duration: 894

@@ -1,0 +1,12 @@
+# Skill 2 (Builder track).
+name: Roboter-Hardware & Embodiments
+dependencies: [physical_ai_grundlagen]
+skills:
+  bauformen_und_sensorik:
+    name: Bauformen & Sensorik
+    dependencies: []
+    courses: [bauformen-und-sensorik]
+  unitree_g1_dex3:
+    name: Unitree G1 EDU + Dex3
+    dependencies: [bauformen_und_sensorik]
+    courses: [unitree-g1-dex3]

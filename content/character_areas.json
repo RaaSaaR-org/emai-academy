@@ -1,0 +1,12 @@
+{
+  "areas": [
+    {
+      "id": "physical-ai",
+      "title": {"de": "Physical AI", "en": "Physical AI"},
+      "root_skill_ids": [],
+      "include_unassigned_roots": true,
+      "rows": 5,
+      "columns": 5
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+# Skill 4 (Builder track).
+name: Daten für Robot Learning
+dependencies: [roboter_hardware_embodiments, robotik_software_grundlagen]
+skills:
+  lerobot_datensaetze:
+    name: Datensätze aufnehmen & verstehen
+    dependencies: []
+    courses: [lerobot-datensaetze]
+  xr_teleoperation:
+    name: XR-Teleoperation
+    dependencies: [lerobot_datensaetze]
+    courses: [teleoperation-g1-xr]

@@ -1,0 +1,16 @@
+# Skill 5 (Builder track).
+name: Imitation Learning & VLAs
+dependencies: [daten_fuer_robot_learning]
+skills:
+  imitation_learning:
+    name: Imitation Learning & ACT
+    dependencies: []
+    courses: [imitation-learning-act]
+  vla_modelle:
+    name: Offene VLA-Modelle
+    dependencies: [imitation_learning]
+    courses: [vla-modelle-im-vergleich]
+  vla_feintuning:
+    name: SmolVLA feintunen
+    dependencies: [vla_modelle]
+    courses: [smolvla-feintuning]

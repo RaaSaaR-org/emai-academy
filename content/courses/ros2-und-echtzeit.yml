@@ -1,0 +1,31 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: Middleware, Regelkreise und Takt
+description: 'Wie Robotik-Software aufgebaut ist: Knoten und Topics in ROS 2 und DDS, gleiche Schnittstellen für
+  Simulation und Realität und warum die Ansteuerfrequenz zum Modell gehört.'
+category: Software
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: ros2-und-echtzeit
+learning_goals:
+- Publish/Subscribe mit Topics erklären
+- Regelebenen und ihre Frequenzen unterscheiden
+- Die Ansteuerfrequenz als Modelleigenschaft behandeln
+requirements:
+- Physical AI in acht Kapiteln
+last_update: 1790812800
+translations:
+  en:
+    title: Middleware, control loops and rates
+    description: 'How robotics software is structured: nodes and topics in ROS 2 and DDS, the same interfaces for
+      simulation and reality, and why the control rate belongs to the model.'
+    learning_goals:
+    - Explain publish/subscribe with topics
+    - Distinguish control layers and their frequencies
+    - Treat the control rate as a model property
+    requirements:
+    - Physical AI in eight chapters
+sections: []

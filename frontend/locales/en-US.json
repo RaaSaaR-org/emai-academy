@@ -1,0 +1,212 @@
+{
+  "UpdateNotice": {
+    "Title": "EmAI Academy is a prototype."
+  },
+  "Subheadings": {
+    "Hero": "EmAI Academy",
+    "About": "Why EmAI Academy?"
+  },
+  "Headings": {
+    "BootstrapAcademy": "EmAI Academy",
+    "Hero": "Learn Physical AI",
+    "WelcomeBack": "Welcome back"
+  },
+  "Body": {
+    "Hero": "Vendor-neutral and hands-on: fundamentals, robot learning and the safe rollout of cognitive robots.",
+    "Login": "Continue your learning path, from the fundamentals to your own robot learning experiment.",
+    "Signup": "Start free with the fundamentals of Physical AI, then choose your path: Decider or Builder.",
+    "ChallengesNickname": "Log in to continue your learning path at EmAI Academy.",
+    "Copyright": "EmAI Robotics GmbH. All rights reserved",
+    "UploadCertificates": "Already hold certificates in robotics or AI? Send us the proofs at:",
+    "BuyCoins": "This feature is not available in EmAI Academy.",
+    "OrderCoinsNote": "This feature is not available in EmAI Academy. Questions to info{'@'}EmAI.dev.",
+    "PurchaseDocumentUnavailable": "We couldn’t load the documents. Try again or contact info{'@'}EmAI.dev.",
+    "Challenges": "Please log in to continue.",
+    "LooseProgressMorphCoinsAndCourses": "Your account and your learning progress will be deleted.%%%Questions to info{'@'}EmAI.dev.",
+    "DeleteAccount": "Your account and your learning progress will be deleted. If you need help afterwards, contact us at %%%."
+  },
+  "AltAttributes": {
+    "BootstrapAcademyLogo": "EmAI Academy logo"
+  },
+  "Forms": {
+    "Signup": "Welcome to EmAI Academy"
+  },
+  "Success": {
+    "AccountCreated": "Your account has been created. Welcome to EmAI Academy.",
+    "Subscribed": "You have joined EmAI Academy."
+  },
+  "Error": {
+    "TooManyRequests": "That was too many requests at once. Try again later or contact info{'@'}EmAI.dev.",
+    "DeclarationNotSubmitted": "We couldn’t send your request. Try again or contact info{'@'}EmAI.dev."
+  },
+  "CharacterDashboard": {
+    "Nav": "My progress"
+  },
+  "Emai": {
+    "Brand": "EmAI Academy",
+    "Company": "EmAI Robotics GmbH",
+    "Tagline": "Sovereign Physical AI for business",
+    "Prototype": "Prototype",
+    "Nav": {
+      "Tracks": "Learning paths",
+      "Curriculum": "Curriculum",
+      "Lab": "Hardware",
+      "Login": "Log in",
+      "Signup": "Sign up"
+    },
+    "Hero": {
+      "Title": "Learn Physical AI – vendor-neutral, hands-on",
+      "Lead": "How do cognitive robots learn, how do you test them, and how do you introduce them safely in your own operations? EmAI Academy teaches this to decision makers and engineers: with open models, real hardware and no vendor lock-in.",
+      "Register": "Register for free",
+      "SkillTree": "View the skill tree",
+      "DiagramLabel": "Curriculum diagram: nine skills connected by their prerequisites. The Decider path runs through skills 1, 8 and 9. The Builder path runs through 1, then 2 or 3, then 4, 5 or 6, and ends at 7.",
+      "Legend": "Each node is a skill. Lines show what builds on what."
+    },
+    "Principles": {
+      "Tested": {
+        "Title": "Tested ourselves",
+        "Body": "Everything we teach, we have tried on our own robots – including the places where it does not work."
+      },
+      "Neutral": {
+        "Title": "Vendor-neutral",
+        "Body": "We do not sell robots. You learn criteria to evaluate any platform yourself."
+      },
+      "Open": {
+        "Title": "Openly shared",
+        "Body": "Open models, open datasets, open tools such as LeRobot. What you learn here is yours."
+      }
+    },
+    "Tracks": {
+      "Title": "Two learning paths, one shared foundation",
+      "Intro": "Both paths start with skill 1. Then you decide whether you want to evaluate and introduce Physical AI, or train robots yourself.",
+      "Path": "Path",
+      "Outcome": "By the end you can",
+      "Decider": {
+        "Name": "Decider",
+        "Who": "For executives, innovation, production and IT leads.",
+        "Body": "You understand what cognitive robots can do today, where the risks are, and how to plan data sovereignty and security from day one.",
+        "Outcome": "compare vendors neutrally, assess risks and set up a pilot with a clear business case."
+      },
+      "Builder": {
+        "Name": "Builder",
+        "Who": "For developers, engineers and researchers.",
+        "Body": "You collect data via teleoperation, train imitation learning and VLA policies, use simulation and deploy models to the robot measurably.",
+        "Outcome": "take a policy from data collection to an evaluated deployment on your own."
+      }
+    },
+    "Curriculum": {
+      "Title": "The curriculum",
+      "Intro": "Nine skills, each with clear prerequisites. The skill tree always shows what you already know and what unlocks next.",
+      "Requires": "Requires",
+      "Entry": "Entry point",
+      "Or": "or",
+      "Both": "Both paths",
+      "Track": "Show path",
+      "All": "All",
+      "And": "and"
+    },
+    "Skills": {
+      "S1": {
+        "Name": "Physical AI fundamentals",
+        "Body": "What sets cognitive robots apart from classic automation: perception, foundation models, embodiment.",
+        "Short": "Fundamentals"
+      },
+      "S2": {
+        "Name": "Robot hardware & embodiments",
+        "Body": "Actuators, sensors, hands and grippers. Why a robot's form decides what it can learn.",
+        "Short": "Hardware"
+      },
+      "S3": {
+        "Name": "Robotics software fundamentals",
+        "Body": "ROS 2, coordinate frames, kinematics and control – the toolkit underneath every policy.",
+        "Short": "Software"
+      },
+      "S4": {
+        "Name": "Data for robot learning",
+        "Body": "Teleoperation, data formats, quality and data sovereignty. Good demonstrations are half the policy.",
+        "Short": "Data"
+      },
+      "S5": {
+        "Name": "Imitation learning & VLAs",
+        "Body": "From ACT to vision-language-action models: train and fine-tune policies from demonstrations.",
+        "Short": "IL & VLAs"
+      },
+      "S6": {
+        "Name": "Simulation & reinforcement learning",
+        "Body": "Sim-to-real, domain randomization and RL for locomotion and manipulation.",
+        "Short": "Sim & RL"
+      },
+      "S7": {
+        "Name": "Evaluation & deployment",
+        "Body": "Measure reproducibly, find failures systematically and bring models to the robot under control.",
+        "Short": "Deployment"
+      },
+      "S8": {
+        "Name": "Safety, security & sovereignty",
+        "Body": "Machine safety, the AI Act, attack surfaces and data flows – and how you stay in control.",
+        "Short": "Safety"
+      },
+      "S9": {
+        "Name": "Introducing Physical AI in your company",
+        "Body": "Prioritise use cases, plan pilots, bring people along and secure operations.",
+        "Short": "Adoption"
+      }
+    },
+    "Lab": {
+      "Title": "Learning happens on real hardware",
+      "Intro": "The practical skills lead to two platforms we operate ourselves. Both are controlled openly, without a vendor cloud.",
+      "Specs": "Specifications",
+      "UsedIn": "In the curriculum",
+      "G1": {
+        "Name": "Unitree G1 EDU with Dex3 hands",
+        "Kind": "Cognitive robot, bipedal",
+        "Body": "Whole-body platform for teleoperation, data collection and manipulation with two force-controlled three-finger hands.",
+        "Height": "Height",
+        "Weight": "Weight",
+        "Dof": "Degrees of freedom",
+        "Hand": "Hand",
+        "HandValue": "Dex3-1, 7 DOF, 33 tactile sensors",
+        "Sensors": "Sensors",
+        "SensorsValue": "Livox Mid-360 LiDAR, RealSense D435i, IMU",
+        "Compute": "Compute",
+        "ComputeValue": "Jetson Orin, 100 TOPS"
+      },
+      "SO101": {
+        "Name": "SO-101 robot arm with LeRobot",
+        "Kind": "Open-source arm, tabletop",
+        "Body": "An affordable entry into robot learning: record demonstrations with the leader arm, train a policy, run it on the follower arm.",
+        "Dof": "Degrees of freedom",
+        "DofValue": "6 (5 joints + gripper)",
+        "Setup": "Setup",
+        "SetupValue": "Leader-follower teleoperation",
+        "Actuators": "Actuators",
+        "ActuatorsValue": "Feetech STS3215 servos",
+        "Software": "Software",
+        "SoftwareValue": "LeRobot: ACT, Diffusion Policy, SmolVLA"
+      }
+    },
+    "Cta": {
+      "Title": "Start with skill 1",
+      "Body": "The fundamentals are the same for both paths and free. Then choose your way in the skill tree.",
+      "Register": "Create account",
+      "SkillTree": "Go to the skill tree"
+    },
+    "Footer": {
+      "About": "The learning platform of EmAI Robotics. Deploying Physical AI with sovereignty – together with you.",
+      "Academy": "Academy",
+      "Company": "EmAI Robotics",
+      "Website": "emai.dev",
+      "Legal": "Legal",
+      "Terms": "Terms of use",
+      "MadeIn": "Made in Europe",
+      "PrototypeNote": "Prototype built on the open-source Bootstrap Academy platform."
+    },
+    "Terms": {
+      "Title": "Terms of use",
+      "Notice": "Prototype – no valid terms of use",
+      "NoticeBody": "This page is a placeholder. EmAI Academy is being trialled; binding terms of use will be published before the public launch.",
+      "Summary": "Until then: use is free of charge, there are no paid services, and your data is processed only to operate the learning platform (see the privacy policy).",
+      "Contact": "Questions to"
+    }
+  }
+}

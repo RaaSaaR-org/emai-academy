@@ -1,0 +1,61 @@
+# Skill 3: robotics software basics - middleware, control loops, rates.
+order: 115
+path:
+  id: ros2-und-echtzeit
+  title: {de: "Middleware, Regelkreise und Takt", en: "Middleware, control loops and rates"}
+  direction_id: builder
+units:
+  - id: rs-middleware
+    title: {de: "Nachrichten statt Monolith: ROS 2 und DDS", en: "Messages, not a monolith: ROS 2 and DDS"}
+    room: guided-lesson
+    teaches: [rs-middleware]
+    steps:
+      - id: knoten
+        title: {de: "Knoten und Topics", en: "Nodes and topics"}
+        body:
+          de: "Robotik-Software besteht aus vielen kleinen Programmen: Kameratreiber, Zustandsschätzung, Policy, Gelenkregler, Sicherheitsüberwachung. ROS 2 nennt sie Knoten (Nodes). Sie tauschen Nachrichten über benannte Kanäle aus, die Topics. Ein Knoten veröffentlicht (publish), andere abonnieren (subscribe), ohne sich gegenseitig kennen zu müssen.\n\nUnter ROS 2 liegt DDS (Data Distribution Service). Unitree-Roboter wie der G1 sprechen DDS direkt: Gelenkzustände und Befehle sind Topics."
+          en: "Robotics software consists of many small programs: camera drivers, state estimation, policy, joint controllers, safety monitoring. ROS 2 calls them nodes. They exchange messages over named channels called topics. One node publishes, others subscribe, without having to know each other.\n\nBeneath ROS 2 sits DDS (Data Distribution Service). Unitree robots such as the G1 speak DDS directly: joint states and commands are topics."
+        check:
+          id: entkopplung
+          question:
+            de: "Sie tauschen den Kameratreiber aus. Was müssen die abonnierenden Knoten anpassen, wenn Topic-Name und Nachrichtentyp gleich bleiben?"
+            en: "You replace the camera driver. What must subscribing nodes change if the topic name and message type stay the same?"
+          options:
+            - {value: nichts, text: {de: "Nichts", en: "Nothing"}}
+            - {value: alles, text: {de: "Sie müssen neu kompiliert und auf den neuen Treiber verlinkt werden", en: "They must be recompiled and linked to the new driver"}}
+          answer: nichts
+          correct: {de: "Richtig. Das Topic ist der Vertrag, nicht der Treiber.", en: "Right. The topic is the contract, not the driver."}
+          tryAgain: {de: "Publisher und Subscriber kennen sich nicht.", en: "Publishers and subscribers do not know each other."}
+      - id: sim-real
+        title: {de: "Gleiche Schnittstelle für Simulation und Realität", en: "Same interface for simulation and reality"}
+        body:
+          de: "Weil Simulation und realer Roboter dieselben Topics sprechen können, lässt sich eine Policy zuerst in der Simulation und dann ohne Codeänderung am Roboter testen. In unserem Labor fährt eine Policy den G1 in Isaac Sim über dieselben DDS-Topics wie den echten Roboter. Getrennt werden beide über die DDS-Domain."
+          en: "Because simulation and the real robot can speak the same topics, a policy can be tested first in simulation and then on the robot without code changes. In our lab a policy drives the G1 in Isaac Sim over the same DDS topics as the real robot. The two are separated by the DDS domain."
+  - id: rs-takt
+    title: {de: "Takt: Wer läuft wie schnell?", en: "Rates: who runs how fast?"}
+    room: guided-lesson
+    teaches: [rs-takt]
+    requires: [rs-middleware]
+    steps:
+      - id: ebenen
+        title: {de: "Drei Ebenen, drei Frequenzen", en: "Three layers, three frequencies"}
+        body:
+          de: "Ein kognitiver Roboter hat typischerweise mehrere Regelebenen:\n• Gelenkregler im Motor: sehr schnell, oft im Kilohertz-Bereich.\n• Policy: z. B. 30 Hz, passend zur Kamera-Bildrate des Datensatzes.\n• Planung oder Sprachverständnis: deutlich langsamer.\n\nDie Policy gibt Zielwerte vor, die schnellen Regler setzen sie um."
+          en: "A cognitive robot typically has several control layers:\n• Joint controllers in the motor: very fast, often in the kilohertz range.\n• Policy: e.g. 30 Hz, matching the camera frame rate of the dataset.\n• Planning or language understanding: much slower.\n\nThe policy sets targets, the fast controllers execute them."
+        check:
+          id: policy-hz
+          question:
+            de: "Ein Datensatz wurde mit 30 fps aufgenommen. Mit welcher Frequenz sollte die Policy im Betrieb Aktionen ausgeben?"
+            en: "A dataset was recorded at 30 fps. At which frequency should the policy output actions in operation?"
+          options:
+            - {value: "30", text: {de: "Mit 30 Hz, wie im Training", en: "At 30 Hz, as in training"}}
+            - {value: "60", text: {de: "Mit 60 Hz, schneller ist besser", en: "At 60 Hz, faster is better"}}
+            - {value: egal, text: {de: "Egal, Hauptsache stabil", en: "It does not matter as long as it is stable"}}
+          answer: "30"
+          correct: {de: "Richtig. Der Takt ist eine Eigenschaft des Modells.", en: "Right. The rate is a property of the model."}
+          tryAgain: {de: "Die Policy hat gelernt, wie weit sich der Arm pro Frame bewegt.", en: "The policy learned how far the arm moves per frame."}
+      - id: lehre
+        title: {de: "Aus unserem Labor", en: "From our lab"}
+        body:
+          de: "In einer Messkampagne haben wir ein Modell doppelt so schnell abgespielt, wie es trainiert war. Der Takt stand als Vorgabewert in einem Skript, nicht in der Modellkonfiguration, und fiel deshalb lange nicht auf. Seitdem gilt: Die Frequenz gehört zum Modell, wird mit ihm versioniert und beim Start geprüft."
+          en: "In one measurement campaign we played back a model twice as fast as it had been trained. The rate was a default value in a script, not in the model configuration, so it went unnoticed for a long time. Since then the rule is: the frequency belongs to the model, is versioned with it and checked at start-up."

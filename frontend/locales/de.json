@@ -1,0 +1,308 @@
+{
+  "UpdateNotice": {
+    "Title": "Die EmAI Academy ist ein Prototyp."
+  },
+  "Subheadings": {
+    "Hero": "EmAI Academy",
+    "About": "Warum EmAI Academy?"
+  },
+  "Headings": {
+    "BootstrapAcademy": "EmAI Academy",
+    "Hero": "Physical AI lernen",
+    "WelcomeBack": "Willkommen zurück"
+  },
+  "Body": {
+    "Hero": "Herstellerunabhängig und praxisnah: Grundlagen, Robot Learning und sichere Einführung kognitiver Roboter.",
+    "Login": "Setzen Sie Ihren Lernpfad fort: vom Grundlagenwissen bis zum eigenen Robot-Learning-Experiment.",
+    "Signup": "Starten Sie kostenlos mit den Grundlagen von Physical AI und wählen Sie Ihren Pfad: Entscheider oder Builder.",
+    "ChallengesNickname": "Melden Sie sich an, um mit Ihrem Lernpfad in der EmAI Academy weiterzumachen.",
+    "Copyright": "EmAI Robotics GmbH. Alle Rechte vorbehalten",
+    "UploadCertificates": "Sie haben bereits Zertifikate im Bereich Robotik oder KI? Schicken Sie uns die Nachweise an:",
+    "BuyCoins": "Diese Funktion ist in der EmAI Academy nicht verfügbar.",
+    "OrderCoinsNote": "Diese Funktion ist in der EmAI Academy nicht verfügbar. Fragen an info{'@'}EmAI.dev.",
+    "PurchaseDocumentUnavailable": "Die Unterlagen konnten nicht geladen werden. Versuch es noch einmal oder schreib uns an info{'@'}EmAI.dev.",
+    "LooseProgressMorphCoinsAndCourses": "Ihr Konto und Ihr Lernfortschritt werden gelöscht.%%%Fragen dazu an info{'@'}EmAI.dev.",
+    "DeleteAccount": "Ihr Konto und Ihr Lernfortschritt werden gelöscht. Wenn Sie danach Hilfe brauchen, schreiben Sie uns an %%%."
+  },
+  "AltAttributes": {
+    "BootstrapAcademyLogo": "EmAI Academy Logo"
+  },
+  "Forms": {
+    "Signup": "Willkommen in der EmAI Academy"
+  },
+  "Success": {
+    "AccountCreated": "Ihr Konto wurde erstellt. Willkommen in der EmAI Academy.",
+    "Subscribed": "Sie sind jetzt in der EmAI Academy angemeldet."
+  },
+  "Error": {
+    "TooManyRequests": "Das waren zu viele Anfragen auf einmal. Versuch es später noch einmal oder schreib uns an info{'@'}EmAI.dev.",
+    "DeclarationNotSubmitted": "Ihre Anfrage konnte nicht gesendet werden. Versuchen Sie es noch einmal oder schreiben Sie uns an info{'@'}EmAI.dev."
+  },
+  "CharacterDashboard": {
+    "Nav": "Mein Lernstand",
+    "Eyebrow": "Ihr Lernweg",
+    "Title": "Mein Lernstand",
+    "EditProfile": "Profil bearbeiten",
+    "Identity": "Ihr Profil",
+    "Level": "Stufe {level}",
+    "Starting": "Am Start",
+    "Experience": "Ihr Fortschritt",
+    "NextLevel": "Bis Stufe {level}",
+    "ProgressError": "Ihr Fortschritt lädt gerade nicht.",
+    "Retry": "Erneut versuchen",
+    "LoadingProgress": "Fortschritt wird geladen …",
+    "NextStep": "Ihr nächster Schritt",
+    "KeepLearning": "Weiterlernen",
+    "Focus": "Lernrichtung",
+    "MixedFocus": "Alle Themen",
+    "FindingPractice": "Übung wird gesucht …",
+    "Practice": "Üben",
+    "Skills": "Ihre Kompetenzen",
+    "Discover": "Skilltree öffnen",
+    "SkillsError": "Ihre Kompetenzen laden gerade nicht.",
+    "LoadingSkills": "Kompetenzen werden geladen …",
+    "FreshTitle": "Ihr erster Schritt zählt.",
+    "FreshBody": "Mit jeder abgeschlossenen Lerneinheit wachsen hier Ihre Kompetenzen.",
+    "SkillNextLevel": "{skill}: bis Stufe {level}",
+    "LoadingDetails": "Details werden geladen …",
+    "DetailsError": "Die Details laden gerade nicht.",
+    "CurrentFocus": "Ihre gewählte Lernrichtung",
+    "ChooseFocus": "Als Lernrichtung wählen",
+    "FewerSkills": "Weniger anzeigen",
+    "AllSkills": "Alle {count} Kompetenzen",
+    "Courses": "Ihre Kurse",
+    "AllCourses": "Alle Kurse",
+    "CoursesError": "Ihre Kurse laden gerade nicht.",
+    "CourseCompleted": "Abgeschlossen",
+    "CourseLectures": "{done} von {total} Lektionen",
+    "You": "Sie",
+    "PracticeError": "Die Übung lädt gerade nicht. Versuchen Sie es gleich noch einmal.",
+    "NoPractice": "Gerade ist keine neue Übung frei. Wählen Sie eine andere Lernrichtung oder sehen Sie in Ihre Kurse."
+  },
+  "Emai": {
+    "Brand": "EmAI Academy",
+    "Company": "EmAI Robotics GmbH",
+    "Tagline": "Souveräne Physical AI für Unternehmen",
+    "Prototype": "Prototyp",
+    "Nav": {
+      "Tracks": "Lernpfade",
+      "Curriculum": "Lehrplan",
+      "Lab": "Hardware",
+      "Login": "Anmelden",
+      "Signup": "Registrieren"
+    },
+    "Hero": {
+      "Title": "Physical AI lernen – hersteller­unabhängig, praxisnah",
+      "Lead": "Wie lernen kognitive Roboter, wie testet man sie, und wie führt man sie sicher im eigenen Betrieb ein? Die EmAI Academy vermittelt das für Entscheider und Entwickler: mit offenen Modellen, echter Hardware und ohne Vendor Lock-in.",
+      "Register": "Kostenlos registrieren",
+      "SkillTree": "Skilltree ansehen",
+      "DiagramLabel": "Schaubild des Lehrplans: neun Skills, verbunden über ihre Voraussetzungen. Der Entscheider-Pfad führt über die Skills 1, 8 und 9. Der Builder-Pfad führt über 1, 2 oder 3, dann 4, 5 oder 6 und endet bei 7.",
+      "Legend": "Jeder Knoten ist ein Skill. Linien zeigen, was worauf aufbaut."
+    },
+    "Principles": {
+      "Tested": {
+        "Title": "Selbst getestet",
+        "Body": "Alles, was wir unterrichten, haben wir an eigenen Robotern ausprobiert – inklusive der Stellen, an denen es nicht funktioniert."
+      },
+      "Neutral": {
+        "Title": "Herstellerunabhängig",
+        "Body": "Wir verkaufen keine Roboter. Sie lernen Kriterien, mit denen Sie jede Plattform selbst bewerten können."
+      },
+      "Open": {
+        "Title": "Offen geteilt",
+        "Body": "Offene Modelle, offene Datensätze, offene Werkzeuge wie LeRobot. Was Sie hier lernen, gehört Ihnen."
+      }
+    },
+    "Tracks": {
+      "Title": "Zwei Lernpfade, ein gemeinsames Fundament",
+      "Intro": "Beide Pfade beginnen mit Skill 1. Danach entscheiden Sie, ob Sie Physical AI bewerten und einführen oder selbst Roboter trainieren wollen.",
+      "Path": "Pfad",
+      "Outcome": "Am Ende können Sie",
+      "Decider": {
+        "Name": "Entscheider",
+        "Who": "Für Geschäftsführung, Innovations-, Produktions- und IT-Leitung.",
+        "Body": "Sie verstehen, was kognitive Roboter heute leisten, wo die Risiken liegen und wie Sie Datenhoheit und Sicherheit von Anfang an einplanen.",
+        "Outcome": "Anbieter neutral vergleichen, Risiken einschätzen und einen Pilot mit klarem Business Case aufsetzen."
+      },
+      "Builder": {
+        "Name": "Builder",
+        "Who": "Für Entwicklerinnen, Ingenieure und Forschende.",
+        "Body": "Sie sammeln Daten per Teleoperation, trainieren Imitation-Learning- und VLA-Policies, nutzen Simulation und bringen Modelle messbar auf den Roboter.",
+        "Outcome": "Eine Policy von der Datenerfassung bis zum evaluierten Deployment selbst umsetzen."
+      }
+    },
+    "Curriculum": {
+      "Title": "Der Lehrplan",
+      "Intro": "Neun Skills, jeder mit klaren Voraussetzungen. Im Skilltree sehen Sie jederzeit, was Sie schon können und was als Nächstes freigeschaltet wird.",
+      "Requires": "Voraussetzung",
+      "Entry": "Einstieg",
+      "Or": "oder",
+      "Both": "Beide Pfade",
+      "Track": "Pfad anzeigen",
+      "All": "Alle",
+      "And": "und"
+    },
+    "Skills": {
+      "S1": {
+        "Name": "Physical AI Grundlagen",
+        "Body": "Was kognitive Roboter von klassischer Automatisierung unterscheidet: Wahrnehmung, Foundation Models, Embodiment.",
+        "Short": "Grundlagen"
+      },
+      "S2": {
+        "Name": "Roboter-Hardware & Embodiments",
+        "Body": "Aktoren, Sensorik, Hände und Greifer. Warum die Form des Roboters bestimmt, was er lernen kann.",
+        "Short": "Hardware"
+      },
+      "S3": {
+        "Name": "Robotik-Software-Grundlagen",
+        "Body": "ROS 2, Koordinatensysteme, Kinematik und Regelung – das Handwerkszeug unter jeder Policy.",
+        "Short": "Software"
+      },
+      "S4": {
+        "Name": "Daten für Robot Learning",
+        "Body": "Teleoperation, Datenformate, Qualität und Datenhoheit. Gute Demonstrationen sind die halbe Policy.",
+        "Short": "Daten"
+      },
+      "S5": {
+        "Name": "Imitation Learning & VLAs",
+        "Body": "Von ACT bis Vision-Language-Action-Modellen: Policies aus Demonstrationen trainieren und feinjustieren.",
+        "Short": "IL & VLAs"
+      },
+      "S6": {
+        "Name": "Simulation & Reinforcement Learning",
+        "Body": "Sim-to-Real, Domain Randomization und RL für Bewegung und Manipulation.",
+        "Short": "Sim & RL"
+      },
+      "S7": {
+        "Name": "Evaluation & Deployment",
+        "Body": "Reproduzierbar messen, Fehler systematisch finden und Modelle kontrolliert auf den Roboter bringen.",
+        "Short": "Deployment"
+      },
+      "S8": {
+        "Name": "Safety, Security & Souveränität",
+        "Body": "Maschinensicherheit, AI Act, Angriffsflächen und Datenflüsse – und wie Sie die Kontrolle behalten.",
+        "Short": "Safety"
+      },
+      "S9": {
+        "Name": "Physical AI im Unternehmen einführen",
+        "Body": "Use Cases priorisieren, Piloten planen, Menschen mitnehmen und den Betrieb absichern.",
+        "Short": "Einführung"
+      }
+    },
+    "Lab": {
+      "Title": "Gelernt wird an echter Hardware",
+      "Intro": "Die praktischen Skills führen an zwei Plattformen, die wir selbst betreiben. Beide werden offen angesteuert, ohne Hersteller-Cloud.",
+      "Specs": "Technische Daten",
+      "UsedIn": "Im Lehrplan",
+      "G1": {
+        "Name": "Unitree G1 EDU mit Dex3-Händen",
+        "Kind": "Kognitiver Roboter, zweibeinig",
+        "Body": "Ganzkörper-Plattform für Teleoperation, Datenerfassung und Manipulation mit zwei kraftgeregelten Dreifingerhänden.",
+        "Height": "Höhe",
+        "Weight": "Gewicht",
+        "Dof": "Freiheitsgrade",
+        "Hand": "Hand",
+        "HandValue": "Dex3-1, 7 DOF, 33 Tastsensoren",
+        "Sensors": "Sensorik",
+        "SensorsValue": "Livox Mid-360 LiDAR, RealSense D435i, IMU",
+        "Compute": "Rechner",
+        "ComputeValue": "Jetson Orin, 100 TOPS"
+      },
+      "SO101": {
+        "Name": "SO-101 Roboterarm mit LeRobot",
+        "Kind": "Open-Source-Arm, Tischaufbau",
+        "Body": "Günstiger Einstieg ins Robot Learning: Demonstrationen per Leader-Arm aufnehmen, Policy trainieren, auf dem Follower-Arm ausführen.",
+        "Dof": "Freiheitsgrade",
+        "DofValue": "6 (5 Gelenke + Greifer)",
+        "Setup": "Aufbau",
+        "SetupValue": "Leader-Follower-Teleoperation",
+        "Actuators": "Antrieb",
+        "ActuatorsValue": "Feetech STS3215 Servos",
+        "Software": "Software",
+        "SoftwareValue": "LeRobot: ACT, Diffusion Policy, SmolVLA"
+      }
+    },
+    "Cta": {
+      "Title": "Beginnen Sie mit Skill 1",
+      "Body": "Die Grundlagen sind für beide Pfade gleich und kostenlos. Danach wählen Sie im Skilltree Ihren Weg.",
+      "Register": "Konto erstellen",
+      "SkillTree": "Zum Skilltree"
+    },
+    "Footer": {
+      "About": "Die Lernplattform von EmAI Robotics. Physical AI souverän einsetzen – gemeinsam mit Ihnen.",
+      "Academy": "Academy",
+      "Company": "EmAI Robotics",
+      "Website": "emai.dev",
+      "Legal": "Rechtliches",
+      "Terms": "Nutzungsbedingungen",
+      "MadeIn": "Made in Europe",
+      "PrototypeNote": "Prototyp auf Basis der Open-Source-Plattform Bootstrap Academy."
+    },
+    "Terms": {
+      "Title": "Nutzungsbedingungen",
+      "Notice": "Prototyp – keine gültigen Nutzungsbedingungen",
+      "NoticeBody": "Diese Seite ist ein Platzhalter. Die EmAI Academy befindet sich in der Erprobung; verbindliche Nutzungsbedingungen werden vor dem öffentlichen Start veröffentlicht.",
+      "Summary": "Bis dahin gilt: Die Nutzung ist kostenlos, es gibt keine kostenpflichtigen Leistungen, und Ihre Daten werden nur zum Betrieb der Lernplattform verarbeitet (siehe Datenschutzerklärung).",
+      "Contact": "Fragen an"
+    }
+  },
+  "LearningRooms": {
+    "Title": "Ihr Lernraum",
+    "ContinueLearning": "Weiterlernen",
+    "Back": "Zum Lernstand",
+    "Loading": "Ihr Lernraum wird geladen …",
+    "Unavailable": "Der Lernraum ist gerade nicht verfügbar.",
+    "LearningPath": "Thema",
+    "Saving": "Wird gespeichert …",
+    "Unsaved": "Noch nicht gespeichert",
+    "Saved": "Gespeichert",
+    "SaveError": "Ihre Bearbeitung ist noch hier, aber das Speichern hat gerade nicht geklappt. Versuchen Sie es noch einmal.",
+    "LoadError": "Ihr Lernraum konnte gerade nicht geladen werden. Versuchen Sie es noch einmal.",
+    "Retry": "Noch einmal versuchen",
+    "SaveAgain": "Jetzt speichern",
+    "Conflict": "Ihr Lernstand wurde auf einem anderen Gerät geändert. Möchten Sie den gespeicherten Stand laden oder Ihre Bearbeitung behalten?",
+    "LoadSaved": "Gespeicherten Stand laden",
+    "KeepMine": "Meine Bearbeitung speichern",
+    "Session": "Bitte melden Sie sich erneut an, um weiterzulernen.",
+    "SignIn": "Anmelden",
+    "CheckIntroduction": "Sehen Sie sich Ihre Antwort noch einmal an. Sie können sie direkt hier ändern.",
+    "AlreadyKnow": "Das kenne ich schon",
+    "Skipped": "Die Einführung ist übersprungen. Sie können mit dem nächsten Schritt weitermachen.",
+    "IntroductionDone": "Gut, weiter geht’s.",
+    "ExerciseDone": "Aufgabe gelöst. Weiter geht’s.",
+    "Next": "Nächster Schritt",
+    "Continue": "Weiter",
+    "PathDone": "Sie haben diesen Lernweg abgeschlossen.",
+    "PathDoneBody": "Oben können Sie ein anderes Thema wählen.",
+    "Code": "Ihr Code",
+    "Language": "Programmiersprache",
+    "ChooseOne": "Wählen Sie eine Antwort.",
+    "ChooseSeveral": "Wählen Sie alle passenden Antworten.",
+    "MatchPairs": "Ordnen Sie jeder Aussage die passende Antwort zu.",
+    "ChooseMatch": "Antwort wählen",
+    "Examples": "Beispiele ansehen",
+    "Input": "Eingabe",
+    "Output": "Erwartete Ausgabe",
+    "Correct": "Richtig gelöst!",
+    "Incorrect": "Das passt noch nicht. Sehen Sie sich Ihre Antwort noch einmal an und versuchen Sie es erneut.",
+    "Details": "Details ansehen",
+    "Running": "Ihr Ergebnis wird geprüft.",
+    "StillRunning": "Die Prüfung dauert noch. Sie können das Ergebnis gleich erneut abrufen.",
+    "CheckResult": "Ergebnis abrufen",
+    "Submitting": "Wird abgegeben …",
+    "CheckAnswer": "Antwort prüfen",
+    "NoHearts": "Für einen neuen Versuch ist gerade kein Versuch frei.",
+    "NoAccess": "Sie haben gerade keinen Zugang zu dieser Aufgabe.",
+    "Wait": "Warten Sie kurz, bevor Sie es noch einmal versuchen.",
+    "RequestError": "Die Aufgabe konnte gerade nicht geladen oder geprüft werden. Versuchen Sie es noch einmal.",
+    "Uncertain": "Das Ergebnis Ihrer Abgabe ist noch unklar. Sie können den aktuellen Stand prüfen.",
+    "NoNextExercise": "Hier fehlt gerade die nächste passende Übung.",
+    "SkipExercise": "Übung überspringen",
+    "PreviousAttemptMayCount": "Der vorige Versuch könnte bereits gezählt haben.",
+    "NewAttempt": "Neuer Versuch",
+    "RecoveryError": "Ihre Bearbeitung konnte in diesem Tab nicht gesichert werden. Lassen Sie die Seite offen und versuchen Sie es noch einmal.",
+    "ReviewStartError": "Die nächste Übung konnte gerade nicht starten. Versuchen Sie es noch einmal.",
+    "BalanceUpdating": "Wird aktualisiert …",
+    "HeartsPending": "Der Stand konnte gerade nicht aktualisiert werden. Prüfen Sie das Ergebnis gleich noch einmal."
+  }
+}

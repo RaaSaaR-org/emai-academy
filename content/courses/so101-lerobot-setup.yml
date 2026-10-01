@@ -1,0 +1,45 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: SO-101 mit LeRobot in Betrieb nehmen
+description: 'Vom ausgepackten Arm zur ersten Teleoperation: LeRobot installieren, Ports finden, Motor-IDs setzen,
+  kalibrieren, Kinematik verstehen und den Follower mit dem Leader steuern.'
+category: Software
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: so101-lerobot-setup
+learning_goals:
+- LeRobot mit Feetech-Unterstützung installieren
+- Motor-IDs setzen und Leader und Follower kalibrieren
+- Vorwärts- und inverse Kinematik an einem Zwei-Gelenk-Modell anwenden
+- Teleoperation mit Kamera starten
+requirements:
+- Physical AI in acht Kapiteln
+- Grundkenntnisse in Python und Kommandozeile
+last_update: 1790812800
+translations:
+  en:
+    title: Set up the SO-101 with LeRobot
+    description: 'From unboxed arm to first teleoperation: install LeRobot, find ports, set motor IDs, calibrate,
+      understand kinematics and drive the follower with the leader.'
+    learning_goals:
+    - Install LeRobot with Feetech support
+    - Set motor IDs and calibrate leader and follower
+    - Apply forward and inverse kinematics on a two-joint model
+    - Start teleoperation with a camera
+    requirements:
+    - Physical AI in eight chapters
+    - Basic Python and command-line skills
+sections:
+- id: video
+  title: Video
+  description: null
+  lectures:
+  - id: lerobot-ueberblick
+    title: KI in der Robotik mit LeRobot (Überblick, englisch)
+    description: Kurzer Überblick über LeRobot von Hugging Face.
+    type: youtube
+    video_id: l1i3Uvc7ybg
+    duration: 298

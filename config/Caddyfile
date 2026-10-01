@@ -1,0 +1,34 @@
+# EmAI Academy API gateway on :8191. It mirrors the Bootstrap gateway (:8190).
+#   /skills/*  ->  skills-ms-rooms 127.0.0.1:8011  (prefix stripped; ROOT_PATH=/skills adds it back)
+#   GET /challenges/courses/*/tasks -> [] (no challenges-ms in the EmAI tenant)
+#   everything else -> EmAI backend 127.0.0.1:8081
+# Run: nix shell nixpkgs#caddy -c caddy run --config emai-academy/config/Caddyfile --adapter caddyfile
+{
+	admin off
+	auto_https off
+}
+
+:8191 {
+	handle_path /skills/* {
+		reverse_proxy 127.0.0.1:8011
+	}
+
+	redir /skills /skills/docs 307
+
+	# EmAI runs without challenges-ms (no quizzes/coding challenges). The upstream course page
+	# still asks for the course's quiz tasks; answer "no tasks" instead of a 404 console error.
+	@courseTasks {
+		method GET
+		path_regexp ^/challenges/courses/[^/]+/tasks$
+	}
+	handle @courseTasks {
+		header Content-Type application/json
+		header Access-Control-Allow-Origin {header.Origin}
+		header Vary Origin
+		respond "[]" 200
+	}
+
+	handle {
+		reverse_proxy 127.0.0.1:8081
+	}
+}

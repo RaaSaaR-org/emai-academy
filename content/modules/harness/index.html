@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module Harness</title>
+<style>
+  body { margin: 0; background: #141414; color: #F5F5F4; font: 14px system-ui, sans-serif; }
+  main { max-width: 1120px; margin: 0 auto; padding: 16px; }
+  #log { font: 12px ui-monospace, monospace; white-space: pre-wrap; background: #1F1F1F; border-radius: 8px; padding: 8px; margin-top: 12px; color: #A8A29E; }
+</style>
+</head>
+<body>
+<main>
+  <div id="surface"></div>
+  <pre id="log"></pre>
+</main>
+<script type="module">
+// Mock of the Academy host (mirrors frontend/utils/learningModule.ts:
+// snapshot semantics, disabled gating, AbortSignal, busy, save, complete).
+// Query: ?module=<url of entry>&kind=<module id>&locale=de|en&auto=solve|wrong|none&content=<json>&disabled=1
+const params = new URLSearchParams(location.search);
+const entry = params.get("module");
+const auto = params.get("auto") || "none";
+const kind = params.get("kind") || "";
+const logEl = document.getElementById("log");
+const events = [];
+const log = (type, payload) => {
+  events.push({ type, payload });
+  logEl.textContent += `${type} ${payload === undefined ? "" : JSON.stringify(payload)}\n`;
+};
+const snapshot = (v) => JSON.parse(JSON.stringify(v));
+let context = {
+  activityId: "harness-activity",
+  locale: params.get("locale") || "de",
+  content: params.get("content") ? JSON.parse(params.get("content")) : {},
+  state: {},
+  disabled: params.get("disabled") === "1",
+};
+const abort = new AbortController();
+const host = {
+  get context() { return snapshot(context); },
+  signal: abort.signal,
+  change(state) {
+    if (context.disabled) return;
+    context = { ...context, state: snapshot(state) };
+    log("change", state);
+    queueMicrotask(() => instance?.update(snapshot(context)));
+  },
+  async save() { log("save"); return true; },
+  complete(answer) { if (!context.disabled) log("complete", answer); },
+  setBusy(b) { log("busy", b); },
+};
+let instance;
+window.__harness = { events, host, get instance() { return instance; }, setContext(c) { context = { ...context, ...c }; instance.update(snapshot(context)); } };
+try {
+  const mod = await import(entry);
+  if (mod.apiVersion !== 1 || typeof mod.mount !== "function") throw new Error("bad exports");
+  const surface = document.createElement("div");
+  document.getElementById("surface").replaceChildren(surface);
+  instance = await mod.mount(surface, host);
+  if (typeof instance.update !== "function" || typeof instance.dispose !== "function") throw new Error("bad instance");
+  instance.update(snapshot(context));
+  log("ready", { apiVersion: mod.apiVersion });
+  const shadow = surface.shadowRoot;
+  const fire = (node, type) => node.dispatchEvent(new Event(type, { bubbles: true }));
+  const pause = (ms) => new Promise((r) => setTimeout(r, ms));
+
+  if (kind === "robot-arm-kinematics" && auto !== "none") {
+    const sliders = [...shadow.querySelectorAll("input[type=range]")];
+    const set = async (angles) => {
+      for (let i = 0; i < 3; i++) { sliders[i].value = String(angles[i]); fire(sliders[i], "input"); fire(sliders[i], "change"); await pause(20); }
+    };
+    // Target A (260, 40): θ = [66, -95, 29] puts the TCP within 1 mm.
+    await set([66, -95, 29]);
+    if (auto === "solve") {
+      // Target B (170, -30) with pitch -90: θ1≈69, θ2≈-87, θ3≈-72.
+      await set([69, -87, -72]);
+      shadow.querySelector("button.primary").click();
+    }
+  }
+  if (kind === "teleop-dataset-explorer" && auto !== "none") {
+    const pick = (name, value) => { const r = shadow.querySelector(`input[name=${name}][value="${value}"]`); r.checked = true; fire(r, "change"); };
+    const scrub = shadow.querySelector("input[type=range]");
+    scrub.value = "90"; fire(scrub, "input");
+    if (auto === "solve") { pick("fps", 30); pick("lagging_joint", "elbow_flex"); pick("gripper_gap", "contact"); }
+    else { pick("fps", 60); pick("lagging_joint", "gripper"); pick("gripper_gap", "contact"); }
+    shadow.querySelector("form").requestSubmit();
+  }
+  await pause(100);
+  log("done", { completes: events.filter((e) => e.type === "complete").length });
+  if (params.get("dispose") === "1") { abort.abort(); instance.dispose(); log("disposed", { children: shadow ? shadow.childElementCount : surface.childElementCount }); }
+} catch (error) {
+  log("error", String(error && error.stack || error));
+}
+document.body.dataset.done = "1";
+</script>
+</body>
+</html>

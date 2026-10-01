@@ -1,0 +1,73 @@
+# Skill 8: functional safety for cognitive robots.
+order: 30
+path:
+  id: funktionale-sicherheit
+  title: {de: "Funktionale Sicherheit für kognitive Roboter", en: "Functional safety for cognitive robots"}
+  direction_id: entscheider
+units:
+  - id: fs-risikobeurteilung
+    title: {de: "Risikobeurteilung und Normen", en: "Risk assessment and standards"}
+    room: guided-lesson
+    teaches: [fs-risiko]
+    steps:
+      - id: risiko
+        title: {de: "Am Anfang steht die Risikobeurteilung", en: "It starts with a risk assessment"}
+        body:
+          de: "Vor jeder Inbetriebnahme steht eine Risikobeurteilung: Gefährdungen erkennen, Risiken einschätzen, Maßnahmen festlegen und deren Wirksamkeit prüfen. Die allgemeine Methodik beschreibt ISO 12100. Für Industrieroboter und Roboteranlagen gilt ISO 10218, für die Zusammenarbeit von Mensch und Roboter ergänzt ISO/TS 15066 etwa biomechanische Grenzwerte für Kraft und Druck je Körperregion."
+          en: "Every commissioning is preceded by a risk assessment: identify hazards, estimate risks, define measures and verify their effectiveness. ISO 12100 describes the general methodology. ISO 10218 applies to industrial robots and robot systems; for human-robot collaboration, ISO/TS 15066 adds, for example, biomechanical limits for force and pressure per body region."
+        check:
+          id: norm
+          question:
+            de: "Welches Dokument liefert biomechanische Grenzwerte für die Mensch-Roboter-Kollaboration?"
+            en: "Which document provides biomechanical limits for human-robot collaboration?"
+          options:
+            - {value: "12100", text: {de: "ISO 12100", en: "ISO 12100"}}
+            - {value: "15066", text: {de: "ISO/TS 15066", en: "ISO/TS 15066"}}
+            - {value: "62443", text: {de: "IEC 62443", en: "IEC 62443"}}
+          answer: "15066"
+          correct: {de: "Richtig. IEC 62443 ist übrigens Security, nicht Safety.", en: "Right. IEC 62443, by the way, is security, not safety."}
+          tryAgain: {de: "Gesucht ist die Spezifikation für kollaborierende Roboter.", en: "You are looking for the specification for collaborative robots."}
+      - id: kollaboration
+        title: {de: "Vier Arten der Zusammenarbeit", en: "Four kinds of collaboration"}
+        body:
+          de: "Die Normen unterscheiden vier Schutzprinzipien für kollaborierenden Betrieb:\n• Sicherheitsbewerteter überwachter Halt: Der Roboter steht, solange ein Mensch im Bereich ist.\n• Handführung: Der Mensch führt den Roboter direkt.\n• Geschwindigkeits- und Abstandsüberwachung: Der Roboter wird langsamer oder hält, je näher der Mensch kommt.\n• Leistungs- und Kraftbegrenzung: Kontakt ist erlaubt, aber unterhalb definierter Grenzwerte."
+          en: "The standards distinguish four protective principles for collaborative operation:\n• Safety-rated monitored stop: the robot stands still while a person is in the area.\n• Hand guiding: the person guides the robot directly.\n• Speed and separation monitoring: the robot slows down or stops as the person approaches.\n• Power and force limiting: contact is allowed, but below defined limits."
+        check:
+          id: ssm
+          question:
+            de: "Der Roboter verlangsamt automatisch, wenn ein Laserscanner einen Menschen näherkommen sieht. Welches Prinzip ist das?"
+            en: "The robot slows down automatically when a laser scanner sees a person approaching. Which principle is this?"
+          options:
+            - {value: ssm, text: {de: "Geschwindigkeits- und Abstandsüberwachung", en: "Speed and separation monitoring"}}
+            - {value: pfl, text: {de: "Leistungs- und Kraftbegrenzung", en: "Power and force limiting"}}
+            - {value: hg, text: {de: "Handführung", en: "Hand guiding"}}
+          answer: ssm
+          correct: {de: "Genau.", en: "Exactly."}
+          tryAgain: {de: "Es geht um Abstand, nicht um Kontakt.", en: "It is about distance, not contact."}
+  - id: fs-lernende-systeme
+    title: {de: "Wenn das Modell falsch liegt", en: "When the model is wrong"}
+    room: guided-lesson
+    teaches: [fs-ki]
+    requires: [fs-risiko]
+    steps:
+      - id: unabhaengig
+        title: {de: "Sicherheit unabhängig von der KI", en: "Safety independent of the AI"}
+        body:
+          de: "Ein gelerntes Modell kann in einer neuen Situation unerwartet handeln. Deshalb darf die Sicherheit nicht vom Modell abhängen. Not-Halt, sichere Geschwindigkeits- und Kraftbegrenzung, Arbeitsraumgrenzen und Kollisionserkennung laufen in einer eigenen, zertifizierten Sicherheitssteuerung. Die Policy schlägt Bewegungen vor, die Sicherheitsebene darf sie jederzeit begrenzen oder stoppen."
+          en: "A learned model can act unexpectedly in a new situation. That is why safety must not depend on the model. Emergency stop, safe speed and force limiting, workspace limits and collision detection run in a separate, certified safety controller. The policy proposes movements; the safety layer may limit or stop them at any time."
+        check:
+          id: schichten
+          question:
+            de: "Wer hat das letzte Wort über eine Bewegung?"
+            en: "Who has the final say over a movement?"
+          options:
+            - {value: policy, text: {de: "Die Policy", en: "The policy"}}
+            - {value: safety, text: {de: "Die unabhängige Sicherheitsebene", en: "The independent safety layer"}}
+          answer: safety
+          correct: {de: "Richtig.", en: "Right."}
+          tryAgain: {de: "Welche Ebene ist zertifiziert und vom Modell unabhängig?", en: "Which layer is certified and independent of the model?"}
+      - id: fallback
+        title: {de: "Fallback und Human-in-the-Loop", en: "Fallback and human-in-the-loop"}
+        body:
+          de: "Planen Sie, was passiert, wenn die Policy unsicher ist oder scheitert: sicherer Halt, Übergabe an einen Menschen, klare Signale an die Umgebung. Im Pilot ist ein Human-in-the-Loop Pflicht. Eingriffe werden protokolliert, sie sind zugleich Sicherheitsnachweis und Trainingsdaten."
+          en: "Plan what happens when the policy is uncertain or fails: a safe stop, hand-over to a person, clear signals to the surroundings. In a pilot a human-in-the-loop is mandatory. Interventions are logged; they are both safety evidence and training data."

@@ -1,0 +1,72 @@
+# Skill 5: imitation learning basics (behaviour cloning, ACT, diffusion policy).
+order: 130
+path:
+  id: imitation-learning-act
+  title: {de: "Imitation Learning: von Behavior Cloning zu ACT", en: "Imitation learning: from behaviour cloning to ACT"}
+  direction_id: builder
+units:
+  - id: il-behavior-cloning
+    title: {de: "Behavior Cloning und seine Tücken", en: "Behaviour cloning and its pitfalls"}
+    room: guided-lesson
+    teaches: [il-bc]
+    steps:
+      - id: bc
+        title: {de: "Überwachtes Lernen auf Demonstrationen", en: "Supervised learning on demonstrations"}
+        body:
+          de: "Die einfachste Form von Imitation Learning heißt Behavior Cloning: Ein Netz bekommt als Eingabe die Beobachtung (Kamerabild, Gelenkstellung, ggf. Task-Satz) und soll die Aktion vorhersagen, die der Mensch in diesem Moment gewählt hat. Trainiert wird wie jedes überwachte Lernen, Frame für Frame."
+          en: "The simplest form of imitation learning is called behaviour cloning: a network takes the observation (camera image, joint state, possibly the task sentence) as input and must predict the action the human chose at that moment. It is trained like any supervised learning, frame by frame."
+      - id: drift
+        title: {de: "Kleine Fehler summieren sich", en: "Small errors add up"}
+        body:
+          de: "Im Betrieb sieht die Policy ihre eigenen Folgen: Ein kleiner Fehler führt in einen Zustand, den es in den Demonstrationen nie gab, dort ist der nächste Fehler größer. Diese Fehlerfortpflanzung (compounding error) ist das Kernproblem von Behavior Cloning.\n\nGegenmittel: Demonstrationen, die auch Korrekturen zeigen, mehr Vielfalt in den Startzuständen, und Modelle, die mehrere Schritte auf einmal planen."
+          en: "In operation the policy sees its own consequences: a small error leads into a state that never occurred in the demonstrations, and there the next error is bigger. This compounding error is the core problem of behaviour cloning.\n\nRemedies: demonstrations that also show corrections, more variety in the start states, and models that plan several steps at once."
+        check:
+          id: compounding
+          question:
+            de: "Warum wird eine Behavior-Cloning-Policy im Betrieb oft schlechter als ihr Trainingsfehler vermuten lässt?"
+            en: "Why does a behaviour cloning policy often perform worse in operation than its training error suggests?"
+          options:
+            - {value: a, text: {de: "Weil sie im Betrieb in Zustände gerät, die in den Demonstrationen nicht vorkamen", en: "Because in operation it gets into states that did not occur in the demonstrations"}}
+            - {value: b, text: {de: "Weil die GPU im Betrieb langsamer ist", en: "Because the GPU is slower in operation"}}
+          answer: a
+          correct: {de: "Richtig. Trainingsfehler misst nur auf den Zuständen der Demonstrationen.", en: "Right. Training error only measures on the demonstrations' states."}
+          tryAgain: {de: "Denken Sie daran, was nach einem kleinen Fehler passiert.", en: "Think about what happens after a small error."}
+  - id: il-act-diffusion
+    title: {de: "Action Chunking und Diffusion", en: "Action chunking and diffusion"}
+    room: guided-lesson
+    teaches: [il-act]
+    requires: [il-bc]
+    steps:
+      - id: act
+        title: {de: "ACT: mehrere Aktionen auf einmal", en: "ACT: several actions at once"}
+        body:
+          de: "ACT (Action Chunking with Transformers) sagt nicht eine, sondern eine ganze Folge von Aktionen voraus, einen Chunk, z. B. die nächsten 100 Zeitschritte. Das glättet die Bewegung und verringert die Fehlerfortpflanzung, weil die Policy seltener neu entscheidet. ACT ist klein, trainiert schnell auf einer einzelnen GPU und ist in LeRobot ein bewährter Einstieg."
+          en: "ACT (Action Chunking with Transformers) predicts not one but a whole sequence of actions, a chunk, e.g. the next 100 time steps. That smooths the motion and reduces compounding error, because the policy decides anew less often. ACT is small, trains quickly on a single GPU and is a proven starting point in LeRobot."
+        code: "lerobot-train \\\n  --dataset.repo_id=${HF_USER}/so101-wuerfel \\\n  --policy.type=act \\\n  --output_dir=outputs/train/act_so101 \\\n  --job_name=act_so101 \\\n  --policy.device=cuda"
+        check:
+          id: chunk
+          question:
+            de: "Was ist ein Action Chunk?"
+            en: "What is an action chunk?"
+          options:
+            - {value: a, text: {de: "Eine Folge mehrerer zukünftiger Aktionen, die das Modell auf einmal vorhersagt", en: "A sequence of several future actions the model predicts at once"}}
+            - {value: b, text: {de: "Ein Ausschnitt aus dem Kamerabild", en: "A crop of the camera image"}}
+          answer: a
+          correct: {de: "Genau.", en: "Exactly."}
+          tryAgain: {de: "Chunk heißt Stück, hier: Stück der Zukunft.", en: "Chunk means piece, here: a piece of the future."}
+      - id: diffusion
+        title: {de: "Diffusion und Flow Matching", en: "Diffusion and flow matching"}
+        body:
+          de: "Menschen lösen dieselbe Aufgabe oft auf verschiedene Weisen, etwa links oder rechts um ein Hindernis. Ein Modell, das nur den Mittelwert lernt, fährt dann mittendurch. Diffusion Policies und Flow-Matching-Aktionsköpfe lernen stattdessen die ganze Verteilung möglicher Aktionen und erzeugen daraus eine konkrete Folge. Moderne VLAs wie π0, SmolVLA und GR00T nutzen solche Aktionsköpfe."
+          en: "People often solve the same task in different ways, for example going left or right around an obstacle. A model that only learns the average then drives straight through the middle. Diffusion policies and flow-matching action heads instead learn the whole distribution of possible actions and sample a concrete sequence from it. Modern VLAs such as π0, SmolVLA and GR00T use such action heads."
+        check:
+          id: multimodal
+          question:
+            de: "In der Hälfte der Demos wird ein Hindernis links umfahren, in der anderen Hälfte rechts. Was macht ein reines Mittelwert-Modell?"
+            en: "In half the demos an obstacle is passed on the left, in the other half on the right. What does a pure mean-regression model do?"
+          options:
+            - {value: links, text: {de: "Es fährt immer links.", en: "It always goes left."}}
+            - {value: mitte, text: {de: "Es fährt mittendurch, also ins Hindernis.", en: "It goes straight through the middle, into the obstacle."}}
+          answer: mitte
+          correct: {de: "Richtig. Deshalb braucht es Modelle, die Verteilungen lernen.", en: "Right. That is why models that learn distributions are needed."}
+          tryAgain: {de: "Der Mittelwert von links und rechts ist …", en: "The average of left and right is …"}

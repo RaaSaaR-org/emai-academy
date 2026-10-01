@@ -1,0 +1,29 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: Physical AI von A bis Z
+description: 'Die wichtigsten Begriffe rund um kognitive Roboter, kurz erklärt und an Beispielen geprüft: von Aktor
+  und Freiheitsgrad bis Policy, Inferenz und Datensouveränität.'
+category: Grundlagen
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: physical-ai-begriffe
+learning_goals:
+- Hardware-Begriffe wie Aktor, Endeffektor und Freiheitsgrade sicher verwenden
+- Sensoren ihrem Zweck zuordnen
+- Begriffe aus Lernen und Betrieb einordnen
+requirements: []
+last_update: 1790812800
+translations:
+  en:
+    title: Physical AI from A to Z
+    description: 'The key terms around cognitive robots, briefly explained and checked with examples: from actuator
+      and degree of freedom to policy, inference and data sovereignty.'
+    learning_goals:
+    - Use hardware terms such as actuator, end effector and degrees of freedom correctly
+    - Match sensors to their purpose
+    - Place terms from learning and operation
+    requirements: []
+sections: []

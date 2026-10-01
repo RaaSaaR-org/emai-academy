@@ -1,0 +1,31 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: Menschen mitnehmen
+description: 'Human-first statt Ersatzlogik: Mitarbeitende als Fachleute einbinden, Betriebsrat und Datenschutz
+  früh beteiligen und neue Rollen qualifizieren.'
+category: Einführung
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: change-und-akzeptanz
+learning_goals:
+- Die Rolle der Mitarbeitenden als Wissensträger nutzen
+- Mitbestimmung und Datenschutz rechtzeitig klären
+- Neue Rollen rund um kognitive Roboter benennen
+requirements:
+- Physical AI in acht Kapiteln
+last_update: 1790812800
+translations:
+  en:
+    title: Bringing people along
+    description: 'Human-first, not replacement logic: involve employees as experts, engage the works council and
+      data protection early and qualify people for new roles.'
+    learning_goals:
+    - Use employees' role as knowledge holders
+    - Settle co-determination and data protection in time
+    - Name new roles around cognitive robots
+    requirements:
+    - Physical AI in eight chapters
+sections: []

@@ -1,0 +1,64 @@
+# Skill 9: identify and assess use cases.
+order: 60
+path:
+  id: use-cases-bewerten
+  title: {de: "Use Cases finden und bewerten", en: "Find and assess use cases"}
+  direction_id: entscheider
+units:
+  - id: uc-finden
+    title: {de: "Wo lohnt sich ein kognitiver Roboter?", en: "Where does a cognitive robot pay off?"}
+    room: guided-lesson
+    teaches: [uc-finden]
+    steps:
+      - id: signale
+        title: {de: "Gute Signale", en: "Good signals"}
+        body:
+          de: "Gute Kandidaten haben mehrere dieser Merkmale:\n• viel Varianz: wechselnde Teile, Lagen, Aufträge\n• kleine Losgrößen und häufige Umstellungen\n• Aufgaben, für die schwer Personal zu finden ist: monoton, körperlich belastend, Schichtbetrieb\n• Fehler sind beherrschbar: kein unmittelbares Verletzungsrisiko, Ergebnis leicht prüfbar\n• klar messbarer Ist-Zustand"
+          en: "Good candidates have several of these traits:\n• high variance: changing parts, poses, orders\n• small batches and frequent changeovers\n• tasks for which staff are hard to find: monotonous, physically demanding, shift work\n• errors are manageable: no immediate injury risk, result easy to check\n• a clearly measurable current state"
+        check:
+          id: kandidat
+          question:
+            de: "Welcher Kandidat eignet sich am besten für einen ersten Pilot?"
+            en: "Which candidate is best suited for a first pilot?"
+          options:
+            - {value: a, text: {de: "Kabelbäume in wechselnden Varianten vorsortieren, Ergebnis wird ohnehin geprüft", en: "Pre-sorting cable harnesses in changing variants; the result is checked anyway"}}
+            - {value: b, text: {de: "Schweres Bauteil über Kopf an einem besetzten Montageband halten", en: "Holding a heavy part overhead at a staffed assembly line"}}
+            - {value: c, text: {de: "Eine hochvolumige Lackierstraße ersetzen", en: "Replacing a high-volume paint line"}}
+          answer: a
+          correct: {de: "Richtig. Varianz, beherrschbare Fehler, leicht messbar.", en: "Right. Variance, manageable errors, easy to measure."}
+          tryAgain: {de: "Suchen Sie Varianz plus geringes Risiko.", en: "Look for variance plus low risk."}
+  - id: uc-bewerten
+    title: {de: "Bewerten mit Zahlen", en: "Assess with numbers"}
+    room: guided-lesson
+    teaches: [uc-bewerten]
+    requires: [uc-finden]
+    steps:
+      - id: tco
+        title: {de: "Gesamtkosten statt Kaufpreis", en: "Total cost, not purchase price"}
+        body:
+          de: "Der Kaufpreis ist oft der kleinere Teil. Zur Total Cost of Ownership gehören Integration, Sicherheitstechnik, Datenaufnahme und Training, Energie, Wartung, Schulung und der Aufwand für Eingriffe im Betrieb. Gegengerechnet werden eingesparte Arbeitszeit, Qualität und Verfügbarkeit, gemessen am heutigen Prozess."
+          en: "The purchase price is often the smaller part. Total cost of ownership includes integration, safety technology, data recording and training, energy, maintenance, training of staff and the effort for interventions in operation. On the other side are saved working time, quality and availability, measured against today's process."
+        check:
+          id: tco-check
+          question:
+            de: "Welcher Posten gehört bei kognitiven Robotern ausdrücklich zur TCO, wird aber oft vergessen?"
+            en: "Which item explicitly belongs to TCO for cognitive robots but is often forgotten?"
+          options:
+            - {value: daten, text: {de: "Datenaufnahme und Nachtraining", en: "Data recording and retraining"}}
+            - {value: farbe, text: {de: "Lackierung des Gehäuses", en: "Painting the housing"}}
+          answer: daten
+          correct: {de: "Genau. Daten sind kein einmaliger Aufwand.", en: "Exactly. Data is not a one-off effort."}
+          tryAgain: {de: "Was unterscheidet kognitive von klassischen Robotern?", en: "What distinguishes cognitive from classic robots?"}
+      - id: eingriffe
+        title: {de: "Was Eingriffe kosten", en: "What interventions cost"}
+        body:
+          de: "Rechnen Sie mit: Wie viele Minuten Personalzeit kostet jeder Eingriff? Der Regler zeigt, wie viele Minuten pro Schicht bei 2 Minuten je Eingriff verloren gehen."
+          en: "Factor in: how many minutes of staff time does each intervention cost? The slider shows how many minutes per shift are lost at 2 minutes per intervention."
+        experiment:
+          id: eingriffe
+          label: {de: "Eingriffe pro Schicht", en: "Interventions per shift"}
+          min: 0
+          max: 60
+          initial: 12
+          resultLabel: {de: "Minuten Personalzeit pro Schicht", en: "Minutes of staff time per shift"}
+          operation: {kind: multiply, factor: 2}

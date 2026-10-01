@@ -1,0 +1,41 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: Offene VLA-Modelle im Vergleich
+description: 'SmolVLA, π0.5 und GR00T N1.7 aus unserem eigenen Benchmark: Aufbau, Größe, Datenformat, Lizenz und
+  wie man Modelle fair vergleicht.'
+category: Lernen & Modelle
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: vla-modelle-im-vergleich
+learning_goals:
+- Backbone und Aktionskopf eines VLA unterscheiden
+- Offene Modelle nach Hardware, Dimensionen und Lizenz auswählen
+- Benchmark-Ergebnisse richtig interpretieren
+requirements:
+- 'Imitation Learning: von Behavior Cloning zu ACT'
+last_update: 1790812800
+translations:
+  en:
+    title: Open VLA models compared
+    description: 'SmolVLA, π0.5 and GR00T N1.7 from our own benchmark: architecture, size, data format, licence
+      and how to compare models fairly.'
+    learning_goals:
+    - Distinguish backbone and action head of a VLA
+    - Choose open models by hardware, dimensions and licence
+    - Interpret benchmark results correctly
+    requirements:
+    - 'Imitation learning: from behaviour cloning to ACT'
+sections:
+- id: video
+  title: Video
+  description: null
+  lectures:
+  - id: vla-ueberblick
+    title: 'Vision-Language-Action-Modelle: OpenVLA, π0, RT-2, Gemini Robotics (englisch)'
+    description: Architekturüberblick über aktuelle VLA-Modelle.
+    type: youtube
+    video_id: iNS7zaxWvJ8
+    duration: 483

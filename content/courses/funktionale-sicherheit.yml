@@ -1,0 +1,31 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: Funktionale Sicherheit für kognitive Roboter
+description: Risikobeurteilung, ISO 10218 und ISO/TS 15066, die vier Arten der Kollaboration und warum Schutzfunktionen
+  unabhängig von der KI greifen müssen.
+category: Sicherheit & Souveränität
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: funktionale-sicherheit
+learning_goals:
+- Die Rolle der Risikobeurteilung kennen
+- Kollaborative Schutzprinzipien unterscheiden
+- Eine von der KI unabhängige Sicherheitsebene fordern
+requirements:
+- Physical AI in acht Kapiteln
+last_update: 1790812800
+translations:
+  en:
+    title: Functional safety for cognitive robots
+    description: Risk assessment, ISO 10218 and ISO/TS 15066, the four kinds of collaboration and why protective
+      functions must act independently of the AI.
+    learning_goals:
+    - Know the role of the risk assessment
+    - Distinguish collaborative protection principles
+    - Require a safety layer independent of the AI
+    requirements:
+    - Physical AI in eight chapters
+sections: []

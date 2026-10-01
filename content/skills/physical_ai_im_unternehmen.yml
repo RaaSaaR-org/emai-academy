@@ -1,0 +1,16 @@
+# Skill 9 (Decider track).
+name: Physical AI im Unternehmen einführen
+dependencies: [physical_ai_grundlagen, safety_security_souveraenitaet]
+skills:
+  use_cases_bewerten:
+    name: Use Cases bewerten
+    dependencies: []
+    courses: [use-cases-bewerten]
+  pilot_planen:
+    name: Pilot planen & auswerten
+    dependencies: [use_cases_bewerten]
+    courses: [pilot-planen]
+  menschen_mitnehmen:
+    name: Menschen mitnehmen
+    dependencies: []
+    courses: [change-und-akzeptanz]

@@ -1,0 +1,26 @@
+{
+  "paths": [
+    {
+      "id": "placeholder-boot",
+      "title": {"de": "PLATZHALTER (Boot)", "en": "PLACEHOLDER (boot)"},
+      "units": ["placeholder-boot-unit"]
+    }
+  ],
+  "units": [
+    {
+      "id": "placeholder-boot-unit",
+      "path_id": "placeholder-boot",
+      "title": {"de": "PLATZHALTER", "en": "PLACEHOLDER"},
+      "room": "guided-lesson",
+      "teaches": [],
+      "practices": [],
+      "requires": [],
+      "retired": false,
+      "completion": {"kind": "introduced", "answer": {}, "allow_skip": true},
+      "content": {
+        "de": {"steps": [{"id": "intro", "title": "Platzhalter", "body": "Boot-Platzhalter aus emai-academy/config/placeholders. Echter Inhalt liegt in content/."}]},
+        "en": {"steps": [{"id": "intro", "title": "Placeholder", "body": "Boot placeholder from emai-academy/config/placeholders. Real content lives in content/."}]}
+      }
+    }
+  ]
+}

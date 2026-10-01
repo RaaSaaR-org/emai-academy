@@ -1,0 +1,188 @@
+# Builder path start, skill 3 "Robotik-Software-Grundlagen": SO-101 + LeRobot setup.
+# Sources: LeRobot docs so101.mdx / il_robots.mdx (/Users/sebastian/develop/emai/repos/lerobot, 2026-09),
+# SO-101 URDF (robot-management-system/app/public/assets/robots/so101/so101.urdf).
+order: 110
+path:
+  id: so101-lerobot-setup
+  title: {de: "SO-101 mit LeRobot in Betrieb nehmen", en: "Set up the SO-101 with LeRobot"}
+  direction_id: builder
+  chapters:
+    - {id: so101-hardware, title: {de: "Leader und Follower", en: "Leader and follower"}}
+    - {id: so101-software, title: {de: "Installation und Motoren", en: "Installation and motors"}}
+    - {id: so101-kinematik, title: {de: "Kinematik", en: "Kinematics"}}
+    - {id: so101-teleop, title: {de: "Teleoperation", en: "Teleoperation"}}
+units:
+  - id: so101-leader-follower
+    chapter_id: so101-hardware
+    title: {de: "Zwei Arme, ein Datensatz", en: "Two arms, one dataset"}
+    room: guided-lesson
+    teaches: [so101-aufbau]
+    steps:
+      - id: idee
+        title: {de: "Warum zwei Arme?", en: "Why two arms?"}
+        body:
+          de: "Der SO-101 ist ein offener, 3D-druckbarer Roboterarm aus dem LeRobot-Ökosystem. Er wird fast immer als Paar betrieben: Den Leader-Arm führt ein Mensch mit der Hand, der Follower-Arm folgt ihm in Echtzeit. Genau diese Teleoperation liefert die Demonstrationen, aus denen später eine Policy lernt.\n\nWir nutzen den SO-101 im Labor als günstige, herstellerunabhängige Plattform, um den ganzen Weg von der Aufnahme bis zum Training selbst zu gehen."
+          en: "The SO-101 is an open, 3D-printable robot arm from the LeRobot ecosystem. It is almost always used as a pair: a person moves the leader arm by hand and the follower arm mirrors it in real time. This teleoperation provides the demonstrations a policy later learns from.\n\nIn our lab we use the SO-101 as a low-cost, vendor-neutral platform to walk the whole way from recording to training ourselves."
+        check:
+          id: rolle
+          question:
+            de: "Welcher Arm führt die Aufgabe am Objekt aus und wird später von der Policy gesteuert?"
+            en: "Which arm performs the task on the object and is later controlled by the policy?"
+          options:
+            - {value: leader, text: {de: "Der Leader", en: "The leader"}}
+            - {value: follower, text: {de: "Der Follower", en: "The follower"}}
+          answer: follower
+          correct: {de: "Richtig. Der Leader ist nur das Eingabegerät des Menschen.", en: "Right. The leader is only the human's input device."}
+          tryAgain: {de: "Welcher Arm hat den Greifer am Werkstück?", en: "Which arm has the gripper at the workpiece?"}
+      - id: gelenke
+        title: {de: "Sechs Motoren, sechs Gelenke", en: "Six motors, six joints"}
+        body:
+          de: "Beide Arme haben sechs Feetech-STS3215-Servomotoren an einem gemeinsamen seriellen Bus. Die Gelenke heißen in LeRobot:\n1 shoulder_pan (Drehung der Basis)\n2 shoulder_lift (Schulter heben)\n3 elbow_flex (Ellbogen)\n4 wrist_flex (Handgelenk beugen)\n5 wrist_roll (Handgelenk drehen)\n6 gripper (Greifer)\n\nDer Follower nutzt überall Motoren mit 1/345-Getriebe. Der Leader mischt Übersetzungen (1/191, 1/345, 1/147), damit er sein Eigengewicht hält und sich trotzdem leicht von Hand führen lässt."
+          en: "Both arms have six Feetech STS3215 servo motors on a shared serial bus. In LeRobot the joints are called:\n1 shoulder_pan (base rotation)\n2 shoulder_lift (raise the shoulder)\n3 elbow_flex (elbow)\n4 wrist_flex (bend the wrist)\n5 wrist_roll (rotate the wrist)\n6 gripper\n\nThe follower uses 1/345 gearing everywhere. The leader mixes ratios (1/191, 1/345, 1/147) so it holds its own weight and can still be moved easily by hand."
+        check:
+          id: dimension
+          question:
+            de: "Wie viele Werte hat damit ein Aktionsvektor des Followers pro Zeitschritt?"
+            en: "How many values does one follower action vector have per time step?"
+          options:
+            - {value: "5", text: {de: "5", en: "5"}}
+            - {value: "6", text: {de: "6", en: "6"}}
+            - {value: "7", text: {de: "7", en: "7"}}
+          answer: "6"
+          correct: {de: "Genau: fünf Gelenkpositionen plus Greifer, z. B. shoulder_pan.pos … gripper.pos.", en: "Exactly: five joint positions plus the gripper, e.g. shoulder_pan.pos … gripper.pos."}
+          tryAgain: {de: "Zählen Sie die Motoren.", en: "Count the motors."}
+      - id: sicherheit
+        title: {de: "Klein, aber kein Spielzeug", en: "Small, but not a toy"}
+        body:
+          de: "Auch ein kleiner Arm kann klemmen und Gegenstände vom Tisch fegen. Arbeiten Sie mit freiem Arbeitsbereich, halten Sie die Finger aus dem Greifer des Followers und trennen Sie die Stromversorgung, bevor Sie Kabel umstecken."
+          en: "Even a small arm can pinch and sweep things off the table. Work with a clear workspace, keep fingers out of the follower's gripper and disconnect power before re-plugging cables."
+  - id: so101-installation-motoren
+    chapter_id: so101-software
+    title: {de: "LeRobot installieren, Ports finden, Motoren einrichten", en: "Install LeRobot, find ports, set up motors"}
+    room: guided-lesson
+    teaches: [so101-setup, lerobot-cli]
+    requires: [so101-aufbau]
+    steps:
+      - id: install
+        title: {de: "Installation", en: "Installation"}
+        body:
+          de: "LeRobot ist eine Python-Bibliothek von Hugging Face: Datenformat, Trainer und eine Sammlung von Policies. Für die Feetech-Motoren des SO-101 brauchen Sie zusätzlich das Feetech-SDK."
+          en: "LeRobot is a Python library by Hugging Face: data format, trainer and a collection of policies. For the SO-101's Feetech motors you also need the Feetech SDK."
+        code: "git clone https://github.com/huggingface/lerobot.git\ncd lerobot\npip install -e \".[feetech]\""
+      - id: ports
+        title: {de: "Welcher USB-Port gehört zu welchem Arm?", en: "Which USB port belongs to which arm?"}
+        body:
+          de: "Jeder Arm hat ein eigenes Motor-Controller-Board mit USB-Anschluss. lerobot-find-port listet die Ports, bittet Sie, ein Kabel abzuziehen, und meldet, welcher Port verschwunden ist. Unter Linux brauchen Sie eventuell Schreibrechte auf /dev/ttyACM*."
+          en: "Each arm has its own motor controller board with a USB connection. lerobot-find-port lists the ports, asks you to unplug one cable and reports which port disappeared. On Linux you may need write access to /dev/ttyACM*."
+        code: "lerobot-find-port"
+        output: "Finding all available ports for the MotorBus.\n['/dev/ttyACM0', '/dev/ttyACM1']\nRemove the usb cable from your MotorsBus and press Enter when done.\nThe port of this MotorsBus is /dev/ttyACM1"
+        check:
+          id: port
+          question:
+            de: "Sie haben das Kabel des Leaders abgezogen und das Tool meldet /dev/ttyACM1. Welcher Port gehört zum Follower?"
+            en: "You unplugged the leader's cable and the tool reports /dev/ttyACM1. Which port belongs to the follower?"
+          options:
+            - {value: acm0, text: {de: "/dev/ttyACM0", en: "/dev/ttyACM0"}}
+            - {value: acm1, text: {de: "/dev/ttyACM1", en: "/dev/ttyACM1"}}
+          answer: acm0
+          correct: {de: "Richtig. ACM1 war der Leader, der verbleibende Port ist der Follower.", en: "Right. ACM1 was the leader, the remaining port is the follower."}
+          tryAgain: {de: "Der gemeldete Port ist der, den Sie abgezogen haben.", en: "The reported port is the one you unplugged."}
+      - id: ids
+        title: {de: "Motor-IDs setzen", en: "Set motor IDs"}
+        body:
+          de: "Neue Motoren haben meist alle die ID 1. Damit der Controller sie auf dem Bus unterscheiden kann, bekommt jeder Motor einmalig eine eigene ID und dieselbe Baudrate, gespeichert im EEPROM. lerobot-setup-motors führt Sie Motor für Motor durch, beginnend beim Greifer (ID 6) bis zur Basis (ID 1). Dabei darf immer nur der eine Motor am Board hängen."
+          en: "New motors usually all have ID 1. So the controller can tell them apart on the bus, each motor is given its own ID and the same baud rate once, stored in EEPROM. lerobot-setup-motors walks you through motor by motor, starting at the gripper (ID 6) down to the base (ID 1). Only that one motor may be connected to the board at a time."
+        code: "lerobot-setup-motors \\\n    --robot.type=so101_follower \\\n    --robot.port=/dev/ttyACM0\n\nlerobot-setup-motors \\\n    --teleop.type=so101_leader \\\n    --teleop.port=/dev/ttyACM1"
+        check:
+          id: einzeln
+          question:
+            de: "Warum darf beim Setzen der IDs nur ein Motor am Board hängen?"
+            en: "Why may only one motor be connected while setting IDs?"
+          options:
+            - {value: a, text: {de: "Weil alle neuen Motoren dieselbe ID haben und sonst gleichzeitig antworten würden", en: "Because all new motors share the same ID and would otherwise answer at the same time"}}
+            - {value: b, text: {de: "Weil das Netzteil sonst überlastet", en: "Because the power supply would otherwise be overloaded"}}
+          answer: a
+          correct: {de: "Genau. Erst mit eindeutigen IDs funktioniert der gemeinsame Bus.", en: "Exactly. The shared bus only works with unique IDs."}
+          tryAgain: {de: "Welche ID haben fabrikneue Motoren?", en: "What ID do brand-new motors have?"}
+      - id: kalibrieren
+        title: {de: "Kalibrieren", en: "Calibrate"}
+        body:
+          de: "Beim Kalibrieren bewegen Sie jedes Gelenk einmal durch seinen Bereich. So lernt LeRobot, welcher Motorwert welcher Gelenkstellung entspricht, und Leader und Follower sprechen dieselbe Sprache. Die Kalibrierung wird unter der id des Arms gespeichert. Verwenden Sie deshalb beim Teleoperieren, Aufnehmen und Auswerten immer dieselbe id."
+          en: "During calibration you move each joint once through its range. That teaches LeRobot which motor value corresponds to which joint position, so leader and follower speak the same language. The calibration is stored under the arm's id, so always use the same id for teleoperation, recording and evaluation."
+        code: "lerobot-calibrate \\\n    --robot.type=so101_follower \\\n    --robot.port=/dev/ttyACM0 \\\n    --robot.id=emai_follower\n\nlerobot-calibrate \\\n    --teleop.type=so101_leader \\\n    --teleop.port=/dev/ttyACM1 \\\n    --teleop.id=emai_leader"
+        check:
+          id: id-gleich
+          question:
+            de: "Sie nehmen morgen mit --robot.id=follower2 auf, kalibriert haben Sie als emai_follower. Was passiert?"
+            en: "Tomorrow you record with --robot.id=follower2, but you calibrated as emai_follower. What happens?"
+          options:
+            - {value: a, text: {de: "Nichts, die id ist nur ein Anzeigename.", en: "Nothing, the id is only a display name."}}
+            - {value: b, text: {de: "LeRobot findet die Kalibrierung nicht unter dieser id, Sie müssen neu kalibrieren.", en: "LeRobot does not find a calibration under that id and you have to calibrate again."}}
+          answer: b
+          correct: {de: "Richtig. Die id ist der Schlüssel zur Kalibrierdatei.", en: "Right. The id is the key to the calibration file."}
+          tryAgain: {de: "Wo wird die Kalibrierung gespeichert?", en: "Where is the calibration stored?"}
+  - id: so101-kinematik
+    chapter_id: so101-kinematik
+    title: {de: "Gelenkwinkel und Greiferposition", en: "Joint angles and gripper position"}
+    room: custom
+    module_id: robot-arm-kinematics
+    # Contract with content/modules/README.md: the module posts exactly this object once all
+    # target zones are reached. Geometry and targets use the module defaults (SO-101 side view,
+    # links 116/135/95 mm = shoulder-elbow / elbow-wrist / wrist-TCP, from the SO-101 URDF).
+    completion_answer: {reached: true}
+    allow_skip: false
+    teaches: [so101-kinematik]
+    requires: [so101-setup]
+    content:
+      de:
+        title: "Vorwärtskinematik am SO-101"
+        intro: "Eine Policy gibt Gelenkwinkel aus, die Aufgabe ist aber im Raum beschrieben: „Greif den Würfel dort.“ Die Vorwärtskinematik rechnet Winkel und Gliedlängen in die Position des Greifers um. Stellen Sie Schulter (shoulder_lift), Ellbogen (elbow_flex) und Handgelenk (wrist_flex) eines vereinfachten SO-101 in der Seitenansicht so ein, dass der Greifer nacheinander jede Zielzone erreicht. Bei einem Ziel muss er zusätzlich senkrecht nach unten zeigen, wie beim Greifen von oben. Dabei merken Sie: Dieselbe Position lässt sich oft mit verschiedenen Winkeln erreichen. Genau diese Mehrdeutigkeit muss die inverse Kinematik auflösen."
+      en:
+        title: "Forward kinematics on the SO-101"
+        intro: "A policy outputs joint angles, but the task is described in space: „Grab the cube over there.“ Forward kinematics turns angles and link lengths into the gripper position. Set the shoulder (shoulder_lift), elbow (elbow_flex) and wrist (wrist_flex) of a simplified SO-101 in side view so the gripper reaches each target zone in turn. For one target it must also point straight down, as when grasping from above. You will notice that the same position can often be reached with different angles. Inverse kinematics has to resolve exactly this ambiguity."
+  - id: so101-teleoperation
+    chapter_id: so101-teleop
+    title: {de: "Teleoperation mit Kamera", en: "Teleoperation with a camera"}
+    room: guided-lesson
+    teaches: [so101-teleop]
+    requires: [so101-kinematik]
+    steps:
+      - id: teleop
+        title: {de: "Der Follower folgt dem Leader", en: "The follower follows the leader"}
+        body:
+          de: "lerobot-teleoperate liest in einer Schleife die Gelenkstellungen des Leaders und schickt sie als Zielpositionen an den Follower. Dieselben ids wie bei der Kalibrierung verwenden."
+          en: "lerobot-teleoperate reads the leader's joint positions in a loop and sends them to the follower as target positions. Use the same ids as during calibration."
+        code: "lerobot-teleoperate \\\n    --robot.type=so101_follower \\\n    --robot.port=/dev/ttyACM0 \\\n    --robot.id=emai_follower \\\n    --teleop.type=so101_leader \\\n    --teleop.port=/dev/ttyACM1 \\\n    --teleop.id=emai_leader"
+      - id: kamera
+        title: {de: "Die Policy braucht Augen", en: "The policy needs eyes"}
+        body:
+          de: "Eine Policy lernt aus dem, was der Roboter sieht. Deshalb nimmt man zu den Gelenkwerten Kamerabilder auf, z. B. eine feste Frontkamera und optional eine Handgelenkkamera. Mit --display_data=true sehen Sie Bilder und Gelenkwerte live."
+          en: "A policy learns from what the robot sees. That is why camera images are recorded alongside joint values, for example a fixed front camera and optionally a wrist camera. With --display_data=true you see images and joint values live."
+        code: "lerobot-teleoperate \\\n    --robot.type=so101_follower \\\n    --robot.port=/dev/ttyACM0 \\\n    --robot.id=emai_follower \\\n    --robot.cameras=\"{front: {type: opencv, index_or_path: 0, width: 640, height: 480, fps: 30}}\" \\\n    --teleop.type=so101_leader \\\n    --teleop.port=/dev/ttyACM1 \\\n    --teleop.id=emai_leader \\\n    --display_data=true"
+        check:
+          id: kamera-warum
+          question:
+            de: "Warum reicht es nicht, nur die Gelenkwerte aufzuzeichnen?"
+            en: "Why is recording only the joint values not enough?"
+          options:
+            - {value: a, text: {de: "Weil die Policy sonst nicht sieht, wo das Objekt liegt", en: "Because otherwise the policy cannot see where the object is"}}
+            - {value: b, text: {de: "Weil LeRobot ohne Kamera nicht startet", en: "Because LeRobot does not start without a camera"}}
+          answer: a
+          correct: {de: "Genau. Ohne Bild kann die Policy nur eine feste Bewegung nachspielen.", en: "Exactly. Without images the policy can only replay a fixed motion."}
+          tryAgain: {de: "Was ändert sich von Episode zu Episode?", en: "What changes from episode to episode?"}
+      - id: gute-demo
+        title: {de: "Was eine gute Demonstration ausmacht", en: "What makes a good demonstration"}
+        body:
+          de: "Führen Sie den Leader ruhig und zielstrebig. Lange Pausen, Zögern und Korrekturen landen im Datensatz und werden mitgelernt. Üben Sie die Bewegung ein paar Mal, bevor Sie aufnehmen. Im nächsten Kurs nehmen Sie daraus einen Datensatz auf."
+          en: "Move the leader calmly and purposefully. Long pauses, hesitation and corrections end up in the dataset and are learned too. Practise the motion a few times before recording. In the next course you record a dataset from it."
+        check:
+          id: zoegern
+          question:
+            de: "Sie zögern in jeder Demonstration zwei Sekunden über dem Würfel. Was lernt die Policy vermutlich?"
+            en: "You hesitate for two seconds above the cube in every demonstration. What will the policy probably learn?"
+          options:
+            - {value: a, text: {de: "Nichts davon, Pausen werden herausgefiltert", en: "None of it, pauses are filtered out"}}
+            - {value: b, text: {de: "Ebenfalls über dem Würfel zu verharren", en: "To hover above the cube as well"}}
+          answer: b
+          correct: {de: "Richtig. Die Policy imitiert, was sie sieht, auch das Zögern.", en: "Right. The policy imitates what it sees, hesitation included."}
+          tryAgain: {de: "Imitation Learning imitiert.", en: "Imitation learning imitates."}

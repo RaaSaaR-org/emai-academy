@@ -1,0 +1,41 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: Inferenz und Deployment
+description: 'Policies flüssig und souverän betreiben: asynchrone Inferenz mit LeRobot, Roboter, Edge oder Cloud,
+  Versionierung und Rückfallwege.'
+category: Deployment
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: inferenz-und-deployment
+learning_goals:
+- Asynchrone Inferenz einrichten und parametrieren
+- Betriebsort eines Modells begründet wählen
+- Modelle versionieren und zurückrollen
+requirements:
+- Policies ehrlich evaluieren
+last_update: 1790812800
+translations:
+  en:
+    title: Inference and deployment
+    description: 'Run policies smoothly and sovereignly: asynchronous inference with LeRobot, robot, edge or cloud,
+      versioning and rollback.'
+    learning_goals:
+    - Set up and tune asynchronous inference
+    - Choose where a model runs, with reasons
+    - Version and roll back models
+    requirements:
+    - Evaluate policies honestly
+sections:
+- id: video
+  title: Video
+  description: null
+  lectures:
+  - id: async-inference
+    title: 'LeRobot Async Inference: Echtzeitsteuerung ohne Verzögerung (englisch)'
+    description: Erklärung der asynchronen Inferenz in LeRobot.
+    type: youtube
+    video_id: XIrqwNPTilA
+    duration: 404

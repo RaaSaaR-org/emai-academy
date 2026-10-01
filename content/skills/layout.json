@@ -1,0 +1,146 @@
+{
+  "rows": 20,
+  "columns": 20,
+  "skills": {
+    "daten_fuer_robot_learning": {
+      "row": 11,
+      "column": 11,
+      "sub_tree_rows": 20,
+      "sub_tree_columns": 20
+    },
+    "evaluation_deployment": {
+      "row": 15,
+      "column": 11,
+      "sub_tree_rows": 20,
+      "sub_tree_columns": 20
+    },
+    "imitation_learning_vlas": {
+      "row": 14,
+      "column": 10,
+      "sub_tree_rows": 20,
+      "sub_tree_columns": 20
+    },
+    "physical_ai_grundlagen": {
+      "row": 7,
+      "column": 10,
+      "sub_tree_rows": 20,
+      "sub_tree_columns": 20
+    },
+    "physical_ai_im_unternehmen": {
+      "row": 12,
+      "column": 9,
+      "sub_tree_rows": 20,
+      "sub_tree_columns": 20
+    },
+    "roboter_hardware_embodiments": {
+      "row": 9,
+      "column": 11,
+      "sub_tree_rows": 20,
+      "sub_tree_columns": 20
+    },
+    "robotik_software_grundlagen": {
+      "row": 10,
+      "column": 12,
+      "sub_tree_rows": 20,
+      "sub_tree_columns": 20
+    },
+    "safety_security_souveraenitaet": {
+      "row": 9,
+      "column": 9,
+      "sub_tree_rows": 20,
+      "sub_tree_columns": 20
+    },
+    "simulation_reinforcement_learning": {
+      "row": 13,
+      "column": 12,
+      "sub_tree_rows": 20,
+      "sub_tree_columns": 20
+    }
+  },
+  "sub_skills": {
+    "daten_fuer_robot_learning/lerobot_datensaetze": {
+      "row": 10,
+      "column": 11
+    },
+    "daten_fuer_robot_learning/xr_teleoperation": {
+      "row": 12,
+      "column": 11
+    },
+    "evaluation_deployment/policies_evaluieren": {
+      "row": 10,
+      "column": 11
+    },
+    "evaluation_deployment/inferenz_deployment": {
+      "row": 12,
+      "column": 11
+    },
+    "imitation_learning_vlas/imitation_learning": {
+      "row": 9,
+      "column": 11
+    },
+    "imitation_learning_vlas/vla_modelle": {
+      "row": 11,
+      "column": 11
+    },
+    "imitation_learning_vlas/vla_feintuning": {
+      "row": 13,
+      "column": 11
+    },
+    "physical_ai_grundlagen/physical_ai_ueberblick": {
+      "row": 10,
+      "column": 11
+    },
+    "physical_ai_grundlagen/physical_ai_begriffe": {
+      "row": 12,
+      "column": 11
+    },
+    "physical_ai_im_unternehmen/use_cases_bewerten": {
+      "row": 10,
+      "column": 10
+    },
+    "physical_ai_im_unternehmen/menschen_mitnehmen": {
+      "row": 10,
+      "column": 12
+    },
+    "physical_ai_im_unternehmen/pilot_planen": {
+      "row": 12,
+      "column": 11
+    },
+    "roboter_hardware_embodiments/bauformen_und_sensorik": {
+      "row": 10,
+      "column": 11
+    },
+    "roboter_hardware_embodiments/unitree_g1_dex3": {
+      "row": 12,
+      "column": 11
+    },
+    "robotik_software_grundlagen/so101_lerobot_setup": {
+      "row": 11,
+      "column": 10
+    },
+    "robotik_software_grundlagen/middleware_und_takt": {
+      "row": 11,
+      "column": 12
+    },
+    "safety_security_souveraenitaet/funktionale_sicherheit": {
+      "row": 11,
+      "column": 9
+    },
+    "safety_security_souveraenitaet/ot_security": {
+      "row": 11,
+      "column": 11
+    },
+    "safety_security_souveraenitaet/souveraenitaet_regulierung": {
+      "row": 11,
+      "column": 13
+    },
+    "simulation_reinforcement_learning/simulation_sim_to_real": {
+      "row": 10,
+      "column": 11
+    },
+    "simulation_reinforcement_learning/reinforcement_learning": {
+      "row": 12,
+      "column": 11
+    }
+  }
+}

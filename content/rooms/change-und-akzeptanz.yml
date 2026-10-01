@@ -1,0 +1,55 @@
+# Skill 9: people first - involving employees and the works council.
+order: 80
+path:
+  id: change-und-akzeptanz
+  title: {de: "Menschen mitnehmen", en: "Bringing people along"}
+  direction_id: entscheider
+units:
+  - id: ca-human-first
+    title: {de: "Human-first statt Ersatzlogik", en: "Human-first, not replacement logic"}
+    room: guided-lesson
+    teaches: [ca-human-first]
+    steps:
+      - id: haltung
+        title: {de: "Wofür der Roboter da ist", en: "What the robot is for"}
+        body:
+          de: "Kognitive Roboter entlasten Menschen von monotonen, belastenden und schwer zu besetzenden Aufgaben. Ihre Mitarbeitenden bleiben die Fachleute: Sie kennen die Varianten, die Sonderfälle und die Qualitätsmaßstäbe. Genau dieses Wissen fließt über Demonstrationen in den Roboter."
+          en: "Cognitive robots relieve people of monotonous, strenuous and hard-to-staff tasks. Your employees remain the experts: they know the variants, the special cases and the quality standards. Exactly this knowledge flows into the robot through demonstrations."
+        check:
+          id: wissen
+          question:
+            de: "Wer liefert die besten Demonstrationen für eine Aufgabe?"
+            en: "Who provides the best demonstrations for a task?"
+          options:
+            - {value: fach, text: {de: "Die Mitarbeitenden, die die Aufgabe heute erledigen", en: "The employees who do the task today"}}
+            - {value: extern, text: {de: "Externe ohne Prozesskenntnis", en: "Outsiders without process knowledge"}}
+          answer: fach
+          correct: {de: "Richtig. Teleoperation macht Erfahrung übertragbar.", en: "Right. Teleoperation makes experience transferable."}
+          tryAgain: {de: "Wer kennt die Sonderfälle?", en: "Who knows the special cases?"}
+  - id: ca-mitbestimmung
+    title: {de: "Früh einbinden: Team und Betriebsrat", en: "Involve early: team and works council"}
+    room: guided-lesson
+    teaches: [ca-mitbestimmung]
+    requires: [ca-human-first]
+    steps:
+      - id: betriebsrat
+        title: {de: "Kameras sind ein Mitbestimmungsthema", en: "Cameras are a co-determination topic"}
+        body:
+          de: "Kognitive Roboter zeichnen Bilder und Betriebsdaten auf, oft auch Menschen im Arbeitsbereich. In Deutschland ist die Einführung technischer Einrichtungen, die geeignet sind, Verhalten oder Leistung von Beschäftigten zu überwachen, mitbestimmungspflichtig (§ 87 Abs. 1 Nr. 6 BetrVG). Binden Sie den Betriebsrat deshalb vor dem Pilot ein und regeln Sie, welche Daten wofür genutzt werden, ebenso den Datenschutz nach DSGVO."
+          en: "Cognitive robots record images and operating data, often including people in the work area. In Germany, introducing technical equipment capable of monitoring employees' behaviour or performance is subject to co-determination (§ 87(1) no. 6 BetrVG). So involve the works council before the pilot and agree which data is used for what, as well as data protection under the GDPR."
+        check:
+          id: wann
+          question:
+            de: "Wann binden Sie den Betriebsrat ein?"
+            en: "When do you involve the works council?"
+          options:
+            - {value: vorher, text: {de: "Vor dem Pilot", en: "Before the pilot"}}
+            - {value: nachher, text: {de: "Nach erfolgreichem Pilot", en: "After a successful pilot"}}
+          answer: vorher
+          correct: {de: "Richtig. Das schafft Vertrauen und vermeidet Stillstand.", en: "Right. That builds trust and avoids standstill."}
+          tryAgain: {de: "Die Aufzeichnung beginnt schon im Pilot.", en: "Recording already starts in the pilot."}
+      - id: qualifizieren
+        title: {de: "Neue Rollen", en: "New roles"}
+        body:
+          de: "Mit kognitiven Robotern entstehen neue Aufgaben: Demonstrationen aufnehmen, Eingriffe bewerten, Datenqualität sichern, Roboter im Betrieb betreuen. Qualifizieren Sie dafür Mitarbeitende aus dem Prozess. Genau dafür ist diese Academy da."
+          en: "Cognitive robots create new tasks: recording demonstrations, assessing interventions, ensuring data quality, looking after robots in operation. Train employees from the process for these roles. That is exactly what this academy is for."

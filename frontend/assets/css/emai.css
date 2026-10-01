@@ -1,0 +1,329 @@
+/* ==========================================================================
+   EmAI Academy theme. Loaded after upstream tailwind.css, so this :root wins.
+   Upstream token semantics: primary = page background, secondary = surface,
+   tertiary = nav/menus/form borders, accent = brand action color.
+   ========================================================================== */
+
+/* ---------- Self-hosted fonts (no Google Fonts requests; sovereignty) ---------- */
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/fonts/space-grotesk-latin.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+    U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/fonts/space-grotesk-latin-ext.woff2) format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF,
+    U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(/fonts/geist-latin.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+    U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(/fonts/geist-latin-ext.woff2) format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF,
+    U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Geist Mono";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(/fonts/geist-mono-latin.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+    U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Geist Mono";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(/fonts/geist-mono-latin-ext.woff2) format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF,
+    U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Space Grotesk Fallback";
+  src: local("Arial");
+  ascent-override: 89.71%;
+  descent-override: 26.62%;
+  line-gap-override: 0%;
+  size-adjust: 109.69%;
+}
+
+/* ---------- Tokens ---------- */
+:root {
+  /* upstream tokens, remapped */
+  --color-primary: #141414;
+  --color-secondary: #1f1f1f;
+  --color-tertiary: #262626;
+  --color-accent: #ff6700;
+  --color-star: #fbbf24;
+
+  --color-black: #0a0a0a;
+  --color-dark: #141414;
+  --color-transparent: #ffffff00;
+  --color-light: #2e2e2e;
+  --color-white: #ffffff;
+
+  --color-heading: #f5f5f4;
+  --color-subheading: #a8a29e;
+  --color-body: #a8a29e;
+
+  --color-error: #f87171;
+  --color-success: #4ade80;
+  --color-warning: #fbbf24;
+  --color-info: #2dd4bf;
+
+  /* EmAI-only tokens (used by tenant components) */
+  --emai-bg: #141414;
+  --emai-surface: #1f1f1f;
+  --emai-surface-2: #262626;
+  --emai-line: #2e2e2e;
+  --emai-line-strong: #3f3f3f;
+  --emai-orange: #ff6700;
+  --emai-orange-soft: #ff8534;
+  --emai-orange-wash: rgba(255, 103, 0, 0.1);
+  --emai-teal: #2dd4bf;
+  --emai-teal-wash: rgba(45, 212, 191, 0.1);
+  --emai-text: #f5f5f4;
+  --emai-muted: #a8a29e;
+  --emai-dim: #78716c;
+  --emai-font-display: "Space Grotesk", "Space Grotesk Fallback", system-ui, sans-serif;
+  --emai-font-body: Geist, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --emai-font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  color-scheme: dark;
+}
+
+/* ---------- Base overrides (upstream base layer) ---------- */
+html.emai,
+.emai body {
+  background-color: var(--emai-bg);
+  color: var(--emai-text);
+  font-family: var(--emai-font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.015em;
+}
+
+/* Upstream hard-codes a navy hr and GitHub-dark code chips. */
+hr {
+  color: var(--emai-line);
+  border-color: var(--emai-line);
+}
+code:not(pre code) {
+  background-color: var(--emai-surface-2) !important;
+}
+
+::selection {
+  background-color: var(--emai-orange);
+  color: #141414;
+}
+
+:focus-visible {
+  outline: 2px solid var(--emai-orange);
+  outline-offset: 2px;
+}
+
+/* Upstream primary buttons put body-colored text on the accent. On orange the page
+   background color reads better and matches emai.dev's buttons. */
+button.primary.bg-accent {
+  color: #141414;
+}
+
+/* Form containers: upstream draws a thick 4px tertiary frame. Make it a hairline panel. */
+@media (min-width: 425px) {
+  .container-form {
+    border-width: 1px !important;
+    border-color: var(--emai-line) !important;
+    background: var(--emai-surface);
+    border-radius: 6px !important;
+  }
+}
+
+/* ---------- Shared EmAI primitives ---------- */
+.emai-wrap {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.emai-mono {
+  font-family: var(--emai-font-mono);
+  font-feature-settings: "zero" 1;
+}
+
+.emai-display {
+  font-family: var(--emai-font-display);
+  color: var(--emai-text);
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  font-weight: 600;
+}
+
+.emai-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.25rem;
+  border-radius: 4px;
+  font-family: var(--emai-font-display);
+  font-weight: 600;
+  font-size: 0.975rem;
+  letter-spacing: 0;
+  line-height: 1.2;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+.emai-btn--primary {
+  background: var(--emai-orange);
+  color: #141414 !important;
+  border: 1px solid var(--emai-orange);
+}
+.emai-btn--primary:hover {
+  background: var(--emai-orange-soft);
+  border-color: var(--emai-orange-soft);
+}
+.emai-btn--ghost {
+  background: transparent;
+  color: var(--emai-text) !important;
+  border: 1px solid var(--emai-line-strong);
+}
+.emai-btn--ghost:hover {
+  border-color: var(--emai-text);
+}
+
+.emai-hazard {
+  height: 14px;
+  background: url(/emai/hazard-tape.svg) center / auto 100% repeat-x;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Legal pages (imprint, privacy, terms) ---------- */
+.emai-legal {
+  max-width: 76rem;
+  margin-inline: auto;
+  padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.25rem, 4vw, 2.5rem) 2rem;
+}
+.emai-legal__body {
+  max-width: 46rem;
+}
+.emai-legal h1 {
+  font-family: var(--emai-font-display);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--emai-text);
+}
+.emai-legal .emai-legal__sub {
+  margin-top: 0.4rem;
+  margin-bottom: 2.5rem;
+  color: var(--emai-muted);
+}
+.emai-legal section {
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--emai-line);
+}
+.emai-legal h2 {
+  font-family: var(--emai-font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--emai-text);
+  margin-bottom: 0.6rem;
+}
+.emai-legal h3 {
+  font-family: var(--emai-font-display);
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--emai-text);
+  margin: 1rem 0 0.35rem;
+}
+.emai-legal p,
+.emai-legal li {
+  font-size: 0.97rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--emai-muted);
+}
+.emai-legal p + p {
+  margin-top: 0.6rem;
+}
+.emai-legal a {
+  font-size: inherit;
+  color: var(--emai-orange);
+}
+.emai-legal a:hover {
+  color: var(--emai-orange-soft);
+}
+.emai-legal ul {
+  margin-top: 0.4rem;
+  padding-left: 1.2rem;
+  list-style: disc;
+}
+.emai-legal .emai-legal__note {
+  margin-bottom: 2rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(45, 212, 191, 0.35);
+  border-left: 3px solid var(--emai-teal);
+  border-radius: 4px;
+  background: var(--emai-teal-wash);
+}
+.emai-legal .emai-legal__note strong {
+  display: block;
+  color: var(--emai-text);
+  font-weight: 600;
+}
+.emai-legal .emai-legal__note p {
+  color: var(--emai-text);
+}
+
+/* Skill-tree node progress label (added to upstream Node.vue by brand/patches.cjs). */
+.emai-node-progress {
+  margin-top: 2px;
+  text-align: center;
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: 12px;
+  color: var(--emai-orange);
+  pointer-events: none;
+}
+
+/* German capitalises nouns already; CSS `capitalize` turns "Physical AI in acht Kapiteln" into
+   "Physical Ai In Acht Kapiteln". Content titles are written as intended, so disable it. */
+.capitalize {
+  text-transform: none;
+}

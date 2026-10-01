@@ -1,0 +1,12 @@
+{
+  "name": "emai-academy-frontend",
+  "private": true,
+  "description": "EmAI Academy frontend: a Nuxt layer over ../../frontend (Bootstrap Academy). Dependencies come from the upstream checkout via scripts/link-deps.sh; never run npm install here.",
+  "scripts": {
+    "link-deps": "sh ./scripts/link-deps.sh",
+    "dev": "nuxt dev --port 3001 --host localhost",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview --port 3001 --host localhost"
+  }
+}

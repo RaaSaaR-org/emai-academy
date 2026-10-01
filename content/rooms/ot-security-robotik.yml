@@ -1,0 +1,55 @@
+# Skill 8: OT security for cognitive robots.
+order: 40
+path:
+  id: ot-security-robotik
+  title: {de: "OT-Security für kognitive Roboter", en: "OT security for cognitive robots"}
+  direction_id: entscheider
+units:
+  - id: sec-angriffsflaeche
+    title: {de: "Ein Roboter ist ein vernetzter Computer", en: "A robot is a networked computer"}
+    room: guided-lesson
+    teaches: [sec-angriffsflaeche]
+    steps:
+      - id: flaeche
+        title: {de: "Die Angriffsfläche", en: "The attack surface"}
+        body:
+          de: "Ein kognitiver Roboter bringt Kameras, Mikrofone, WLAN, Bluetooth, Fernwartungszugänge und oft eine Cloud-Anbindung des Herstellers mit. Jede dieser Schnittstellen ist ein möglicher Zugang in Ihr Netz, und jede Kamera ein möglicher Datenabfluss aus Ihrer Halle."
+          en: "A cognitive robot comes with cameras, microphones, Wi-Fi, Bluetooth, remote maintenance access and often a vendor cloud connection. Each of these interfaces is a possible way into your network, and each camera a possible data leak from your shop floor."
+        check:
+          id: zuerst
+          question:
+            de: "Ein neuer Roboter wird geliefert. Was klären Sie vor dem Anschluss ans Werksnetz?"
+            en: "A new robot is delivered. What do you clarify before connecting it to the plant network?"
+          options:
+            - {value: a, text: {de: "Welche Verbindungen er nach außen aufbaut und welche Dienste er anbietet", en: "Which outbound connections it makes and which services it offers"}}
+            - {value: b, text: {de: "Nur die Farbe des Gehäuses", en: "Only the colour of the housing"}}
+          answer: a
+          correct: {de: "Richtig. Erst inventarisieren, dann verbinden.", en: "Right. Inventory first, then connect."}
+          tryAgain: {de: "Denken Sie an Fernwartung und Cloud.", en: "Think of remote maintenance and cloud."}
+  - id: sec-massnahmen
+    title: {de: "Maßnahmen nach dem Zonenmodell", en: "Measures following the zone model"}
+    room: guided-lesson
+    teaches: [sec-massnahmen]
+    requires: [sec-angriffsflaeche]
+    steps:
+      - id: zonen
+        title: {de: "Segmentieren, berechtigen, protokollieren", en: "Segment, authorise, log"}
+        body:
+          de: "Bewährte Grundlage ist IEC 62443 mit ihrem Zonen- und Conduit-Modell:\n• Netzsegmentierung: Roboter in eine eigene Zone, Übergänge nur über definierte Kanäle.\n• Zugriffsrechte: keine Standardpasswörter, persönliche Konten, minimale Rechte.\n• Updates: nur signiert, geprüft und mit Rückfallweg.\n• Protokollierung: wer hat wann was gesteuert, geändert, abgerufen.\n• Herstellerverbindungen: standardmäßig aus, nur bei Bedarf und nachvollziehbar freigeschaltet."
+          en: "A proven basis is IEC 62443 with its zone and conduit model:\n• Network segmentation: robots in their own zone, crossings only through defined channels.\n• Access rights: no default passwords, personal accounts, least privilege.\n• Updates: only signed, tested and with a fallback.\n• Logging: who controlled, changed or retrieved what, and when.\n• Vendor connections: off by default, enabled only when needed and traceably."
+        check:
+          id: hersteller
+          question:
+            de: "Wie gehen Sie mit dem Fernwartungszugang des Herstellers um?"
+            en: "How do you handle the vendor's remote maintenance access?"
+          options:
+            - {value: a, text: {de: "Dauerhaft offen, damit der Support schnell helfen kann", en: "Permanently open so support can help quickly"}}
+            - {value: b, text: {de: "Standardmäßig aus, bei Bedarf befristet und protokolliert freigeben", en: "Off by default, enabled temporarily and logged when needed"}}
+          answer: b
+          correct: {de: "Genau. Kontrolle bleibt bei Ihnen.", en: "Exactly. Control stays with you."}
+          tryAgain: {de: "Wer soll die Kontrolle über den Zugang haben?", en: "Who should control the access?"}
+      - id: cra
+        title: {de: "Der Cyber Resilience Act", en: "The Cyber Resilience Act"}
+        body:
+          de: "Der EU Cyber Resilience Act verpflichtet Hersteller vernetzter Produkte zu Security by Design, Schwachstellenmanagement und Sicherheitsupdates über die Lebensdauer. Für Betreiber heißt das: Fragen Sie bei der Beschaffung nach Update-Zusagen, SBOM und dem Prozess für gemeldete Schwachstellen."
+          en: "The EU Cyber Resilience Act obliges manufacturers of connected products to provide security by design, vulnerability handling and security updates over the product's lifetime. For operators this means: ask about update commitments, SBOMs and the process for reported vulnerabilities when procuring."

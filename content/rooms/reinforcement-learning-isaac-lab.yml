@@ -1,0 +1,71 @@
+# Skill 6: reinforcement learning in Isaac Lab (source: emai vla-training README §6).
+order: 155
+path:
+  id: reinforcement-learning-isaac-lab
+  title: {de: "Reinforcement Learning in Isaac Lab", en: "Reinforcement learning in Isaac Lab"}
+  direction_id: builder
+units:
+  - id: rl-grundbegriffe
+    title: {de: "Belohnung statt Demonstration", en: "Reward instead of demonstration"}
+    room: guided-lesson
+    teaches: [rl-grundlagen]
+    steps:
+      - id: schleife
+        title: {de: "Agent, Umgebung, Belohnung", en: "Agent, environment, reward"}
+        body:
+          de: "Beim Reinforcement Learning beobachtet ein Agent den Zustand, wählt eine Aktion und erhält von der Umgebung eine Belohnung. Ziel ist eine Policy, die die Summe der Belohnungen maximiert. Niemand zeigt die Lösung vor, die Belohnungsfunktion beschreibt nur, was gut ist.\n\nFür Laufen könnte die Belohnung z. B. lauten: Folge der Sollgeschwindigkeit, bleib aufrecht, verbrauche wenig Energie, setze die Füße nicht zu hart auf."
+          en: "In reinforcement learning an agent observes the state, chooses an action and receives a reward from the environment. The goal is a policy that maximises the sum of rewards. Nobody demonstrates the solution; the reward function only describes what is good.\n\nFor walking the reward could be: track the target velocity, stay upright, use little energy, do not stamp your feet."
+        check:
+          id: reward-hacking
+          question:
+            de: "Die Belohnung zählt nur die zurückgelegte Strecke. Was könnte die Policy lernen?"
+            en: "The reward counts only the distance travelled. What might the policy learn?"
+          options:
+            - {value: a, text: {de: "Einen eleganten, energiesparenden Gang", en: "An elegant, energy-efficient gait"}}
+            - {value: b, text: {de: "Irgendeine Bewegung, die vorankommt, auch Stolpern oder Rutschen", en: "Any motion that makes progress, including stumbling or sliding"}}
+          answer: b
+          correct: {de: "Genau. Die Policy optimiert, was Sie belohnen, nicht was Sie meinen.", en: "Exactly. The policy optimises what you reward, not what you mean."}
+          tryAgain: {de: "Was wird nicht bestraft?", en: "What is not penalised?"}
+      - id: parallel
+        title: {de: "Tausende Roboter gleichzeitig", en: "Thousands of robots at once"}
+        body:
+          de: "Isaac Lab simuliert Tausende Kopien eines Roboters parallel auf einer GPU. Unser Lauftraining für den G1 nutzt 4096 Umgebungen mit dem Algorithmus PPO (Proximal Policy Optimization). So sammelt die Policy in Minuten Erfahrung, für die ein einzelner realer Roboter Jahre bräuchte."
+          en: "Isaac Lab simulates thousands of copies of a robot in parallel on one GPU. Our locomotion training for the G1 uses 4096 environments with the PPO algorithm (Proximal Policy Optimization). That way the policy gathers in minutes the experience a single real robot would need years for."
+  - id: rl-deployment
+    title: {de: "Vom Training zum Roboter", en: "From training to robot"}
+    room: guided-lesson
+    teaches: [rl-deployment]
+    requires: [rl-grundlagen]
+    steps:
+      - id: kette
+        title: {de: "Training, Abspielen, Export", en: "Train, play, export"}
+        body:
+          de: "Der typische Ablauf: headless trainieren, die Policy mit Fenster abspielen und visuell prüfen, dann als ONNX-Datei exportieren. Das ONNX-Modell ist klein und läuft auf dem Rechner des Roboters in der schnellen Regelschleife."
+          en: "The typical flow: train headless, play the policy with a window and inspect it visually, then export it as an ONNX file. The ONNX model is small and runs on the robot's computer in the fast control loop."
+        check:
+          id: onnx
+          question:
+            de: "Warum exportiert man die Policy als ONNX?"
+            en: "Why export the policy as ONNX?"
+          options:
+            - {value: a, text: {de: "Damit sie ohne die Trainingsumgebung schlank und schnell auf dem Roboter läuft", en: "So it runs lean and fast on the robot without the training environment"}}
+            - {value: b, text: {de: "Damit sie weiter trainiert", en: "So it keeps training"}}
+          answer: a
+          correct: {de: "Richtig.", en: "Right."}
+          tryAgain: {de: "Auf dem Roboter läuft keine Isaac-Simulation.", en: "No Isaac simulation runs on the robot."}
+      - id: wann
+        title: {de: "RL oder Imitation?", en: "RL or imitation?"}
+        body:
+          de: "Reinforcement Learning ist heute besonders erfolgreich bei Fortbewegung und Balance: Die Physik lässt sich gut simulieren, und die Belohnung ist leicht zu formulieren. Für Manipulation mit vielen Objekten und Sprachaufträgen dominieren Demonstrationen und VLAs. In der Praxis werden beide kombiniert: ein per RL trainierter Lauf-Controller unten, eine per Imitation trainierte Manipulations-Policy oben."
+          en: "Reinforcement learning is especially successful today for locomotion and balance: the physics simulates well and the reward is easy to formulate. For manipulation with many objects and language instructions, demonstrations and VLAs dominate. In practice both are combined: an RL-trained locomotion controller below, an imitation-trained manipulation policy on top."
+        check:
+          id: wahl
+          question:
+            de: "Der G1 soll stabil auf unebenem Boden stehen und gehen. Welcher Lernweg ist heute am erfolgreichsten?"
+            en: "The G1 should stand and walk stably on uneven ground. Which approach is most successful today?"
+          options:
+            - {value: rl, text: {de: "Reinforcement Learning in der Simulation", en: "Reinforcement learning in simulation"}}
+            - {value: vla, text: {de: "Ein VLA mit Sprachauftrag", en: "A VLA with a language instruction"}}
+          answer: rl
+          correct: {de: "Genau.", en: "Exactly."}
+          tryAgain: {de: "Fortbewegung und Balance …", en: "Locomotion and balance …"}

@@ -1,0 +1,41 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: Souveränität und EU-Regulierung
+description: Kontrolle über Daten, Modelle und Updates behalten und den Rahmen aus EU-Maschinenverordnung, AI Act
+  und Cyber Resilience Act verstehen.
+category: Sicherheit & Souveränität
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: souveraenitaet-und-regulierung
+learning_goals:
+- Souveränität mit drei Fragen prüfen
+- Offene Bausteine gegen Lock-in einsetzen
+- Die relevanten EU-Regelwerke und Fristen kennen
+requirements:
+- Physical AI in acht Kapiteln
+last_update: 1790812800
+translations:
+  en:
+    title: Sovereignty and EU regulation
+    description: Keep control over data, models and updates, and understand the framework of the EU Machinery Regulation,
+      AI Act and Cyber Resilience Act.
+    learning_goals:
+    - Test sovereignty with three questions
+    - Use open building blocks against lock-in
+    - Know the relevant EU regulations and deadlines
+    requirements:
+    - Physical AI in eight chapters
+sections:
+- id: video
+  title: Video
+  description: null
+  lectures:
+  - id: open-source-robotik
+    title: 'Robotik zugänglich machen: die Open-Source-Vision von Hugging Face (englisch)'
+    description: Gespräch über offene Modelle, Daten und Hardware.
+    type: youtube
+    video_id: snc6ucXSuiQ
+    duration: 2646

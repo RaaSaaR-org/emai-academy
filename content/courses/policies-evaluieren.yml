@@ -1,0 +1,31 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: Policies ehrlich evaluieren
+description: 'Offline, Simulation, realer Roboter: was jede Stufe zeigt, warum 7 von 10 kein Ergebnis ist und wie
+  man Messungen vorab festlegt.'
+category: Deployment
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: policies-evaluieren
+learning_goals:
+- Evaluationsstufen und ihre Grenzen kennen
+- Konfidenzintervalle für Erfolgsquoten deuten
+- Messprotokolle vorab festlegen
+requirements:
+- 'Imitation Learning: von Behavior Cloning zu ACT'
+last_update: 1790812800
+translations:
+  en:
+    title: Evaluate policies honestly
+    description: 'Offline, simulation, real robot: what each level shows, why 7 out of 10 is not a result and how
+      to fix measurements in advance.'
+    learning_goals:
+    - Know evaluation levels and their limits
+    - Interpret confidence intervals for success rates
+    - Fix measurement protocols in advance
+    requirements:
+    - 'Imitation learning: from behaviour cloning to ACT'
+sections: []

@@ -1,0 +1,280 @@
+# Builder path, skill 4 "Daten für Robot Learning": record and understand LeRobotDataset v3.0.
+# Sources: LeRobot docs il_robots.mdx + lerobot-dataset-v3.mdx; emai vla-training
+# (README §1-2, docs/datensatz-erweitern.md, docs/vla-modelle.md).
+order: 120
+path:
+  id: lerobot-datensaetze
+  title: {de: "Datensätze aufnehmen und verstehen", en: "Record and understand datasets"}
+  direction_id: builder
+  chapters:
+    - {id: ds-aufnahme, title: {de: "Aufnehmen", en: "Recording"}}
+    - {id: ds-format, title: {de: "Das Format v3.0", en: "The v3.0 format"}}
+    - {id: ds-qualitaet, title: {de: "Datenqualität", en: "Data quality"}}
+units:
+  - id: ds-aufnehmen
+    chapter_id: ds-aufnahme
+    title: {de: "Episoden aufnehmen mit lerobot-record", en: "Record episodes with lerobot-record"}
+    room: guided-lesson
+    teaches: [ds-aufnahme]
+    steps:
+      - id: episode
+        title: {de: "Episode, Task, Frame", en: "Episode, task, frame"}
+        body:
+          de: "Ein Datensatz besteht aus Episoden. Eine Episode ist ein vollständiger Durchlauf der Aufgabe, z. B. „Würfel greifen und in die Kiste legen“. Jede Episode besteht aus Frames: Bei 30 fps entstehen pro Sekunde 30 Zeilen mit Gelenkstellung (observation.state), Zielbefehl (action) und je einem Bild pro Kamera. Die Aufgabe als Satz heißt Task und wird mitgespeichert, damit sprachgesteuerte Modelle wie VLAs sie später nutzen können."
+          en: "A dataset consists of episodes. An episode is one complete run of the task, for example „grab the cube and put it in the box“. Each episode consists of frames: at 30 fps each second produces 30 rows with joint positions (observation.state), the commanded target (action) and one image per camera. The task sentence is stored too, so language-conditioned models such as VLAs can use it later."
+        check:
+          id: frames
+          question:
+            de: "Eine Episode dauert 14 Sekunden bei 30 fps. Wie viele Frames hat sie?"
+            en: "An episode lasts 14 seconds at 30 fps. How many frames does it have?"
+          options:
+            - {value: "44", text: {de: "44", en: "44"}}
+            - {value: "420", text: {de: "420", en: "420"}}
+            - {value: "4200", text: {de: "4200", en: "4200"}}
+          answer: "420"
+          correct: {de: "Richtig: 14 × 30 = 420.", en: "Right: 14 × 30 = 420."}
+          tryAgain: {de: "Sekunden mal Bilder pro Sekunde.", en: "Seconds times frames per second."}
+      - id: record
+        title: {de: "Die Aufnahme starten", en: "Start recording"}
+        body:
+          de: "lerobot-record kombiniert Teleoperation und Aufnahme. Neu sind die --dataset-Parameter: Name (repo_id), Anzahl Episoden und der Task-Satz. Standardmäßig dauert jede Episode bis zu 60 s (--dataset.episode_time_s), danach folgen 60 s zum Zurücksetzen der Szene (--dataset.reset_time_s)."
+          en: "lerobot-record combines teleoperation and recording. New are the --dataset parameters: name (repo_id), number of episodes and the task sentence. By default each episode lasts up to 60 s (--dataset.episode_time_s), followed by 60 s to reset the scene (--dataset.reset_time_s)."
+        code: "lerobot-record \\\n  --robot.type=so101_follower \\\n  --robot.port=/dev/ttyACM0 \\\n  --robot.id=emai_follower \\\n  --robot.cameras=\"{front: {type: opencv, index_or_path: 0, width: 640, height: 480, fps: 30}}\" \\\n  --teleop.type=so101_leader \\\n  --teleop.port=/dev/ttyACM1 \\\n  --teleop.id=emai_leader \\\n  --display_data=true \\\n  --dataset.repo_id=${HF_USER}/so101-wuerfel \\\n  --dataset.num_episodes=50 \\\n  --dataset.single_task=\"Grab the black cube and put it in the box\" \\\n  --dataset.push_to_hub=false"
+        note:
+          de: "Souverän arbeiten: Mit --dataset.push_to_hub=false bleibt der Datensatz lokal. Hochladen ist eine bewusste Entscheidung, keine Voreinstellung."
+          en: "Work sovereignly: with --dataset.push_to_hub=false the dataset stays local. Uploading is a deliberate decision, not a default."
+      - id: tasten
+        title: {de: "Während der Aufnahme", en: "During recording"}
+        body:
+          de: "Drei Tasten steuern die Aufnahme:\n→ oder n: Episode vorzeitig beenden bzw. Reset überspringen\n← oder r: Episode verwerfen und neu aufnehmen\nEsc oder q: Sitzung beenden, Videos kodieren, speichern\n\nAbgebrochen? Mit --resume=true geht es weiter. Dann gibt --dataset.num_episodes die Anzahl ZUSÄTZLICHER Episoden an."
+          en: "Three keys control recording:\n→ or n: end the episode early or skip the reset\n← or r: discard the episode and record it again\nEsc or q: end the session, encode videos, save\n\nInterrupted? Continue with --resume=true. Then --dataset.num_episodes is the number of ADDITIONAL episodes."
+        check:
+          id: verworfen
+          question:
+            de: "Mitten in der Episode fällt der Würfel aus dem Greifer. Was tun Sie?"
+            en: "The cube drops out of the gripper in the middle of the episode. What do you do?"
+          options:
+            - {value: weiter, text: {de: "Weitermachen, die Policy lernt daraus", en: "Carry on, the policy will learn from it"}}
+            - {value: neu, text: {de: "← bzw. r drücken und die Episode neu aufnehmen", en: "Press ← or r and record the episode again"}}
+            - {value: ende, text: {de: "Esc drücken und alles neu beginnen", en: "Press Esc and start over completely"}}
+          answer: neu
+          correct: {de: "Richtig. Misslungene Demonstrationen gehören nicht in einen Imitationsdatensatz, außer Sie wollen gezielt Korrekturen zeigen.", en: "Right. Failed demonstrations do not belong in an imitation dataset unless you deliberately want to show recoveries."}
+          tryAgain: {de: "Eine Taste verwirft nur die aktuelle Episode.", en: "One key discards just the current episode."}
+  - id: ds-format-v3
+    chapter_id: ds-format
+    title: {de: "LeRobotDataset v3.0 von innen", en: "Inside LeRobotDataset v3.0"}
+    room: guided-lesson
+    teaches: [ds-format-v3]
+    requires: [ds-aufnahme]
+    steps:
+      - id: saeulen
+        title: {de: "Drei Säulen", en: "Three pillars"}
+        body:
+          de: "LeRobotDataset v3.0 speichert drei Arten von Daten:\n1. Tabellendaten: Gelenkwerte, Aktionen, Zeitstempel als Apache Parquet.\n2. Bilddaten: Kamerabilder, kodiert als MP4-Video, je Kamera.\n3. Metadaten: Schema, fps, Normierungsstatistiken und die Grenzen jeder Episode.\n\nDer große Unterschied zu v2.1: Viele Episoden teilen sich eine Parquet- bzw. MP4-Datei. Wo eine Episode beginnt und endet, steht in den Metadaten, nicht mehr im Dateinamen. Das macht große Datensätze schneller und streamingfähig."
+          en: "LeRobotDataset v3.0 stores three kinds of data:\n1. Tabular data: joint values, actions, timestamps as Apache Parquet.\n2. Visual data: camera images encoded as MP4 video, per camera.\n3. Metadata: schema, fps, normalisation statistics and the boundaries of each episode.\n\nThe big difference to v2.1: many episodes share one Parquet or MP4 file. Where an episode starts and ends is stored in the metadata, no longer in the file name. That makes large datasets faster and streamable."
+        check:
+          id: v3-grenzen
+          question:
+            de: "Woher weiß LeRobot in v3.0, wo Episode 17 im Video beginnt?"
+            en: "How does LeRobot v3.0 know where episode 17 starts in the video?"
+          options:
+            - {value: a, text: {de: "Aus dem Dateinamen episode_000017.mp4", en: "From the file name episode_000017.mp4"}}
+            - {value: b, text: {de: "Aus den Episoden-Metadaten mit Start- und End-Offsets", en: "From the episode metadata with start and end offsets"}}
+          answer: b
+          correct: {de: "Genau. Eine Datei pro Episode war v2.", en: "Exactly. One file per episode was v2."}
+          tryAgain: {de: "In v3.0 liegen viele Episoden in einer Datei.", en: "In v3.0 many episodes share one file."}
+      - id: layout
+        title: {de: "Verzeichnisstruktur", en: "Directory layout"}
+        body:
+          de: "meta/info.json: Schema (Features, Formen, Datentypen), fps, Version, Pfadvorlagen\nmeta/stats.json: Mittelwert, Standardabweichung, Min, Max je Feature für die Normierung\nmeta/tasks.jsonl: die Task-Sätze mit ihren Indizes\nmeta/episodes/: je Episode Länge, Task und Offsets (Parquet)\ndata/: Frames als Parquet-Dateien, viele Episoden pro Datei\nvideos/: MP4-Dateien je Kamera, viele Episoden pro Datei"
+          en: "meta/info.json: schema (features, shapes, dtypes), fps, version, path templates\nmeta/stats.json: mean, std, min, max per feature for normalisation\nmeta/tasks.jsonl: the task sentences with their indices\nmeta/episodes/: per-episode length, task and offsets (Parquet)\ndata/: frames as Parquet files, many episodes per file\nvideos/: MP4 files per camera, many episodes per file"
+        check:
+          id: stats
+          question:
+            de: "Wo stehen die Werte, mit denen Gelenkwinkel vor dem Training normiert werden?"
+            en: "Where are the values used to normalise joint angles before training?"
+          options:
+            - {value: info, text: {de: "meta/info.json", en: "meta/info.json"}}
+            - {value: stats, text: {de: "meta/stats.json", en: "meta/stats.json"}}
+            - {value: tasks, text: {de: "meta/tasks.jsonl", en: "meta/tasks.jsonl"}}
+          answer: stats
+          correct: {de: "Richtig. Falsche Statistiken sind eine klassische, schwer sichtbare Fehlerquelle.", en: "Right. Wrong statistics are a classic, hard-to-spot source of errors."}
+          tryAgain: {de: "Normierung braucht Mittelwert und Streuung.", en: "Normalisation needs mean and spread."}
+      - id: laden
+        title: {de: "Laden in Python", en: "Loading in Python"}
+        body:
+          de: "LeRobotDataset liefert pro Index ein Dictionary mit PyTorch-Tensoren und passt direkt in einen DataLoader. Mit delta_timestamps holen Sie zusätzlich Nachbarframes, z. B. die letzten 0,2 s Bildverlauf."
+          en: "LeRobotDataset returns a dictionary of PyTorch tensors per index and plugs straight into a DataLoader. With delta_timestamps you also fetch neighbouring frames, for example the last 0.2 s of images."
+        code: "from lerobot.datasets import LeRobotDataset\n\nds = LeRobotDataset(\"<user>/so101-wuerfel\")\nsample = ds[100]\nprint(sample[\"observation.state\"].shape)   # torch.Size([6])\nprint(sample[\"action\"].shape)              # torch.Size([6])\nprint(ds.meta.fps, ds.num_episodes)"
+      - id: praxis
+        title: {de: "Aus unserem Labor: Dimensionen zählen", en: "From our lab: dimensions matter"}
+        body:
+          de: "Beim Unitree G1 EDU mit Dex3-Händen umfasst das Imitation-Learning-Format 28 Werte: 14 für die beiden Arme, 14 für die beiden Hände. Beine und Taille sind nicht enthalten. Modelle wie SmolVLA und π0.5 akzeptieren höchstens 32 Dimensionen für Zustand und Aktion. 28 passt, ein 43-dimensionaler Ganzkörpervektor nicht.\n\nUnd: Nicht jedes Modell liest v3.0. GR00T N1.7 erwartet noch LeRobot v2 und braucht eine Konvertierung."
+          en: "For the Unitree G1 EDU with Dex3 hands the imitation-learning format has 28 values: 14 for both arms, 14 for both hands. Legs and waist are not included. Models such as SmolVLA and π0.5 accept at most 32 dimensions for state and action. 28 fits, a 43-dimensional whole-body vector does not.\n\nAlso: not every model reads v3.0. GR00T N1.7 still expects LeRobot v2 and needs a conversion."
+        check:
+          id: dim-deckel
+          question:
+            de: "Ein Datensatz hat 43-dimensionale Aktionen. Was passiert beim Feintuning von SmolVLA (Deckel 32)?"
+            en: "A dataset has 43-dimensional actions. What happens when fine-tuning SmolVLA (cap 32)?"
+          options:
+            - {value: a, text: {de: "Es passt, SmolVLA skaliert automatisch.", en: "It fits, SmolVLA scales automatically."}}
+            - {value: b, text: {de: "Es passt nicht. Man muss die kommandierten Gelenke gezielt auswählen.", en: "It does not fit. You have to select the commanded joints deliberately."}}
+          answer: b
+          correct: {de: "Richtig. Genau hier entstehen Fehler, die wie schlechte Policies aussehen.", en: "Right. This is exactly where errors arise that look like bad policies."}
+          tryAgain: {de: "43 ist größer als 32.", en: "43 is larger than 32."}
+  - id: ds-episode-lesen
+    chapter_id: ds-format
+    title: {de: "Eine Teleoperations-Episode lesen", en: "Reading a teleoperation episode"}
+    room: custom
+    module_id: teleop-dataset-explorer
+    # Contract with content/modules/README.md: the module checks its three questions locally
+    # against its bundled synthetic episode and posts exactly this object when all are right.
+    completion_answer: {fps: 30, lagging_joint: elbow_flex, gripper_gap: contact}
+    allow_skip: false
+    teaches: [ds-episode-lesen]
+    requires: [ds-format-v3]
+    content:
+      de:
+        title: "Eine Teleoperations-Episode lesen"
+        intro: "So sieht eine Episode von innen aus: eine synthetische SO-101-Aufnahme im Layout von LeRobot v3.0. „action“ ist das Kommando des Leader-Arms, „observation.state“ die gemessene Gelenkstellung des Followers. Bewegen Sie sich durch die Zeitachse, vergleichen Sie Kommando und Messung und beantworten Sie die drei Fragen. Genau diesen Blick in die Daten sollten Sie sich vor jedem Training angewöhnen."
+      en:
+        title: "Reading a teleoperation episode"
+        intro: "This is what an episode looks like from the inside: a synthetic SO-101 recording in LeRobot v3.0 layout. „action“ is the leader arm's command, „observation.state“ the follower's measured joint position. Scrub through the timeline, compare command and measurement and answer the three questions. Make this look into the data a habit before every training run."
+  - id: ds-detektiv
+    chapter_id: ds-qualitaet
+    title: {de: "Datensatz-Detektiv: fehlerhafte Episoden finden", en: "Dataset detective: find faulty episodes"}
+    room: guided-lesson
+    teaches: [ds-inspektion]
+    requires: [ds-episode-lesen]
+    steps:
+      - id: tabelle
+        title: {de: "Acht Episoden im Überblick", en: "Eight episodes at a glance"}
+        body:
+          de: "Ein SO-101-Datensatz, 30 fps, Task „Grab the black cube and put it in the box“. Pro Episode: Länge, Stillstandsanteil, ob der Greifer je geschlossen hat, gemessene Kamerarate und die Notiz des Operators.
+
+Ep. 0: 13,4 s · 8 % Stillstand · Greifer zu · 30 fps
+Ep. 1: 12,6 s · 6 % · zu · 30 fps
+Ep. 2: 3,2 s · 2 % · nie geschlossen · 30 fps · „Aufnahme zu früh beendet“
+Ep. 3: 14,4 s · 10 % · zu · 30 fps
+Ep. 4: 13,2 s · 7 % · zu · 30 fps · „Würfel etwas weiter links“
+Ep. 5: 28,9 s · 46 % · zu · 30 fps · „Telefon geklingelt“
+Ep. 6: 13,7 s · 9 % · zu · 30 fps · „Würfel gedreht“
+Ep. 7: 12,9 s · 7 % · zu · 17 fps · „USB-Hub gewechselt“"
+          en: "An SO-101 dataset, 30 fps, task „Grab the black cube and put it in the box“. Per episode: length, idle share, whether the gripper ever closed, measured camera rate and the operator's note.
+
+Ep. 0: 13.4 s · 8 % idle · gripper closed · 30 fps
+Ep. 1: 12.6 s · 6 % · closed · 30 fps
+Ep. 2: 3.2 s · 2 % · never closed · 30 fps · „Recording stopped too early“
+Ep. 3: 14.4 s · 10 % · closed · 30 fps
+Ep. 4: 13.2 s · 7 % · closed · 30 fps · „Cube slightly further left“
+Ep. 5: 28.9 s · 46 % · closed · 30 fps · „Phone rang“
+Ep. 6: 13.7 s · 9 % · closed · 30 fps · „Cube rotated“
+Ep. 7: 12.9 s · 7 % · closed · 17 fps · „Changed USB hub“"
+        check:
+          id: abbruch
+          question:
+            de: "In welcher Episode wurde die Aufgabe gar nicht ausgeführt?"
+            en: "In which episode was the task not performed at all?"
+          options:
+            - {value: "2", text: {de: "Episode 2", en: "Episode 2"}}
+            - {value: "4", text: {de: "Episode 4", en: "Episode 4"}}
+            - {value: "6", text: {de: "Episode 6", en: "Episode 6"}}
+          answer: "2"
+          correct: {de: "Richtig: 3,2 s und der Greifer hat nie geschlossen.", en: "Right: 3.2 s and the gripper never closed."}
+          tryAgain: {de: "Suchen Sie die Episode, in der nie gegriffen wurde.", en: "Look for the episode in which nothing was grasped."}
+      - id: stillstand
+        title: {de: "Pausen werden mitgelernt", en: "Pauses are learned too"}
+        body:
+          de: "Eine Policy imitiert auch Zögern und Warten. Ein hoher Stillstandsanteil mitten in der Aufgabe bringt ihr bei, ohne Grund anzuhalten."
+          en: "A policy imitates hesitation and waiting too. A high idle share in the middle of the task teaches it to stop for no reason."
+        check:
+          id: pause
+          question:
+            de: "Welche Episode würden Sie wegen des Stillstands verwerfen?"
+            en: "Which episode would you discard because of idle time?"
+          options:
+            - {value: "3", text: {de: "Episode 3", en: "Episode 3"}}
+            - {value: "5", text: {de: "Episode 5", en: "Episode 5"}}
+            - {value: "7", text: {de: "Episode 7", en: "Episode 7"}}
+          answer: "5"
+          correct: {de: "Genau: 46 % Stillstand, das Telefon hat geklingelt.", en: "Exactly: 46 % idle, the phone rang."}
+          tryAgain: {de: "Vergleichen Sie die Stillstandsanteile.", en: "Compare the idle shares."}
+      - id: technik
+        title: {de: "Aufnahmefehler", en: "Recording faults"}
+        body:
+          de: "Bilder und Gelenkwerte müssen zeitlich zusammenpassen. Liefert eine Kamera weniger Bilder als die Aufnahmerate, sieht die Policy veraltete oder doppelte Bilder zu frischen Gelenkwerten."
+          en: "Images and joint values must line up in time. If a camera delivers fewer frames than the recording rate, the policy sees stale or duplicated images next to fresh joint values."
+        check:
+          id: kamera
+          question:
+            de: "Welche Episode hat ein technisches Aufnahmeproblem?"
+            en: "Which episode has a technical recording problem?"
+          options:
+            - {value: "1", text: {de: "Episode 1", en: "Episode 1"}}
+            - {value: "6", text: {de: "Episode 6", en: "Episode 6"}}
+            - {value: "7", text: {de: "Episode 7", en: "Episode 7"}}
+          answer: "7"
+          correct: {de: "Richtig: nur 17 statt 30 fps nach dem Wechsel des USB-Hubs.", en: "Right: only 17 instead of 30 fps after changing the USB hub."}
+          tryAgain: {de: "Achten Sie auf die gemessene Kamerarate.", en: "Look at the measured camera rate."}
+      - id: behalten
+        title: {de: "Varianz ist erwünscht", en: "Variance is welcome"}
+        body:
+          de: "Nicht jede Abweichung ist ein Fehler. Andere Objektpositionen und -lagen sind genau die Vielfalt, aus der eine Policy Generalisierung lernt."
+          en: "Not every deviation is a fault. Different object positions and orientations are exactly the variety a policy learns to generalise from."
+        check:
+          id: varianz
+          question:
+            de: "Was tun Sie mit Episode 4 („Würfel weiter links“) und Episode 6 („Würfel gedreht“)?"
+            en: "What do you do with episode 4 („cube further left“) and episode 6 („cube rotated“)?"
+          options:
+            - {value: behalten, text: {de: "Behalten, sie sind wertvolle Varianz", en: "Keep them, they are valuable variance"}}
+            - {value: verwerfen, text: {de: "Verwerfen, sie weichen vom Standard ab", en: "Discard them, they deviate from the standard"}}
+          answer: behalten
+          correct: {de: "Genau. Verwerfen Sie Fehler, nicht Vielfalt.", en: "Exactly. Discard faults, not variety."}
+          tryAgain: {de: "Ist eine andere Würfelposition ein Fehler oder eine Variante?", en: "Is a different cube position a fault or a variant?"}
+  - id: ds-vielfalt
+    chapter_id: ds-qualitaet
+    title: {de: "Mehr Welt statt mehr Wiederholungen", en: "More world, not more repetitions"}
+    room: guided-lesson
+    teaches: [ds-vielfalt]
+    requires: [ds-inspektion]
+    steps:
+      - id: befund
+        title: {de: "Ein echter Befund", en: "A real finding"}
+        body:
+          de: "In einer unserer Trainingskampagnen hatten wir 402 Demonstrationen einer Pick-and-Place-Aufgabe: eine Szene, ein Objekt, ein Task-Satz. Die Bildhelligkeit schwankte über alle Aufnahmen hinweg nur um etwa 2 %. Die Simulation, in der wir die Policy testeten, war deutlich heller, rund 11 Standardabweichungen außerhalb des Datensatzes. Das Ergebnis: Die Modelle verloren unter dem fremden Bild einen Großteil ihrer Anfahrtsrichtung."
+          en: "In one of our training campaigns we had 402 demonstrations of a pick-and-place task: one scene, one object, one task sentence. Image brightness varied by only about 2 % across all recordings. The simulation in which we tested the policy was much brighter, about 11 standard deviations outside the dataset. The result: under the unfamiliar image the models lost much of their approach direction."
+        check:
+          id: ursache
+          question:
+            de: "Was fehlte diesem Datensatz vor allem?"
+            en: "What was this dataset mainly missing?"
+          options:
+            - {value: a, text: {de: "Mehr Episoden", en: "More episodes"}}
+            - {value: b, text: {de: "Vielfalt: Szenen, Objekte, Licht", en: "Variety: scenes, objects, lighting"}}
+            - {value: c, text: {de: "Eine höhere Bildrate", en: "A higher frame rate"}}
+          answer: b
+          correct: {de: "Genau. 402 Wiederholungen derselben Welt lehren nur diese eine Welt.", en: "Exactly. 402 repetitions of the same world only teach that one world."}
+          tryAgain: {de: "Episoden gab es genug. Was war immer gleich?", en: "There were enough episodes. What was always the same?"}
+      - id: literatur
+        title: {de: "Was die Forschung sagt", en: "What research says"}
+        body:
+          de: "Generalisierung skaliert mit der Anzahl der Umgebungen und Objekte, nicht mit der Anzahl der Demonstrationen. Ab etwa 50 Demonstrationen pro Kombination aus Umgebung und Objekt bringt weitere Wiederholung kaum noch etwas (Lin et al., ICLR 2025).\n\nStrukturierte Variation von Licht, Textur und Kamera wirkt deutlich besser als reine 2D-Bildaugmentierung wie Helligkeits-Jitter im Dataloader."
+          en: "Generalisation scales with the number of environments and objects, not with the number of demonstrations. Beyond about 50 demonstrations per environment-object pair, further repetition adds little (Lin et al., ICLR 2025).\n\nStructured variation of lighting, texture and camera works much better than pure 2D image augmentation such as brightness jitter in the data loader."
+        check:
+          id: planung
+          question:
+            de: "Sie haben Zeit für 200 weitere Demonstrationen. Wie verteilen Sie sie?"
+            en: "You have time for 200 more demonstrations. How do you distribute them?"
+          options:
+            - {value: a, text: {de: "200 in der bestehenden Szene", en: "200 in the existing scene"}}
+            - {value: b, text: {de: "Etwa 50 je Szene in vier neuen Szenen mit anderen Objekten und anderem Licht", en: "About 50 each in four new scenes with other objects and lighting"}}
+          answer: b
+          correct: {de: "Richtig. Mehr Welt statt mehr Wiederholungen.", en: "Right. More world, not more repetitions."}
+          tryAgain: {de: "Denken Sie an die Faustregel von etwa 50 pro Kombination.", en: "Remember the rule of thumb of about 50 per pair."}
+      - id: pruefen
+        title: {de: "Vor dem Training prüfen", en: "Check before training"}
+        body:
+          de: "Zwei Werkzeuge helfen vor jedem Training: lerobot-replay spielt eine aufgenommene Episode auf dem Roboter ab. Passt die Bewegung, stimmen Kalibrierung und Zeitbasis. Und ein Blick auf Episodenlängen, Stillstand und Kamerarate zeigt Ausreißer, bevor sie GPU-Stunden kosten."
+          en: "Two tools help before every training run: lerobot-replay replays a recorded episode on the robot. If the motion matches, calibration and time base are right. And a look at episode lengths, idle time and camera rate reveals outliers before they cost GPU hours."
+        code: "lerobot-replay \\\n    --robot.type=so101_follower \\\n    --robot.port=/dev/ttyACM0 \\\n    --robot.id=emai_follower \\\n    --dataset.repo_id=${HF_USER}/so101-wuerfel \\\n    --dataset.episode=0"

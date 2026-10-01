@@ -1,0 +1,19 @@
+# runtime state of the dev scripts
+.logs/
+.run/
+.state/
+# frontend
+node_modules/
+.nuxt/
+.output/
+.data/
+frontend/.env
+# python
+__pycache__/
+*.pyc
+.DS_Store
+frontend/public/learning-modules/
+# build output (scripts/seed.sh runs content/modules/build.sh)
+content/modules/dist/
+# generated per checkout by scripts/lib.sh
+.run/

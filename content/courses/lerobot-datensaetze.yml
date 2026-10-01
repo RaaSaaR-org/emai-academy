@@ -1,0 +1,43 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: Datensätze aufnehmen und verstehen
+description: Mit lerobot-record eigene Demonstrationen aufnehmen, das Format LeRobotDataset v3.0 von innen kennenlernen,
+  fehlerhafte Episoden finden und Datensätze auf Vielfalt statt Menge auslegen.
+category: Daten
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: lerobot-datensaetze
+learning_goals:
+- Episoden mit lerobot-record aufnehmen, verwerfen und fortsetzen
+- Aufbau von LeRobotDataset v3.0 erklären
+- Fehlerhafte Episoden vor dem Training erkennen
+- Aufnahmezeit in Vielfalt statt Wiederholung investieren
+requirements:
+- SO-101 mit LeRobot in Betrieb nehmen
+last_update: 1790812800
+translations:
+  en:
+    title: Record and understand datasets
+    description: Record your own demonstrations with lerobot-record, get to know the LeRobotDataset v3.0 format
+      from the inside, find faulty episodes and design datasets for variety rather than volume.
+    learning_goals:
+    - Record, discard and resume episodes with lerobot-record
+    - Explain the structure of LeRobotDataset v3.0
+    - Detect faulty episodes before training
+    - Invest recording time in variety rather than repetition
+    requirements:
+    - Set up the SO-101 with LeRobot
+sections:
+- id: video
+  title: Video
+  description: null
+  lectures:
+  - id: pick-place-so101
+    title: Pick-and-Place-Modell für SO-100/SO-101 trainieren (englisch)
+    description: Kurze Praxisdemo von der Aufnahme bis zum Training.
+    type: youtube
+    video_id: vC7E6ZmXBT8
+    duration: 204

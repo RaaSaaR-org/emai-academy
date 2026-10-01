@@ -1,0 +1,31 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: XR-Teleoperation am G1
+description: 'Datenerfassung für einen Roboter mit zwei Armen und zwei Händen: XR-Headset, Retargeting, Aufnahme
+  real und in der Simulation, Konvertierung in LeRobot v3.0 und öffentliche Dex3-Datensätze.'
+category: Daten
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: teleoperation-g1-xr
+learning_goals:
+- Prinzip der XR-Teleoperation und des Retargetings erklären
+- Die Kette von der Aufnahme bis zum Training beschreiben
+- Öffentliche Datensätze auf Passung prüfen
+requirements:
+- Unitree G1 EDU mit Dex3-Händen
+last_update: 1790812800
+translations:
+  en:
+    title: XR teleoperation on the G1
+    description: 'Data collection for a robot with two arms and two hands: XR headset, retargeting, recording real
+      and in simulation, conversion to LeRobot v3.0 and public Dex3 datasets.'
+    learning_goals:
+    - Explain XR teleoperation and retargeting
+    - Describe the chain from recording to training
+    - Check public datasets for fit
+    requirements:
+    - Unitree G1 EDU with Dex3 hands
+sections: []

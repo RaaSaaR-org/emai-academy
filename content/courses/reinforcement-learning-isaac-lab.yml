@@ -1,0 +1,49 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: Reinforcement Learning in Isaac Lab
+description: 'Belohnung statt Demonstration: Agent, Umgebung und Belohnungsfunktion, Tausende parallele Roboter
+  mit PPO, Export als ONNX und wann RL die richtige Wahl ist.'
+category: Simulation
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: reinforcement-learning-isaac-lab
+learning_goals:
+- Den RL-Kreislauf und Belohnungsdesign erklären
+- Massiv paralleles Training einordnen
+- Eine Policy für den Roboter exportieren
+- RL und Imitation sinnvoll kombinieren
+requirements:
+- Simulation und Sim-to-Real
+last_update: 1790812800
+translations:
+  en:
+    title: Reinforcement learning in Isaac Lab
+    description: 'Reward instead of demonstration: agent, environment and reward function, thousands of parallel
+      robots with PPO, ONNX export and when RL is the right choice.'
+    learning_goals:
+    - Explain the RL loop and reward design
+    - Understand massively parallel training
+    - Export a policy for the robot
+    - Combine RL and imitation sensibly
+    requirements:
+    - Simulation and sim-to-real
+sections:
+- id: video
+  title: Video
+  description: null
+  lectures:
+  - id: isaac-lab-rl-tutorial
+    title: 'Reinforcement Learning für Roboter in Python: Isaac-Lab-Tutorial (englisch)'
+    description: Praktischer Einstieg in Isaac Lab.
+    type: youtube
+    video_id: TMHkFDhVt7g
+    duration: 559
+  - id: isaac-lab-workflows
+    title: 'Isaac-Lab-Workflows im Detail: Office Hours (NVIDIA, englisch)'
+    description: Ausführliche Session zu Workflows in Isaac Lab.
+    type: youtube
+    video_id: _UHxP0FbOws
+    duration: 4382

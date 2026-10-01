@@ -1,0 +1,72 @@
+# Skill 8: sovereignty and EU regulation.
+order: 50
+path:
+  id: souveraenitaet-und-regulierung
+  title: {de: "Souveränität und EU-Regulierung", en: "Sovereignty and EU regulation"}
+  direction_id: entscheider
+units:
+  - id: souv-kontrolle
+    title: {de: "Kontrolle über Daten, Modelle und Updates", en: "Control over data, models and updates"}
+    room: guided-lesson
+    teaches: [souv-kontrolle]
+    steps:
+      - id: drei
+        title: {de: "Drei Fragen der Souveränität", en: "Three questions of sovereignty"}
+        body:
+          de: "Souveränität lässt sich mit drei Fragen prüfen:\n1. Daten: Wo liegen Aufnahmen und Betriebsdaten, wer darf sie nutzen, auch zum Training fremder Modelle?\n2. Modelle: Können wir das Modell prüfen, anpassen und auf eigener Hardware betreiben, oder nur über eine fremde Schnittstelle nutzen?\n3. Updates und Betrieb: Wer entscheidet, wann sich das Verhalten des Roboters ändert, und können wir den Anbieter wechseln?"
+          en: "Sovereignty can be tested with three questions:\n1. Data: where do recordings and operating data live, and who may use them, including for training other parties' models?\n2. Models: can we inspect, adapt and run the model on our own hardware, or only use it through someone else's API?\n3. Updates and operation: who decides when the robot's behaviour changes, and can we switch vendors?"
+        check:
+          id: lockin
+          question:
+            de: "Ein Anbieter liefert Roboter und Modell nur im Paket, Updates kommen automatisch aus seiner Cloud. Welches Risiko ist am größten?"
+            en: "A vendor supplies robot and model only as a bundle, updates arrive automatically from its cloud. What is the biggest risk?"
+          options:
+            - {value: lockin, text: {de: "Vendor Lock-in und Kontrollverlust über das Verhalten", en: "Vendor lock-in and loss of control over behaviour"}}
+            - {value: dof, text: {de: "Zu wenige Freiheitsgrade", en: "Too few degrees of freedom"}}
+          answer: lockin
+          correct: {de: "Richtig. Herstellerunabhängigkeit ist eine Architekturentscheidung.", en: "Right. Vendor independence is an architecture decision."}
+          tryAgain: {de: "Wer entscheidet über Änderungen?", en: "Who decides on changes?"}
+      - id: offen
+        title: {de: "Offene Bausteine", en: "Open building blocks"}
+        body:
+          de: "Offene Modelle mit freien Gewichten, offene Datenformate wie LeRobotDataset und offene Schnittstellen wie ROS 2 und DDS machen Komponenten austauschbar. Auch das Training muss nicht bei einem außereuropäischen Hyperscaler laufen: Wir trainieren große Modelle auf europäischer HPC-Infrastruktur."
+          en: "Open models with free weights, open data formats such as LeRobotDataset and open interfaces such as ROS 2 and DDS make components replaceable. Training does not have to run at a non-European hyperscaler either: we train large models on European HPC infrastructure."
+  - id: souv-regulierung
+    title: {de: "Der regulatorische Rahmen", en: "The regulatory framework"}
+    room: guided-lesson
+    teaches: [souv-regulierung]
+    requires: [souv-kontrolle]
+    steps:
+      - id: drei-regeln
+        title: {de: "Drei EU-Regelwerke", en: "Three EU regulations"}
+        body:
+          de: "• EU-Maschinenverordnung (EU) 2023/1230: löst die Maschinenrichtlinie ab und gilt ab 20. Januar 2027. Sie adressiert ausdrücklich Maschinen mit selbstlernendem Verhalten und vernetzte Sicherheitsfunktionen.\n• EU AI Act: regelt KI-Systeme nach Risiko. KI als Sicherheitsbauteil von Maschinen fällt in die Hochrisikokategorie.\n• Cyber Resilience Act: Cybersicherheitsanforderungen an Produkte mit digitalen Elementen über ihren Lebenszyklus."
+          en: "• EU Machinery Regulation (EU) 2023/1230: replaces the Machinery Directive and applies from 20 January 2027. It explicitly addresses machines with self-evolving behaviour and connected safety functions.\n• EU AI Act: regulates AI systems by risk. AI as a safety component of machinery falls into the high-risk category.\n• Cyber Resilience Act: cybersecurity requirements for products with digital elements across their lifecycle."
+        check:
+          id: datum
+          question:
+            de: "Ab wann gilt die neue EU-Maschinenverordnung?"
+            en: "From when does the new EU Machinery Regulation apply?"
+          options:
+            - {value: "2025", text: {de: "Januar 2025", en: "January 2025"}}
+            - {value: "2027", text: {de: "Januar 2027", en: "January 2027"}}
+            - {value: "2030", text: {de: "Januar 2030", en: "January 2030"}}
+          answer: "2027"
+          correct: {de: "Richtig: ab 20. Januar 2027.", en: "Right: from 20 January 2027."}
+          tryAgain: {de: "Das Kapitel 7 der Grundlagen nennt den Termin.", en: "Chapter 7 of the fundamentals names the date."}
+      - id: praxis
+        title: {de: "Was das für Ihren Pilot heißt", en: "What this means for your pilot"}
+        body:
+          de: "Dokumentieren Sie von Anfang an: Risikobeurteilung, eingesetzte Modelle und Versionen, Trainingsdaten und deren Herkunft, Sicherheitsfunktionen und Update-Prozess. Diese Dokumentation brauchen Sie ohnehin für Konformität und Betrieb, und sie ist im Nachhinein kaum zu rekonstruieren.\n\nHinweis: Diese Lektion ersetzt keine Rechtsberatung."
+          en: "Document from the start: risk assessment, models and versions used, training data and their origin, safety functions and update process. You need this documentation for conformity and operation anyway, and it is almost impossible to reconstruct afterwards.\n\nNote: this lesson is not legal advice."
+        check:
+          id: doku
+          question:
+            de: "Wann beginnen Sie mit der Dokumentation von Modellversionen und Datenherkunft?"
+            en: "When do you start documenting model versions and data provenance?"
+          options:
+            - {value: start, text: {de: "Ab dem ersten Pilot", en: "From the first pilot"}}
+            - {value: rollout, text: {de: "Erst beim Rollout", en: "Only at rollout"}}
+          answer: start
+          correct: {de: "Genau.", en: "Exactly."}
+          tryAgain: {de: "Nachträglich ist es kaum rekonstruierbar.", en: "It can hardly be reconstructed afterwards."}

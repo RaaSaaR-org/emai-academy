@@ -1,0 +1,31 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: Unitree G1 EDU mit Dex3-Händen
+description: 'Unser zweibeiniger kognitiver Roboter im Labor: Gelenkstruktur, das 28-dimensionale Format für Imitation
+  Learning, DDS-Schnittstellen und sichere Arbeitsweise.'
+category: Hardware
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: unitree-g1-dex3
+learning_goals:
+- Den Zustandsvektor des G1 mit Dex3 lesen
+- Fallstricke bei der Gelenkreihenfolge erkennen
+- Grundregeln für den sicheren Laborbetrieb anwenden
+requirements:
+- Physical AI in acht Kapiteln
+last_update: 1790812800
+translations:
+  en:
+    title: Unitree G1 EDU with Dex3 hands
+    description: 'Our bipedal cognitive robot in the lab: joint structure, the 28-dimensional imitation-learning
+      format, DDS interfaces and safe working practice.'
+    learning_goals:
+    - Read the state vector of the G1 with Dex3
+    - Spot joint-order pitfalls
+    - Apply basic rules for safe lab operation
+    requirements:
+    - Physical AI in eight chapters
+sections: []

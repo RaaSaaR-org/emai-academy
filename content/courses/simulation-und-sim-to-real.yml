@@ -1,0 +1,41 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: Simulation und Sim-to-Real
+description: Wozu Simulation in der Physical AI dient, woraus die Sim-to-Real-Lücke besteht und warum strukturierte
+  Domain Randomization mehr hilft als Bild-Jitter.
+category: Simulation
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: simulation-und-sim-to-real
+learning_goals:
+- Training, Datenerzeugung und Evaluation als Simulationsaufgaben unterscheiden
+- Physikalische und visuelle Lücke erkennen
+- Domain Randomization gezielt einsetzen
+requirements:
+- Middleware, Regelkreise und Takt
+last_update: 1790812800
+translations:
+  en:
+    title: Simulation and sim-to-real
+    description: What simulation is for in Physical AI, what the sim-to-real gap consists of and why structured
+      domain randomisation helps more than image jitter.
+    learning_goals:
+    - Distinguish training, data generation and evaluation as simulation jobs
+    - Recognise the physical and visual gap
+    - Apply domain randomisation deliberately
+    requirements:
+    - Middleware, control loops and rates
+sections:
+- id: video
+  title: Video
+  description: null
+  lectures:
+  - id: sim-to-real-showcase
+    title: 'Sim-to-Real mit Isaac Sim und Isaac Lab: Community Showcase (NVIDIA, englisch)'
+    description: Live-Session mit Beispielen zum Transfer aus der Simulation.
+    type: youtube
+    video_id: sffNvv3GkRA
+    duration: 4332

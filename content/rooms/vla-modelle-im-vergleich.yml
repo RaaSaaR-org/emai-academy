@@ -1,0 +1,72 @@
+# Skill 5: open VLA models compared (source: emai vla-training docs/vla-modelle.md, verified 2026-08).
+order: 135
+path:
+  id: vla-modelle-im-vergleich
+  title: {de: "Offene VLA-Modelle im Vergleich", en: "Open VLA models compared"}
+  direction_id: builder
+units:
+  - id: vla-aufbau
+    title: {de: "Backbone plus Aktionskopf", en: "Backbone plus action head"}
+    room: guided-lesson
+    teaches: [vla-aufbau]
+    steps:
+      - id: aufbau
+        title: {de: "Zwei Hälften", en: "Two halves"}
+        body:
+          de: "Die meisten offenen VLAs bestehen aus zwei Teilen: einem vortrainierten Vision-Language-Modell (VLM) als Backbone, das Bild und Auftrag versteht, und einem Aktionskopf, der daraus einen Chunk von Gelenkbefehlen erzeugt, meist per Flow Matching oder Diffusion."
+          en: "Most open VLAs consist of two parts: a pre-trained vision-language model (VLM) as the backbone that understands image and instruction, and an action head that turns this into a chunk of joint commands, usually via flow matching or diffusion."
+      - id: tabelle
+        title: {de: "Drei Kandidaten aus unserem Benchmark", en: "Three candidates from our benchmark"}
+        body:
+          de: "SmolVLA (Hugging Face): 0,45 Mrd. Parameter, Backbone SmolVLM2, Chunk 50, LeRobot v3.0, Apache-2.0.\nπ0.5 (Physical Intelligence): 3,6 Mrd. Parameter, Backbone PaliGemma, Chunk 50, LeRobot v3.0, Apache-2.0.\nGR00T N1.7 (NVIDIA): 3,5 Mrd. Parameter, Backbone Cosmos-Reason2-2B, DiT-Aktionskopf, Chunk 16, LeRobot v2, NVIDIA-Lizenz.\n\nParameterzahlen haben wir an den Gewichten selbst gezählt."
+          en: "SmolVLA (Hugging Face): 0.45 bn parameters, SmolVLM2 backbone, chunk 50, LeRobot v3.0, Apache-2.0.\nπ0.5 (Physical Intelligence): 3.6 bn parameters, PaliGemma backbone, chunk 50, LeRobot v3.0, Apache-2.0.\nGR00T N1.7 (NVIDIA): 3.5 bn parameters, Cosmos-Reason2-2B backbone, DiT action head, chunk 16, LeRobot v2, NVIDIA licence.\n\nWe counted the parameters on the weights ourselves."
+        check:
+          id: klein
+          question:
+            de: "Welches Modell ist etwa achtmal kleiner als die beiden anderen?"
+            en: "Which model is roughly eight times smaller than the other two?"
+          options:
+            - {value: smolvla, text: {de: "SmolVLA", en: "SmolVLA"}}
+            - {value: pi05, text: {de: "π0.5", en: "π0.5"}}
+            - {value: groot, text: {de: "GR00T N1.7", en: "GR00T N1.7"}}
+          answer: smolvla
+          correct: {de: "Richtig. 0,45 gegen rund 3,5 Mrd. Parameter.", en: "Right. 0.45 vs roughly 3.5 bn parameters."}
+          tryAgain: {de: "Der Name verrät es.", en: "The name gives it away."}
+  - id: vla-auswahl
+    title: {de: "Welches Modell für welchen Zweck?", en: "Which model for which purpose?"}
+    room: guided-lesson
+    teaches: [vla-auswahl]
+    requires: [vla-aufbau]
+    steps:
+      - id: kriterien
+        title: {de: "Auswahlkriterien", en: "Selection criteria"}
+        body:
+          de: "Größer ist nicht automatisch besser. Entscheidend sind:\n• Hardware: SmolVLA lässt sich auf einer Workstation-GPU feintunen. π0.5 braucht für ein volles Feintuning über 70 GB Grafikspeicher, auf einer 32-GB-Karte geht es nur mit LoRA. GR00T N1.7 unterstützt kein LoRA mehr (seit Version 1.6): Feintuning heißt dort, das Backbone einzufrieren (rund 1,1 von 3 Mrd. Parametern bleiben trainierbar) oder den Vision-Teil gezielt mitzutrainieren; empfohlen sind mindestens 40 GB Grafikspeicher.\n• Datenformat und Dimensionen: SmolVLA und π0.5 akzeptieren höchstens 32 Zustands- und Aktionsdimensionen.\n• Lizenz: Apache-2.0 erlaubt freie kommerzielle Nutzung, herstellerspezifische Lizenzen müssen geprüft werden.\n• Integrationsaufwand in den eigenen Stack."
+          en: "Bigger is not automatically better. What matters:\n• Hardware: SmolVLA can be fine-tuned on a workstation GPU. A full fine-tune of π0.5 needs more than 70 GB of GPU memory; on a 32 GB card it only works with LoRA. GR00T N1.7 no longer supports LoRA (removed in 1.6): fine-tuning there means freezing the backbone (about 1.1 of 3 bn parameters stay trainable) or also training the vision part; at least 40 GB of GPU memory are recommended.\n• Data format and dimensions: SmolVLA and π0.5 accept at most 32 state and action dimensions.\n• Licence: Apache-2.0 allows free commercial use, vendor-specific licences must be reviewed.\n• Integration effort into your own stack."
+        check:
+          id: lizenzfrage
+          question:
+            de: "Ihr Unternehmen will ein Modell kommerziell und ohne Rückfragen beim Hersteller einsetzen. Welche Lizenz ist am unkompliziertesten?"
+            en: "Your company wants to use a model commercially without asking the vendor. Which licence is the simplest?"
+          options:
+            - {value: apache, text: {de: "Apache-2.0", en: "Apache-2.0"}}
+            - {value: hersteller, text: {de: "Eine herstellerspezifische Modelllizenz", en: "A vendor-specific model licence"}}
+          answer: apache
+          correct: {de: "Richtig. Trotzdem gilt: Lizenz immer lesen.", en: "Right. Still: always read the licence."}
+          tryAgain: {de: "Welche ist eine etablierte Open-Source-Lizenz?", en: "Which one is an established open-source licence?"}
+      - id: benchmark
+        title: {de: "Vergleichen, aber richtig", en: "Compare, but properly"}
+        body:
+          de: "Ein Ergebnis wie „Modell X schlägt Modell Y“ sagt: Das Gesamtpaket X ist auf dieser Aufgabe besser. Backbone, Vortrainingsdaten und Aktionskopf variieren gleichzeitig. Wenn ein kleines Modell mit einem großen mithält, ist die Aufgabe eher daten- als kapazitätslimitiert. Das ist oft die wichtigere Erkenntnis als die Rangfolge."
+          en: "A result like „model X beats model Y“ says: the overall package X is better on this task. Backbone, pre-training data and action head vary at the same time. If a small model keeps up with a large one, the task is more data-limited than capacity-limited. That is often a more important insight than the ranking."
+        check:
+          id: datenlimit
+          question:
+            de: "SmolVLA erreicht auf Ihrer Aufgabe dieselbe Erfolgsquote wie π0.5. Was folgt am ehesten daraus?"
+            en: "SmolVLA reaches the same success rate as π0.5 on your task. What follows most likely?"
+          options:
+            - {value: daten, text: {de: "Mehr und vielfältigere Daten bringen mehr als ein größeres Modell.", en: "More and more varied data will help more than a bigger model."}}
+            - {value: groesser, text: {de: "Man sollte ein noch größeres Modell nehmen.", en: "You should use an even bigger model."}}
+          answer: daten
+          correct: {de: "Genau. Die Aufgabe ist datenlimitiert.", en: "Exactly. The task is data-limited."}
+          tryAgain: {de: "Mehr Kapazität hat nichts gebracht.", en: "More capacity did not help."}

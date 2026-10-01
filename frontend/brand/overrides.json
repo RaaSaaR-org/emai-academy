@@ -1,0 +1,160 @@
+{
+  "//": "Tenant files that shadow upstream files. upstreamBlob = git blob hash of the upstream file the override was written against. Checked on every dev start/build and by scripts/check-upstream.sh.",
+  "upstreamCommit": "6d4389e94835ced809edbc0375a48d5dbbc0db95",
+  "overrides": [
+    {
+      "file": "frontend/components/Navbar.vue",
+      "upstream": "components/Navbar.vue",
+      "kind": "rewrite",
+      "contract": "props {links, authorized}; used by layouts/default.vue",
+      "upstreamBlob": "17307b62fa194721a2d884c2fee78ffddb6d0f79"
+    },
+    {
+      "file": "frontend/components/NavbarMenu.vue",
+      "upstream": "components/NavbarMenu.vue",
+      "kind": "rewrite",
+      "contract": "no props; account menu without hearts/coins/premium/leaderboard",
+      "upstreamBlob": "61d9bbbf9651ea3049b2c5ccbcd293a69f4db859"
+    },
+    {
+      "file": "frontend/components/NavbarDrawer.vue",
+      "upstream": "components/NavbarDrawer.vue",
+      "kind": "rewrite",
+      "contract": "props {links, authorized}; mobile nav",
+      "upstreamBlob": "d6a4cba2350b31a37023c13cfc68b89559b56699"
+    },
+    {
+      "file": "frontend/components/NavbarBack.vue",
+      "upstream": "components/NavbarBack.vue",
+      "kind": "rewrite",
+      "contract": "no props; back target logic of upstream minus pruned routes; used by layouts/inner.vue",
+      "upstreamBlob": "1d0f9f616ff6445f6616457b27ac07ed100a5713"
+    },
+    {
+      "file": "frontend/components/Footer.vue",
+      "upstream": "components/Footer.vue",
+      "kind": "rewrite",
+      "contract": "no props; EmAI links, no social/commerce links",
+      "upstreamBlob": "f50a9780ae6abfaadffd844a924edad934ddf7d3"
+    },
+    {
+      "file": "frontend/components/Language.vue",
+      "upstream": "components/Language.vue",
+      "kind": "rewrite",
+      "contract": "no props; writes the 'locale' app cookie only on user choice, like upstream",
+      "upstreamBlob": "cf76569590d18fb2ffdda4b6dc6a6025546e841f"
+    },
+    {
+      "file": "frontend/layouts/default.vue",
+      "upstream": "layouts/default.vue",
+      "kind": "rewrite",
+      "contract": "renders <Language/>, <Navbar :links :authorized/>, <slot/>, <Footer/>; nav links without challenges",
+      "upstreamBlob": "8c56619a40bd94a97358adf1f51b89aa38b4b16e"
+    },
+    {
+      "file": "frontend/layouts/inner.vue",
+      "upstream": "layouts/inner.vue",
+      "kind": "rewrite",
+      "contract": "renders <Language/>, <NavbarBack/>, <slot/>",
+      "upstreamBlob": "511936d46ada6d36f4a609dcfcd84ef39b7e44b1"
+    },
+    {
+      "file": "frontend/pages/index.vue",
+      "upstream": "pages/index.vue",
+      "kind": "tenant page",
+      "contract": "EmAI landing page (no upstream behaviour to keep)",
+      "upstreamBlob": "463eda4dfb3c0c59db3c4a30a0e8f671414447f4"
+    },
+    {
+      "file": "frontend/pages/docs/imprint.vue",
+      "upstream": "pages/docs/imprint.vue",
+      "kind": "tenant page",
+      "contract": "EmAI legal text",
+      "upstreamBlob": "1234f87a916762545b8cadfad90499c0d23c98bf"
+    },
+    {
+      "file": "frontend/pages/docs/privacy.vue",
+      "upstream": "pages/docs/privacy.vue",
+      "kind": "tenant page",
+      "contract": "EmAI legal text",
+      "upstreamBlob": "1a54ad931e39ad2b766358f8a3d6d5f41c37c561"
+    },
+    {
+      "file": "frontend/pages/docs/terms-and-conditions.vue",
+      "upstream": "pages/docs/terms-and-conditions.vue",
+      "kind": "tenant page",
+      "contract": "EmAI legal text (placeholder)",
+      "upstreamBlob": "6a3c7440661f83cf8d62de0a7cb3602334bd9cee"
+    },
+    {
+      "file": "frontend/components/svg/Login.vue",
+      "upstream": "components/svg/Login.vue",
+      "kind": "asset",
+      "contract": "illustration on the login page",
+      "upstreamBlob": "818ff477d8651e9d4821bb143082e28d87a84c6b"
+    },
+    {
+      "file": "frontend/components/svg/Signup.vue",
+      "upstream": "components/svg/Signup.vue",
+      "kind": "asset",
+      "contract": "illustration on the signup page",
+      "upstreamBlob": "3fe74b96e00b8c4320c595fb085348ee2b23877b"
+    },
+    {
+      "file": "frontend/components/FeedbackLauncher.vue",
+      "upstream": "components/FeedbackLauncher.vue",
+      "kind": "stub",
+      "contract": "feature off: files GitHub issues against Bootstrap repos",
+      "upstreamBlob": "29461fddf27f883c231e9ce31fc4f6f71d100e6c"
+    },
+    {
+      "file": "frontend/components/UpdateNotice.vue",
+      "upstream": "components/UpdateNotice.vue",
+      "kind": "stub",
+      "contract": "feature off: Bootstrap release notice",
+      "upstreamBlob": "fc4c5b18a35b065cc9f434a78faef118da9b84db"
+    },
+    {
+      "file": "frontend/components/user/Hearts.vue",
+      "upstream": "components/user/Hearts.vue",
+      "kind": "stub",
+      "contract": "feature off: hearts (shop)",
+      "upstreamBlob": "a4062954188dbd6722e16ec0982664d0574afc2c"
+    },
+    {
+      "file": "frontend/components/user/Coins.vue",
+      "upstream": "components/user/Coins.vue",
+      "kind": "stub",
+      "contract": "feature off: MorphCoins (shop)",
+      "upstreamBlob": "63ce8107727cdc12f0aec86a30b6fe3b2c2b4c52"
+    },
+    {
+      "file": "frontend/public/favicon.ico",
+      "upstream": "public/favicon.ico",
+      "kind": "asset",
+      "contract": "favicon",
+      "upstreamBlob": "7a3a996334599e6eba9c5734e27f99e4ad2308ee"
+    },
+    {
+      "file": "frontend/public/manifest.txt",
+      "upstream": "public/manifest.txt",
+      "kind": "asset",
+      "contract": "manifest",
+      "upstreamBlob": "00c15d3aded59518e2c3073d3d529663b8ff9c42"
+    },
+    {
+      "file": "frontend/public/images/logo.png",
+      "upstream": "public/images/logo.png",
+      "kind": "asset",
+      "contract": "logo",
+      "upstreamBlob": "08eadfec94fd0e4e78a45a2c99b5ebd34bc97227"
+    },
+    {
+      "file": "frontend/public/images/logo-text.png",
+      "upstream": "public/images/logo-text.png",
+      "kind": "asset",
+      "contract": "logo with text",
+      "upstreamBlob": "9f44064a1a9111d3fd27828f2cc2964db5bcfc29"
+    }
+  ]
+}

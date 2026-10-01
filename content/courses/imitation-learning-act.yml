@@ -1,0 +1,43 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: 'Imitation Learning: von Behavior Cloning zu ACT'
+description: Wie Policies aus Demonstrationen lernen, warum sich kleine Fehler aufschaukeln und wie Action Chunking,
+  Diffusion und Flow Matching helfen.
+category: Lernen & Modelle
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: imitation-learning-act
+learning_goals:
+- Behavior Cloning als überwachtes Lernen beschreiben
+- Fehlerfortpflanzung erkennen und Gegenmittel nennen
+- ACT mit LeRobot trainieren
+- Multimodale Demonstrationen verstehen
+requirements:
+- Datensätze aufnehmen und verstehen
+last_update: 1790812800
+translations:
+  en:
+    title: 'Imitation learning: from behaviour cloning to ACT'
+    description: How policies learn from demonstrations, why small errors compound and how action chunking, diffusion
+      and flow matching help.
+    learning_goals:
+    - Describe behaviour cloning as supervised learning
+    - Recognise compounding error and name remedies
+    - Train ACT with LeRobot
+    - Understand multimodal demonstrations
+    requirements:
+    - Record and understand datasets
+sections:
+- id: video
+  title: Video
+  description: null
+  lectures:
+  - id: groot-tutorial
+    title: 'Roboter mit 40 statt Tausenden Demonstrationen trainieren: GR00T-Tutorial (NVIDIA, englisch)'
+    description: Entwickler-Tutorial zum Feintuning von GR00T.
+    type: youtube
+    video_id: L-WriIVOyYE
+    duration: 351

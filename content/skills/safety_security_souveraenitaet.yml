@@ -1,0 +1,16 @@
+# Skill 8 (Decider track).
+name: Safety, Security & Souveränität
+dependencies: [physical_ai_grundlagen]
+skills:
+  funktionale_sicherheit:
+    name: Funktionale Sicherheit
+    dependencies: []
+    courses: [funktionale-sicherheit]
+  ot_security:
+    name: OT-Security
+    dependencies: []
+    courses: [ot-security-robotik]
+  souveraenitaet_regulierung:
+    name: Souveränität & Regulierung
+    dependencies: []
+    courses: [souveraenitaet-und-regulierung]

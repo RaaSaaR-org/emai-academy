@@ -1,0 +1,72 @@
+# Skill 5: fine-tune SmolVLA on your own SO-101 dataset (source: LeRobot smolvla.mdx, peft_training.mdx).
+order: 140
+path:
+  id: smolvla-feintuning
+  title: {de: "SmolVLA auf eigene Daten feintunen", en: "Fine-tune SmolVLA on your own data"}
+  direction_id: builder
+units:
+  - id: sv-training
+    title: {de: "Vom Basismodell zur eigenen Policy", en: "From base model to your own policy"}
+    room: guided-lesson
+    teaches: [sv-training]
+    steps:
+      - id: basis
+        title: {de: "Warum feintunen statt neu trainieren?", en: "Why fine-tune instead of training from scratch?"}
+        body:
+          de: "SmolVLA wurde auf vielen Community-Datensätzen vortrainiert, überwiegend mit SO-100/SO-101-Armen. Es bringt also schon ein Grundverständnis von Greifen und Ablegen mit. Beim Feintuning passen wir dieses Basismodell mit unserem eigenen Datensatz an Aufgabe, Kamera und Umgebung an. Dafür genügen oft deutlich weniger Demonstrationen als beim Training von Grund auf."
+          en: "SmolVLA was pre-trained on many community datasets, mostly with SO-100/SO-101 arms. It therefore already brings a basic understanding of picking and placing. Fine-tuning adapts this base model to task, camera and environment with our own dataset. This often needs far fewer demonstrations than training from scratch."
+      - id: befehl
+        title: {de: "Der Trainingsbefehl", en: "The training command"}
+        body:
+          de: "Mit --policy.path laden Sie das vortrainierte Basismodell. Auf Apple-Silicon-Rechnern lautet das Gerät mps statt cuda. Starten Sie mit einer kleinen Batchgröße und erhöhen Sie sie, solange der Grafikspeicher reicht."
+          en: "--policy.path loads the pre-trained base model. On Apple silicon the device is mps instead of cuda. Start with a small batch size and increase it as long as GPU memory allows."
+        code: "lerobot-train \\\n  --policy.path=lerobot/smolvla_base \\\n  --dataset.repo_id=${HF_USER}/so101-wuerfel \\\n  --batch_size=64 \\\n  --steps=20000 \\\n  --output_dir=outputs/train/smolvla_so101 \\\n  --job_name=smolvla_so101 \\\n  --policy.device=cuda"
+        check:
+          id: path-vs-type
+          question:
+            de: "Was ist der Unterschied zwischen --policy.path=lerobot/smolvla_base und --policy.type=smolvla?"
+            en: "What is the difference between --policy.path=lerobot/smolvla_base and --policy.type=smolvla?"
+          options:
+            - {value: a, text: {de: "path lädt vortrainierte Gewichte, type startet mit einer frischen Architektur.", en: "path loads pre-trained weights, type starts from a fresh architecture."}}
+            - {value: b, text: {de: "Kein Unterschied.", en: "No difference."}}
+          answer: a
+          correct: {de: "Richtig. Für Feintuning wollen Sie die vortrainierten Gewichte.", en: "Right. For fine-tuning you want the pre-trained weights."}
+          tryAgain: {de: "Einmal wird ein Checkpoint geladen, einmal nicht.", en: "One loads a checkpoint, the other does not."}
+  - id: sv-ressourcen
+    title: {de: "Rechnen, wo es sinnvoll ist", en: "Compute where it makes sense"}
+    room: guided-lesson
+    teaches: [sv-ressourcen]
+    requires: [sv-training]
+    steps:
+      - id: hardware
+        title: {de: "Welche GPU reicht?", en: "Which GPU is enough?"}
+        body:
+          de: "SmolVLA mit Batchgröße 64 belegt rund 22 GB Grafikspeicher, passt also auf eine einzelne Workstation-GPU. Größere Modelle wie π0.5 lassen sich auf einer solchen Karte nur mit LoRA feintunen: Dabei werden nur kleine Zusatzmatrizen trainiert, das Basismodell bleibt eingefroren. Für volle Feintunings großer Modelle nutzen wir europäische HPC-Infrastruktur mit mehreren Rechenzentrums-GPUs."
+          en: "SmolVLA at batch size 64 uses around 22 GB of GPU memory, so it fits on a single workstation GPU. Larger models such as π0.5 can only be fine-tuned on such a card with LoRA: only small additional matrices are trained while the base model stays frozen. For full fine-tunes of large models we use European HPC infrastructure with several data-centre GPUs."
+        check:
+          id: lora
+          question:
+            de: "Was macht LoRA beim Feintuning?"
+            en: "What does LoRA do during fine-tuning?"
+          options:
+            - {value: a, text: {de: "Es trainiert nur kleine Zusatzmatrizen und lässt das Basismodell eingefroren.", en: "It trains only small additional matrices and keeps the base model frozen."}}
+            - {value: b, text: {de: "Es komprimiert den Datensatz.", en: "It compresses the dataset."}}
+          answer: a
+          correct: {de: "Genau. Das spart Speicher und Rechenzeit.", en: "Exactly. That saves memory and compute."}
+          tryAgain: {de: "LoRA betrifft die Gewichte, nicht die Daten.", en: "LoRA concerns the weights, not the data."}
+      - id: offline-reicht-nicht
+        title: {de: "Niedriger Loss ist kein Erfolg", en: "Low loss is not success"}
+        body:
+          de: "Ein sinkender Trainings-Loss zeigt nur, dass das Modell die Demonstrationen nachbilden kann. Ob es die Aufgabe löst, zeigt erst der geschlossene Regelkreis: am Roboter oder in der Simulation, mit vorher festgelegtem Erfolgskriterium. Wir hatten Läufe mit gutem Offline-Ergebnis und 0 von 10 Erfolgen in der Simulation, der Arm schwebte über dem Objekt, statt zu greifen."
+          en: "A falling training loss only shows that the model can reproduce the demonstrations. Whether it solves the task only shows in closed loop: on the robot or in simulation, with a success criterion defined in advance. We had runs with good offline results and 0 out of 10 successes in simulation: the arm hovered above the object instead of grasping."
+        check:
+          id: loss
+          question:
+            de: "Woran erkennen Sie, dass eine Policy die Aufgabe löst?"
+            en: "How do you know a policy solves the task?"
+          options:
+            - {value: loss, text: {de: "Am niedrigen Trainings-Loss", en: "From a low training loss"}}
+            - {value: closed, text: {de: "An der Erfolgsquote im geschlossenen Regelkreis", en: "From the closed-loop success rate"}}
+          answer: closed
+          correct: {de: "Richtig. Mehr dazu im Kurs zur Evaluation.", en: "Right. More on this in the evaluation course."}
+          tryAgain: {de: "Offline-Werte messen Nachbildung, nicht Erfolg.", en: "Offline values measure imitation, not success."}

@@ -1,0 +1,16 @@
+{
+  "name": "EmAI Academy",
+  "short_name": "EmAI Academy",
+  "description": "Physical AI lernen: herstellerunabhängig, praxisnah. Von EmAI Robotics.",
+  "lang": "de",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#141414",
+  "theme_color": "#141414",
+  "icons": [
+    { "src": "/brand/emai-icon-192-v2.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/brand/emai-icon-512-v2.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/brand/emai-icon-v2.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

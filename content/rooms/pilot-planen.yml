@@ -1,0 +1,51 @@
+# Skill 9: plan and run a pilot.
+order: 70
+path:
+  id: pilot-planen
+  title: {de: "Einen Pilot planen und auswerten", en: "Plan and evaluate a pilot"}
+  direction_id: entscheider
+units:
+  - id: pilot-rahmen
+    title: {de: "Der Pilot-Steckbrief", en: "The pilot brief"}
+    room: guided-lesson
+    teaches: [pilot-rahmen]
+    steps:
+      - id: steckbrief
+        title: {de: "Was vorher feststehen muss", en: "What must be fixed beforehand"}
+        body:
+          de: "Ein guter Pilot passt auf eine Seite:\n• Aufgabe und Abgrenzung: was genau, was ausdrücklich nicht\n• Ausgangswerte des heutigen Prozesses\n• Erfolgskriterien: Erfolgsquote, Zykluszeit, Eingriffe pro Stunde, mit Zielwerten\n• Dauer und Umfang, z. B. vier Wochen, eine Zelle, eine Schicht\n• Sicherheitskonzept und Verantwortliche\n• Datenregeln: was aufgezeichnet wird, wo es liegt, wer es nutzt\n• Entscheidungstermin: Rollout, Nachbessern oder Stopp"
+          en: "A good pilot fits on one page:\n• Task and scope: what exactly, and what explicitly not\n• Baseline of today's process\n• Success criteria: success rate, cycle time, interventions per hour, with target values\n• Duration and scope, e.g. four weeks, one cell, one shift\n• Safety concept and owners\n• Data rules: what is recorded, where it lives, who uses it\n• Decision date: roll out, improve or stop"
+        check:
+          id: stopp
+          question:
+            de: "Gehört „Stopp“ als mögliches Ergebnis in den Steckbrief?"
+            en: "Does „stop“ belong in the brief as a possible outcome?"
+          options:
+            - {value: ja, text: {de: "Ja, ein ehrlicher Pilot kann auch mit Nein enden.", en: "Yes, an honest pilot can also end with no."}}
+            - {value: nein, text: {de: "Nein, ein Pilot muss in den Rollout münden.", en: "No, a pilot must lead to rollout."}}
+          answer: ja
+          correct: {de: "Richtig. Sonst ist es kein Pilot, sondern eine Einführung ohne Prüfung.", en: "Right. Otherwise it is not a pilot but a rollout without testing."}
+          tryAgain: {de: "Wozu misst man, wenn das Ergebnis vorher feststeht?", en: "Why measure if the result is fixed in advance?"}
+  - id: pilot-auswerten
+    title: {de: "Auswerten und entscheiden", en: "Evaluate and decide"}
+    room: guided-lesson
+    teaches: [pilot-auswertung]
+    requires: [pilot-rahmen]
+    steps:
+      - id: auswertung
+        title: {de: "Ehrliche Zahlen", en: "Honest numbers"}
+        body:
+          de: "Werten Sie gegen die vorab festgelegten Kriterien aus, nicht gegen die beste Demo. Trennen Sie Anlaufphase und stabilen Betrieb. Analysieren Sie die Eingriffe: Welche Situationen führen zu Fehlern, und sind sie mit mehr Daten lösbar oder grundsätzlich?"
+          en: "Evaluate against the criteria set in advance, not against the best demo. Separate the ramp-up phase from stable operation. Analyse the interventions: which situations lead to errors, and can they be solved with more data or are they fundamental?"
+        check:
+          id: entscheidung
+          question:
+            de: "Ziel 95 %, erreicht 88 %. Fast alle Fehler treten bei einer Teilevariante auf, die in den Trainingsdaten fehlte. Was empfehlen Sie?"
+            en: "Target 95 %, achieved 88 %. Almost all errors occur on one part variant that was missing from the training data. What do you recommend?"
+          options:
+            - {value: rollout, text: {de: "Sofort ausrollen", en: "Roll out immediately"}}
+            - {value: nachbessern, text: {de: "Gezielt Daten für diese Variante aufnehmen, nachtrainieren, erneut messen", en: "Record data for this variant, retrain, measure again"}}
+            - {value: stopp, text: {de: "Projekt stoppen", en: "Stop the project"}}
+          answer: nachbessern
+          correct: {de: "Genau. Der Fehler ist verstanden und mit Daten lösbar.", en: "Exactly. The error is understood and solvable with data."}
+          tryAgain: {de: "Die Ursache ist bekannt. Ist sie behebbar?", en: "The cause is known. Can it be fixed?"}

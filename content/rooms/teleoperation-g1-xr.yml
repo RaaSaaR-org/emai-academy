@@ -1,0 +1,72 @@
+# Skill 4: XR teleoperation for the G1 + Dex3 (source: emai vla-training README §2).
+order: 125
+path:
+  id: teleoperation-g1-xr
+  title: {de: "XR-Teleoperation am G1", en: "XR teleoperation on the G1"}
+  direction_id: builder
+units:
+  - id: xr-prinzip
+    title: {de: "Mit dem Headset in den Roboter", en: "Into the robot with a headset"}
+    room: guided-lesson
+    teaches: [xr-teleop]
+    steps:
+      - id: prinzip
+        title: {de: "Wie XR-Teleoperation funktioniert", en: "How XR teleoperation works"}
+        body:
+          de: "Für einen Roboter mit zwei Armen und zwei mehrfingrigen Händen reicht ein Leader-Arm nicht. Stattdessen trägt die bedienende Person ein XR-Headset wie die Meta Quest. Das Headset verfolgt Kopf, Hände und Finger. Retargeting rechnet diese Bewegungen auf die Gelenke des Roboters um, und die Person sieht im Headset das Kamerabild des Roboters."
+          en: "A single leader arm is not enough for a robot with two arms and two multi-finger hands. Instead the operator wears an XR headset such as the Meta Quest. The headset tracks head, hands and fingers. Retargeting maps these movements onto the robot's joints, and the operator sees the robot's camera image in the headset."
+        check:
+          id: retargeting
+          question:
+            de: "Was macht das Retargeting?"
+            en: "What does retargeting do?"
+          options:
+            - {value: a, text: {de: "Es überträgt menschliche Hand- und Armbewegungen auf die Gelenke des Roboters.", en: "It maps human hand and arm movements onto the robot's joints."}}
+            - {value: b, text: {de: "Es komprimiert die Videodaten.", en: "It compresses the video data."}}
+          answer: a
+          correct: {de: "Richtig. Menschliche und Roboterhand sind verschieden gebaut, deshalb braucht es diese Übersetzung.", en: "Right. Human and robot hands are built differently, which is why this translation is needed."}
+          tryAgain: {de: "Eine Menschenhand hat andere Gelenke als eine Dex3-Hand.", en: "A human hand has different joints from a Dex3 hand."}
+      - id: sim-real
+        title: {de: "Real oder simuliert", en: "Real or simulated"}
+        body:
+          de: "Dieselbe Teleoperation funktioniert am realen G1 und in der Isaac-Simulation. In der Simulation lassen sich Aufnahmen zusätzlich mit veränderter Beleuchtung und Kameraposition erneut abspielen, um synthetische Varianten zu erzeugen. Das ersetzt keine echte Vielfalt, ergänzt sie aber günstig."
+          en: "The same teleoperation works on the real G1 and in the Isaac simulation. In simulation, recordings can also be replayed with changed lighting and camera pose to generate synthetic variants. That does not replace real variety, but it complements it cheaply."
+  - id: xr-pipeline
+    title: {de: "Von der Aufnahme zum LeRobot-Datensatz", en: "From recording to LeRobot dataset"}
+    room: guided-lesson
+    teaches: [xr-pipeline]
+    requires: [xr-teleop]
+    steps:
+      - id: kette
+        title: {de: "Die Kette", en: "The chain"}
+        body:
+          de: "1. Aufnahme per XR-Teleoperation, gespeichert als Episoden im Unitree-JSON-Format.\n2. Konvertierung in LeRobotDataset v3.0 mit 28-dimensionalem Zustand und Aktion.\n3. Prüfung: Episoden abspielen, Längen und Stillstand ansehen, Gelenkreihenfolge kontrollieren.\n4. Training, z. B. ACT, SmolVLA oder π0.5 direkt auf v3.0, GR00T N1.7 nach Konvertierung auf v2."
+          en: "1. Recording via XR teleoperation, stored as episodes in Unitree JSON format.\n2. Conversion to LeRobotDataset v3.0 with 28-dimensional state and action.\n3. Checks: replay episodes, look at lengths and idle time, verify joint order.\n4. Training, e.g. ACT, SmolVLA or π0.5 directly on v3.0, GR00T N1.7 after conversion to v2."
+        check:
+          id: schritt
+          question:
+            de: "Welcher Schritt fehlt oft und kostet später am meisten?"
+            en: "Which step is often skipped and costs the most later?"
+          options:
+            - {value: a, text: {de: "Die Prüfung vor dem Training", en: "The check before training"}}
+            - {value: b, text: {de: "Die Aufnahme", en: "The recording"}}
+          answer: a
+          correct: {de: "Genau. Ein Fehler im Datensatz sieht später aus wie eine schlechte Policy.", en: "Exactly. An error in the dataset later looks like a bad policy."}
+          tryAgain: {de: "Ohne Aufnahme gäbe es gar keinen Datensatz.", en: "Without recording there would be no dataset at all."}
+      - id: oeffentlich
+        title: {de: "Öffentliche Datensätze nutzen", en: "Using public datasets"}
+        body:
+          de: "Bevor Sie selbst aufnehmen, lohnt ein Blick auf öffentliche Datensätze mit genau Ihrem Aufbau. Für den G1 mit Dex3 gibt es mehrere Sammlungen auf Hugging Face, z. B. mit über 400 Episoden einer Brot-Toast-Aufgabe unter Apache-2.0-Lizenz. Prüfen Sie immer Lizenz, Gelenkreihenfolge und Kameraaufbau."
+          en: "Before recording yourself, check public datasets with exactly your setup. For the G1 with Dex3 there are several collections on Hugging Face, e.g. one with more than 400 episodes of a bread-toasting task under the Apache-2.0 licence. Always check the licence, joint order and camera setup."
+        check:
+          id: lizenz
+          question:
+            de: "Was prüfen Sie bei einem öffentlichen Datensatz NICHT zwingend?"
+            en: "What do you NOT necessarily need to check for a public dataset?"
+          options:
+            - {value: lizenz, text: {de: "Die Lizenz", en: "The licence"}}
+            - {value: reihenfolge, text: {de: "Die Gelenkreihenfolge", en: "The joint order"}}
+            - {value: sterne, text: {de: "Die Anzahl der Likes auf dem Hub", en: "The number of likes on the Hub"}}
+          answer: sterne
+          correct: {de: "Richtig. Popularität sagt nichts über Passung.", en: "Right. Popularity says nothing about fit."}
+          tryAgain: {de: "Zwei davon entscheiden über die Nutzbarkeit.", en: "Two of these decide whether it is usable."}

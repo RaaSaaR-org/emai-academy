@@ -1,0 +1,31 @@
+# EmAI Academy course. Schema: skills-ms-rooms api/schemas/course.py (id = file name).
+title: OT-Security für kognitive Roboter
+description: 'Ein Roboter ist ein vernetzter Computer mit Kameras: Angriffsfläche, Zonenmodell nach IEC 62443, Herstellerzugänge
+  und der Cyber Resilience Act.'
+category: Sicherheit & Souveränität
+language: de
+image: null
+authors:
+- name: EmAI Robotics
+  url: https://emai.dev
+price: 0
+learning_path_id: ot-security-robotik
+learning_goals:
+- Die Angriffsfläche eines kognitiven Roboters inventarisieren
+- Segmentierung, Rechte, Updates und Protokollierung planen
+- Beschaffungsfragen aus dem Cyber Resilience Act ableiten
+requirements:
+- Physical AI in acht Kapiteln
+last_update: 1790812800
+translations:
+  en:
+    title: OT security for cognitive robots
+    description: 'A robot is a networked computer with cameras: attack surface, IEC 62443 zone model, vendor access
+      and the Cyber Resilience Act.'
+    learning_goals:
+    - Inventory the attack surface of a cognitive robot
+    - Plan segmentation, rights, updates and logging
+    - Derive procurement questions from the Cyber Resilience Act
+    requirements:
+    - Physical AI in eight chapters
+sections: []

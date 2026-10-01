@@ -1,0 +1,14 @@
+# Skill 7 (Builder track). The curriculum says "requires 5 OR 6"; the skill model has no
+# OR dependency (all listed dependencies are required), so 7 depends on 5 only - the main
+# Builder path 4 -> 5 -> 7. Skill 6 stays an optional branch.
+name: Evaluation & Deployment
+dependencies: [imitation_learning_vlas]
+skills:
+  policies_evaluieren:
+    name: Policies evaluieren
+    dependencies: []
+    courses: [policies-evaluieren]
+  inferenz_deployment:
+    name: Inferenz & Deployment
+    dependencies: [policies_evaluieren]
+    courses: [inferenz-und-deployment]

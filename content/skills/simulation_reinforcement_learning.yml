@@ -1,0 +1,12 @@
+# Skill 6 (Builder track).
+name: Simulation & Reinforcement Learning
+dependencies: [robotik_software_grundlagen]
+skills:
+  simulation_sim_to_real:
+    name: Simulation & Sim-to-Real
+    dependencies: []
+    courses: [simulation-und-sim-to-real]
+  reinforcement_learning:
+    name: Reinforcement Learning in Isaac Lab
+    dependencies: [simulation_sim_to_real]
+    courses: [reinforcement-learning-isaac-lab]
